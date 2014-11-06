@@ -35,6 +35,11 @@ function OnMessage(e) {
 			//$.fancybox.close();
 			console.log(Core9);
 
+			Core9.parent.send({
+				url : url,
+				myparam : 'Trying again...'
+			});
+
 			// Delete handler of the message from ResponsiveFilemanager
 			$(window).off('message', OnMessage);
 		}

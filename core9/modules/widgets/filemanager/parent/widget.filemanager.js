@@ -1,6 +1,8 @@
 ;
 (function($) {
 			this.child = {},
+			this.url = {},
+			this.pubsub = {},
 			_appendIframe = function(){
 				if($('#ifr').size() == 0){
 					$('body')
@@ -9,6 +11,19 @@
 					this.child = $('#ifr').seamless({
 						loading : ''
 					});
+
+					this.child.receive(function(data, event) {
+
+						  console.log('recieving data.. : ');
+						  console.log(data);
+
+						  if(data.url){
+							  this.url = data.url;
+
+
+						  }
+
+						});
 				}
 			},
 
@@ -57,6 +72,10 @@
 				return this;
 			};
 	$.filemanager = function(obj) {
+	};
+
+	$.filemanager.setPubSub = function(pubsub) {
+		this.pubsub = pubsub;
 	};
 
 	$.filemanager.init = function(data) {

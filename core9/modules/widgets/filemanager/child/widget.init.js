@@ -13,6 +13,8 @@ $LAB
 		allowStyleInjection : true
 	});
 
+	Core9.parent = parent;
+
 	parent.receive(function(data, event) {
 		console.log("child recieved :");
 		console.log(data);

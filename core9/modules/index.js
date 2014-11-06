@@ -13,7 +13,11 @@ $LAB
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
 		$('#choose-file').on('click', function(){
+
+
+			widget.filemanager.setPubSub(pubsub);
 			widget.filemanager.init({'size':'full'});
+
 		});
 
 	});
