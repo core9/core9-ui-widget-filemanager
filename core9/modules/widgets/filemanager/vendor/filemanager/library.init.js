@@ -31,10 +31,9 @@ function OnMessage(e) {
 			var fieldID = event.data.field_id;
 			var url = event.data.url;
 
-
-
 			$('#' + fieldID).val(url).trigger('change');
-			$.fancybox.close();
+			//$.fancybox.close();
+			console.log(Core9);
 
 			// Delete handler of the message from ResponsiveFilemanager
 			$(window).off('message', OnMessage);

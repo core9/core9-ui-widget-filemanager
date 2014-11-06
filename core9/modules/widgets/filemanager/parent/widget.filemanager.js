@@ -42,7 +42,7 @@
 					$('#ifr').css('width', $('body').width() + 'px');
 					$('#ifr').show();
 
-				}, 1000);
+				}, 1500);
 
 
 
