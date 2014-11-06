@@ -1,5 +1,4 @@
 
-
 ;
 (function($) {
 	$.fn.filemanager = function(options) {
@@ -13,23 +12,25 @@
 	$.filemanager = function(obj) {
 	};
 
-	  $(function() {
-			$('body').append('<iframe id="ifr" src="widgets/filemanager/child/filemanager.html"></iframe>');
-			setTimeout(function(){
-				var child =   $('#ifr').seamless({
-			    	  loading: ''
-			    }).show();
+	$(function() {
+		$('body')
+				.append(
+						'<iframe id="ifr" src="widgets/filemanager/child/filemanager.html"></iframe>');
+		setTimeout(function() {
+			var child = $('#ifr').seamless({
+				loading : ''
+			}).show();
 
-				child.send({
-					action : 'init'
-				});
+			child.send({
+				action : 'init'
+			});
 
-				child.receive(function(data, event) {
-					  console.log(data);
-				});
-			}, 30);
+			child.receive(function(data, event) {
+				console.log("parent recieved : ");
+				console.log(data);
+			});
+		}, 30);
 
-	  });
-
+	});
 
 })(window.widget);

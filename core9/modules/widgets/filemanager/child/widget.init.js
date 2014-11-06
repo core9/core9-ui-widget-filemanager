@@ -12,7 +12,7 @@ $LAB
 	});
 
 	parent.receive(function(data, event) {
-		console.log("message recieved :");
+		console.log("child recieved :");
 		console.log(data);
 	});
 
