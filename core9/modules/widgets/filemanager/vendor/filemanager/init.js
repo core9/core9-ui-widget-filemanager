@@ -30,6 +30,9 @@ function OnMessage(e) {
 		if (event.data.field_id) {
 			var fieldID = event.data.field_id;
 			var url = event.data.url;
+
+
+
 			$('#' + fieldID).val(url).trigger('change');
 			$.fancybox.close();
 

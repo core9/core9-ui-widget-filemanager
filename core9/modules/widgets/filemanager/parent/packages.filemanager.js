@@ -1,4 +1,4 @@
 JS.packages(function() { with(this) {
-    file( 'widgets/filemanager/widget.parent.filemanager.js')
+    file( 'widgets/filemanager/parent/widget.filemanager.js')
         .provides('widget.filemanager');
 }});

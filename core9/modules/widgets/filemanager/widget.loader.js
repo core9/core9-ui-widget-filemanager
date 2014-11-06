@@ -10,10 +10,17 @@ $LAB
 		container : 'div.content',
 		allowStyleInjection : true
 	});
+
+	parent.receive(function(data, event) {
+		console.log("message recieved :");
+		console.log(data);
+	});
+
 	$(function($) {
 
 		$('#send').on('click', function(e) {
 			parent.send({
+				size : 'full',
 				myparam : 'This is anything you want it to be...'
 			});
 		});

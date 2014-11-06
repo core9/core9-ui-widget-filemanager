@@ -7,7 +7,7 @@ $LAB
 .script("../../lib/seamless/build/seamless.parent.min.js")
 .script("../../lib/pmrpc/pmrpc.min.js")
 .script("../../lib/jsclass/src/loader-browser.js")
-.script("widgets/filemanager/widget.parent.packages.filemanager.js")
+.script("widgets/filemanager/parent/packages.filemanager.js")
 .wait(function(){
 	window.widget = jQuery;
 	window.widget.filemanager = JS.require('widget.filemanager');
