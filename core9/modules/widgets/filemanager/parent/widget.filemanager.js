@@ -1,8 +1,6 @@
 ;
 (function($) {
 			this.child = {},
-			this.url = {},
-			this.pubsub = {},
 			_appendIframe = function(){
 				if($('#ifr').size() == 0){
 					$('body')
@@ -20,7 +18,7 @@
 						  if(data.url){
 							  this.url = data.url;
 
-
+							  PubSub.publish( 'geturl', data.url );
 						  }
 
 						});
@@ -72,10 +70,6 @@
 				return this;
 			};
 	$.filemanager = function(obj) {
-	};
-
-	$.filemanager.setPubSub = function(pubsub) {
-		this.pubsub = pubsub;
 	};
 
 	$.filemanager.init = function(data) {

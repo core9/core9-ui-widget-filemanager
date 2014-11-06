@@ -5,7 +5,7 @@ $LAB
 .setOptions({AlwaysPreserveOrder:true})
 .script("../../lib/jquery/zepto.min.js")
 .script("../../lib/seamless/build/seamless.parent.min.js")
-.script("../../lib/pmrpc/pmrpc.min.js")
+.script("../../lib/pubsubjs/src/pubsub.js")
 .script("../../lib/jsclass/src/loader-browser.js")
 .script("widgets/filemanager/parent/packages.filemanager.js")
 .wait(function(){
@@ -14,8 +14,11 @@ $LAB
 
 		$('#choose-file').on('click', function(){
 
+			var mySubscriber = function( msg, data ){
+			    console.log( msg, data );
+			};
+			var token = PubSub.subscribe( 'geturl', mySubscriber );
 
-			widget.filemanager.setPubSub(pubsub);
 			widget.filemanager.init({'size':'full'});
 
 		});
