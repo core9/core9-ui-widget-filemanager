@@ -12,7 +12,7 @@ $LAB
 	window.widget = jQuery;
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
-		$('#choose-file').on('click', function(){
+		$('.choose-file').on('click', function(){
 			var token;
 			var mySubscriber = function( msg, data ){
 				console.log("got url now destroy filemanager");
