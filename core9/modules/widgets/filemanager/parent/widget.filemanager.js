@@ -14,7 +14,7 @@
 	};
 
 	  $(function() {
-			$('body').append('<iframe id="ifr" src="widgets/filemanager/filemanager.html"></iframe>');
+			$('body').append('<iframe id="ifr" src="widgets/filemanager/child/filemanager.html"></iframe>');
 			setTimeout(function(){
 				var child =   $('#ifr').seamless({
 			    	  loading: ''

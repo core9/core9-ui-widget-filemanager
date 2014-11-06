@@ -2,9 +2,9 @@
 
 $LAB
 .setOptions({AlwaysPreserveOrder:true})
-.script("../../../../lib/jquery/zepto.min.js")
-.script("../../../../lib/jquery/zepto-extras.js")
-.script("../../../../lib/seamless/build/seamless.child.min.js").wait(function(){
+.script("../../../../../lib/jquery/zepto.min.js")
+.script("../../../../../lib/jquery/zepto-extras.js")
+.script("../../../../../lib/seamless/build/seamless.child.min.js").wait(function(){
 	var parent = $.seamless.connect({
 		url : 'index.html',
 		container : 'div.content',
