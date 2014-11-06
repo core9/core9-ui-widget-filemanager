@@ -61,6 +61,12 @@ jQuery(document).ready(function($) {
 			});
 
 
+			$('#fancybox-close').on('click', function(){
+				Core9.parent.send({
+					url : 'no url chosen',
+					myparam : 'Trying again...'
+				});
+			});
 
 			// Handler for a message from ResponsiveFilemanager
 			$('.iframe-btn').on('click', function(e) {
