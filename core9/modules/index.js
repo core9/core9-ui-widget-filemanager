@@ -13,12 +13,14 @@ $LAB
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
 		$('#choose-file').on('click', function(){
+			var token;
 			var mySubscriber = function( msg, data ){
+				console.log("got url now destroy filemanager");
 			    console.log( msg, data );
 			    widget.filemanager.destroy();
+			    PubSub.unsubscribe( token );
 			};
-			var token = PubSub.subscribe( 'geturl', mySubscriber );
-			PubSub.unsubscribe( token );
+			token = PubSub.subscribe( 'geturl', mySubscriber );
 			widget.filemanager.init({'size':'full'});
 		});
 
