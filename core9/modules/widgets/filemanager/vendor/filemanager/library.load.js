@@ -19,7 +19,7 @@ $LAB.setOptions({AlwaysPreserveOrder:true})
 .script(baseUrl + "assets/jquery.inview.js")
 .script(baseUrl + "assets/jquery.fitvids.min.js")
 .script(baseUrl + "assets/jquery.nicescroll.min.js")
-.script(baseUrl + "init.js").wait(function(){
+.script(baseUrl + "library.init.js").wait(function(){
     initMyPage(baseUrl);
 });
 
