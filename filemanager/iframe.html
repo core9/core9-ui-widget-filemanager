@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<script>
+
+var Frame = {
+		id : "",
+		createIframeDoc : function(id){
+			Frame.id = id;
+			var iframe = document.createElement('iframe');
+			iframe.setAttribute('id',Frame.id);
+			var html = '<!DOCTYPE html><html><head></head><body>Fame</body></html>';
+			document.body.appendChild(iframe);
+			iframe.contentWindow.document.open();
+			iframe.contentWindow.document.write(html);
+			iframe.contentWindow.document.close();
+		},
+		createIframe : function(id){
+			Frame.id = id;
+		  var iframe = document.createElement('iframe');
+		  iframe.setAttribute('id',Frame.id);
+		  document.body.appendChild(iframe);
+		},
+		appendSource : function(src){
+			var myIframe = document.getElementById(Frame.id);
+			myIframe.setAttribute("src", src);
+		},
+		appendScript : function(scriptsrc){
+			var myIframe = document.getElementById(Frame.id);
+			var script = myIframe.contentWindow.document.createElement("script");
+			script.type = "text/javascript";
+			script.src = scriptsrc;
+			myIframe.contentWindow.document.head.appendChild(script);
+		}
+};
+
+
+Frame.createIframeDoc('myIframeId');
+Frame.appendScript("//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js");
+
+Frame.createIframe('myIframeId2');
+Frame.appendSource("childFrame.html");
+
+
+
+
+
+</script>
+
+
+<form name="form">
+  <input type="text" name="msg" value="Your message"/>
+  <input type="submit"/>
+</form>
+
+<script>
+
+  var win = document.getElementById("myIframeId2").contentWindow
+
+  document.forms.form.onsubmit = function() {
+    win.postMessage(
+      this.elements.msg.value,
+      "http://localhost"
+    )
+    return false
+  }
+
+</script>
+
+</body>
+</html>
