@@ -7,8 +7,8 @@ $LAB
 .script("../../lib/seamless/build/seamless.parent.min.js")
 .script("../../lib/pmrpc/pmrpc.min.js")
 .script("../../lib/jsclass/src/loader-browser.js")
-.script("widgets/skeleton/widget.parent.packages.skeleton.js")
+.script("widgets/filemanager/widget.parent.packages.filemanager.js")
 .wait(function(){
 	window.widget = jQuery;
-	window.widget.skeleton = JS.require('widget.skeleton');
+	window.widget.filemanager = JS.require('widget.filemanager');
 });

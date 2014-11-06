@@ -2,7 +2,7 @@
 
 ;
 (function($) {
-	$.fn.skeleton = function(options) {
+	$.fn.filemanager = function(options) {
 		if (!$(this).length) {
 			return this;
 		}
@@ -10,11 +10,11 @@
 		var settings = $.extend({}, this.defaultOptions, options);
 		return this;
 	};
-	$.skeleton = function(obj) {
+	$.filemanager = function(obj) {
 	};
 
 	  $(function() {
-			$('body').append('<iframe id="ifr" src="widgets/skeleton/skeleton.html"></iframe>');
+			$('body').append('<iframe id="ifr" src="widgets/filemanager/filemanager.html"></iframe>');
 			setTimeout(function(){
 				var child =   $('#ifr').seamless({
 			    	  loading: ''
