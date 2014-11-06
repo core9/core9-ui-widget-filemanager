@@ -10,5 +10,13 @@ $LAB
 .script("widgets/filemanager/parent/packages.filemanager.js")
 .wait(function(){
 	window.widget = jQuery;
-	window.widget.filemanager = JS.require('widget.filemanager');
+	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
+
+		$('#choose-file').on('click', function(){
+			widget.filemanager.init({'size':'full'});
+		});
+
+	});
+
+
 });
