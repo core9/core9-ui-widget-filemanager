@@ -3,10 +3,12 @@
 var baseUrl = "http://localhost/ResponsiveFilemanager-master/";
 
 $LAB.setOptions({AlwaysPreserveOrder:true})
-.script(baseUrl + "assets/jquery.min.js").wait()
+.script(baseUrl + "assets/jquery.min.js").wait(function(){
+	$.noConflict();
+})
 .script(baseUrl + "assets/jquery.browser.min.js")
 .script(baseUrl + "assets/bootstrap.min.js")
-.script(baseUrl + "assets/jquery.easing.js")
+//.script(baseUrl + "assets/jquery.easing.js")
 .script(baseUrl + "assets/jquery.prettyPhoto-3.1.4-W3C.js")
 .script(baseUrl + "assets/jquery.ui.totop.js")
 .script(baseUrl + "assets/jquery.inview.js")
