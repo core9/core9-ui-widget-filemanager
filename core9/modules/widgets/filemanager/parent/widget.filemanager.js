@@ -61,6 +61,10 @@
 
 			},
 
+			_destroy = function(){
+				$('#ifr').hide();
+			},
+
 			$.fn.filemanager = function(options) {
 				if (!$(this).length) {
 					return this;
@@ -72,6 +76,9 @@
 	$.filemanager = function(obj) {
 	};
 
+	$.filemanager.destroy = function(){
+		_destroy();
+	},
 	$.filemanager.init = function(data) {
 		if (data.size == 'full') {
 			_show();

@@ -16,6 +16,7 @@ $LAB
 
 			var mySubscriber = function( msg, data ){
 			    console.log( msg, data );
+			    widget.filemanager.destroy();
 			};
 			var token = PubSub.subscribe( 'geturl', mySubscriber );
 
