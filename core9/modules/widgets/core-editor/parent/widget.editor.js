@@ -23,7 +23,12 @@
 						loading : ''
 					});
 					$.editor.child.receive(function(data, event) {
+						console.log('recieving data.. : ');
 						console.log(data);
+
+						if (data.destroy) {
+							PubSub.publish('destroy', data.url);
+						}
 					});
 				}
 			},

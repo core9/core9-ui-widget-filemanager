@@ -25,12 +25,6 @@ $LAB
 		.script(baseUrl + "js/editor.load.css.js").wait()
 		.script("../../../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
-
-			initMyPage(baseUrl);
-
-
-
-
 			// connect stuff
 
 			var parent = $.seamless.connect({
@@ -52,12 +46,7 @@ $LAB
 				}
 			});
 
-			$('#send').on('click', function(e) {
-					parent.send({
-						size : 'full',
-						myparam : 'This is anything you want it to be...'
-					});
-			});
+
 
 
 
@@ -196,6 +185,13 @@ $LAB
 
 			$('.close-modal').click(function() {
 				location = location.href.split('#')[0];
+
+				parent.send({
+					destroy : true//,
+					//url : location.href.split('#')[0]
+				});
+
+
 			});
 
 			$('#variants').click(function() {
