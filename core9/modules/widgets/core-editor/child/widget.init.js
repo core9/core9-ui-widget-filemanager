@@ -20,10 +20,40 @@ $LAB
 		.script(baseUrl + "js/iframeResizer.min.js")
 		.script(baseUrl + "js/wizard-engine.js")
 		.script(baseUrl + "js/editor.load.css.js")
-		.script("../../../../../lib/seamless/build/seamless.child.js")
+		.script("../../../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
 
 			initMyPage(baseUrl);
+
+			// connect stuff
+
+			parent = $.seamless.connect({
+				url : 'index.html',
+				container : 'div.content',
+				allowStyleInjection : true
+			});
+
+			Core9.parent = parent;
+
+			parent.receive(function(data, event) {
+				console.log("child recieved :");
+				console.log(data);
+				if (data.action == 'init') {
+					console.log('activating editor..');
+					$('#wizard-wrapper').modal("show");
+					$('#modal').toggle();
+
+				}
+			});
+
+			$('#send').on('click', function(e) {
+					parent.send({
+						size : 'full',
+						myparam : 'This is anything you want it to be...'
+					});
+			});
+
+
 
 			console.log(EditorConfig);
 
@@ -49,8 +79,35 @@ $LAB
 					if (data.action == 'edit-block') {
 						window.location = "#state=edit-block-"
 								+ data.block + "-type-" + data.type;
-						$('#wizard-wrapper').modal("show");
-						$('#modal').toggle();
+						// connect stuff
+
+						parent = $.seamless.connect({
+							url : 'index.html',
+							container : 'div.content',
+							allowStyleInjection : true
+						});
+
+						Core9.parent = parent;
+
+						parent.receive(function(data, event) {
+							console.log("child recieved :");
+							console.log(data);
+							if (data.action == 'init') {
+								console.log('activating filemanager');
+
+							}
+						});
+
+						$(function($) {
+
+							$('#send').on('click', function(e) {
+								parent.send({
+									size : 'full',
+									myparam : 'This is anything you want it to be...'
+								});
+							});
+
+						});
 					}
 					if (data.action == 'insertbefore-block') {
 						window.location = "#state=insertbefore-block-"
@@ -141,33 +198,5 @@ $LAB
 
 
 
-			// connect stuff
 
-			parent = $.seamless.connect({
-				url : 'index.html',
-				container : 'div.content',
-				allowStyleInjection : true
-			});
-
-			Core9.parent = parent;
-
-			parent.receive(function(data, event) {
-				console.log("child recieved :");
-				console.log(data);
-				if (data.action == 'init') {
-					console.log('activating filemanager');
-
-				}
-			});
-
-			$(function($) {
-
-				$('#send').on('click', function(e) {
-					parent.send({
-						size : 'full',
-						myparam : 'This is anything you want it to be...'
-					});
-				});
-
-			});
 		});

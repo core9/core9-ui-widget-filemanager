@@ -23,6 +23,7 @@
 						loading : ''
 					});
 					$.editor.child.receive(function(data, event) {
+						console.log(data);
 					});
 				}
 			},
@@ -33,7 +34,7 @@
 					$.editor.child.send({
 						action : 'init'
 					});
-				}, 30);
+				}, 900);
 
 				setTimeout(function() {
 					function getDocHeight() {
