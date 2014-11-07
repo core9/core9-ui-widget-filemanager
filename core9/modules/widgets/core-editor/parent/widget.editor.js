@@ -1,24 +1,36 @@
 ;
 (function($) {
-	this.editor = this;
-	this.editor.ifr = '<iframe id="ifr-editor" src="widgets/core-editor/child/editor.html"></iframe>',
-	this.editor.child = {},
-	this.editor._appendIframe = function(){
+
+			$.fn.editor = function(options) {
+				if (!$(this).length) {
+					return this;
+				}
+				this.defaultOptions = {};
+				var settings = $.extend({}, this.defaultOptions, options);
+				return this;
+			};
+	$.editor = function(obj) {
+	};
+
+
+	$.editor.ifr = '<iframe id="ifr-editor" src="widgets/core-editor/child/editor.html"></iframe>',
+	$.editor.child = {},
+	$.editor._appendIframe = function(){
 				if($('#ifr-editor').size() == 0){
 					$('body')
-					.append(editor.ifr);
-					this.editor.child = $('#ifr-editor').seamless({
+					.append($.editor.ifr);
+					$.editor.child = $('#ifr-editor').seamless({
 						loading : ''
 					});
-					this.editor.child.receive(function(data, event) {
+					$.editor.child.receive(function(data, event) {
 					});
 				}
 			},
 
-			this.editor._show = function() {
-				this.editor._appendIframe();
+			$.editor._show = function() {
+				$.editor._appendIframe();
 				setTimeout(function() {
-					this.editor.child.send({
+					$.editor.child.send({
 						action : 'init'
 					});
 				}, 30);
@@ -43,27 +55,14 @@
 
 			},
 
-			this.editor._destroy = function(){
-				$('#ifr-editor').hide();
-			},
 
-			$.fn.editor = function(options) {
-				if (!$(this).length) {
-					return this;
-				}
-				this.defaultOptions = {};
-				var settings = $.extend({}, this.defaultOptions, options);
-				return this;
-			};
-	$.editor = function(obj) {
-	};
 
 	$.editor.destroy = function(){
-		this.editor._destroy();
+				$('#ifr-editor').hide();
 	},
 	$.editor.init = function(data) {
 		if (data.size == 'full') {
-			this.editor._show();
+			$.editor._show();
 		}
 	};
 
