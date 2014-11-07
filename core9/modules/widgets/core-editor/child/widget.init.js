@@ -7,27 +7,33 @@ var Core9 = {
 var baseUrl = "http://easydrain.localhost:8080/plugins/editor/static/";
 
 $LAB
+.script(baseUrl + "js/jquery.js").wait();
+
+$LAB
 		.setOptions({
 			AlwaysPreserveOrder : true
 		})
-		.script(baseUrl + "js/jquery.js")
+		.script(baseUrl + "js/jquery.js").wait()
 		.script(baseUrl + "js/bootstrap.min.js").wait()
-		.script(baseUrl + "js/jquery.sceditor.bbcode.min.js")
-		.script(baseUrl + "js/jquery.sceditor.xhtml.min.js")
-		.script(baseUrl + "js/select2.min.js")
-		.script(baseUrl + "js/jsoneditor.min.js")
-		.script(baseUrl + "js/promise.min.js")
-		.script(baseUrl + "js/iframeResizer.min.js")
-		.script(baseUrl + "js/wizard-engine.js")
-		.script(baseUrl + "js/editor.load.css.js")
+		.script(baseUrl + "js/jquery.sceditor.bbcode.min.js").wait()
+		.script(baseUrl + "js/jquery.sceditor.xhtml.min.js").wait()
+		.script(baseUrl + "js/select2.min.js").wait()
+		.script(baseUrl + "js/jsoneditor.min.js").wait()
+		.script(baseUrl + "js/promise.min.js").wait()
+		.script(baseUrl + "js/iframeResizer.min.js").wait()
+		.script(baseUrl + "js/wizard-engine.js").wait()
+		.script(baseUrl + "js/editor.load.css.js").wait()
 		.script("../../../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
 
 			initMyPage(baseUrl);
 
+
+
+
 			// connect stuff
 
-			parent = $.seamless.connect({
+			var parent = $.seamless.connect({
 				url : 'index.html',
 				container : 'div.content',
 				allowStyleInjection : true
@@ -40,8 +46,8 @@ $LAB
 				console.log(data);
 				if (data.action == 'init') {
 					console.log('activating editor..');
-					$('#wizard-wrapper').modal("show");
-					$('#modal').toggle();
+					jQuery('#wizard-wrapper').modal("show");
+					jQuery('#modal').toggle();
 
 				}
 			});
