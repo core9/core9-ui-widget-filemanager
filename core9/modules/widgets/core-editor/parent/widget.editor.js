@@ -1,43 +1,29 @@
 ;
 (function($) {
-			this.child = {},
-			_appendIframe = function(){
+	this.editor = this;
+	this.editor.ifr = '<iframe id="ifr-editor" src="widgets/core-editor/child/editor.html"></iframe>',
+	this.editor.child = {},
+	this.editor._appendIframe = function(){
 				if($('#ifr-editor').size() == 0){
 					$('body')
-					.append(
-							'<iframe id="ifr-editor" src="widgets/core-editor/child/editor.html"></iframe>');
-					this.child = $('#ifr-editor').seamless({
+					.append(editor.ifr);
+					this.editor.child = $('#ifr-editor').seamless({
 						loading : ''
 					});
-
-					this.child.receive(function(data, event) {
-
-						  console.log('recieving data.. : ');
-						  console.log(data);
-
-						  if(data.url){
-							  this.url = data.url;
-
-							  PubSub.publish( 'geturl', data.url );
-						  }
-
-						});
+					this.editor.child.receive(function(data, event) {
+					});
 				}
 			},
 
-			_show = function() {
-				_appendIframe();
+			this.editor._show = function() {
+				this.editor._appendIframe();
 				setTimeout(function() {
-
-					this.child.send({
+					this.editor.child.send({
 						action : 'init'
 					});
-
 				}, 30);
 
-
 				setTimeout(function() {
-
 					function getDocHeight() {
 				          var doc = document;
 				          return Math.max(
@@ -46,7 +32,6 @@
 				              Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
 				          );
 				      }
-
 				   var height = getDocHeight();
 					console.log("height : " + height);
 					$('#ifr-editor').css('position', 'absolute');
@@ -54,14 +39,11 @@
 					$('#ifr-editor').css('height', height + 'px');
 					$('#ifr-editor').css('width', $('body').width() + 'px');
 					$('#ifr-editor').show();
-
 				}, 1500);
-
-
 
 			},
 
-			_destroy = function(){
+			this.editor._destroy = function(){
 				$('#ifr-editor').hide();
 			},
 
@@ -77,11 +59,11 @@
 	};
 
 	$.editor.destroy = function(){
-		_destroy();
+		this.editor._destroy();
 	},
 	$.editor.init = function(data) {
 		if (data.size == 'full') {
-			_show();
+			this.editor._show();
 		}
 	};
 

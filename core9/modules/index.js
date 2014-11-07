@@ -31,13 +31,13 @@ $LAB
 
 		$('.edit-block').on('click', function(){
 			var token;
-			var mySubscriber = function( msg, data ){
+			var mySubscriber2 = function( msg, data ){
 				console.log("got url now destroy filemanager");
 			    console.log( msg, data );
 			    widget.editor.destroy();
 			    PubSub.unsubscribe( token );
 			};
-			token = PubSub.subscribe( 'geturl', mySubscriber );
+			token = PubSub.subscribe( 'geturl', mySubscriber2 );
 			widget.editor.init({'size':'full'});
 		});
 

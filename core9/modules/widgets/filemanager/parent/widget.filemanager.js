@@ -1,53 +1,50 @@
 ;
 (function($) {
-			this.child = {},
-			_appendIframe = function(){
-				if($('#ifr').size() == 0){
-					$('body')
-					.append(
-							'<iframe id="ifr" src="widgets/filemanager/child/filemanager.html"></iframe>');
-					this.child = $('#ifr').seamless({
-						loading : ''
-					});
 
-					this.child.receive(function(data, event) {
+	$.fn.filemanager = function(options) {
+		if (!$(this).length) {
+			return this;
+		}
+		this.defaultOptions = {};
+		var settings = $.extend({}, this.defaultOptions, options);
+		return this;
+	};
 
-						  console.log('recieving data.. : ');
-						  console.log(data);
+	$.filemanager = function(obj) {
+	};
 
-						  if(data.url){
-							  this.url = data.url;
+	$.filemanager.child = {},
 
-							  PubSub.publish( 'geturl', data.url );
-						  }
+	$.filemanager.destroy = function() {
+		$('#ifr').hide();
+	},
 
-						});
-				}
-			},
+	$.filemanager.init = function(data) {
+		if (data.size == 'full') {
+			$.filemanager._show();
+		}
+	};
 
-			_show = function() {
-				_appendIframe();
-				setTimeout(function() {
-
-					this.child.send({
+	$.filemanager._show = function() {
+		$.filemanager._appendIframe();
+		setTimeout(function() {
+					$.filemanager.child.send({
 						action : 'init'
 					});
-
-				}, 30);
-
-
-				setTimeout(function() {
+		}, 30);
+		setTimeout(function() {
 
 					function getDocHeight() {
-				          var doc = document;
-				          return Math.max(
-				              Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight),
-				              Math.max(doc.body.offsetHeight, doc.documentElement.offsetHeight),
-				              Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
-				          );
-				      }
+						var doc = document;
+						return Math.max(Math.max(doc.body.scrollHeight,
+								doc.documentElement.scrollHeight), Math.max(
+								doc.body.offsetHeight,
+								doc.documentElement.offsetHeight), Math.max(
+								doc.body.clientHeight,
+								doc.documentElement.clientHeight));
+					}
 
-				   var height = getDocHeight();
+					var height = getDocHeight();
 					console.log("height : " + height);
 					$('#ifr').css('position', 'absolute');
 					$('#ifr').css('top', '0px');
@@ -55,37 +52,34 @@
 					$('#ifr').css('width', $('body').width() + 'px');
 					$('#ifr').show();
 
-				}, 1500);
+		}, 1500);
 
-
-
-			},
-
-			_destroy = function(){
-				$('#ifr').hide();
-			},
-
-			$.fn.filemanager = function(options) {
-				if (!$(this).length) {
-					return this;
-				}
-				this.defaultOptions = {};
-				var settings = $.extend({}, this.defaultOptions, options);
-				return this;
-			};
-	$.filemanager = function(obj) {
-	};
-
-	$.filemanager.destroy = function(){
-		_destroy();
 	},
-	$.filemanager.init = function(data) {
-		if (data.size == 'full') {
-			_show();
-		}
-	};
 
-	$(function() {
-	});
+	$.filemanager._appendIframe = function() {
+				if ($('#ifr').size() == 0) {
+					$('body')
+							.append(
+									'<iframe id="ifr" src="widgets/filemanager/child/filemanager.html"></iframe>');
+					$.filemanager.child = $('#ifr').seamless({
+						loading : ''
+					});
+
+					$.filemanager.child.receive(function(data, event) {
+
+						console.log('recieving data.. : ');
+						console.log(data);
+
+						if (data.url) {
+							PubSub.publish('geturl', data.url);
+						}
+
+					});
+				}
+			},
+
+			$(function() {
+
+			});
 
 })(window.widget);
