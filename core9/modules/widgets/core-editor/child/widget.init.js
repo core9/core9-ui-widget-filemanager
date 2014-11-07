@@ -11,7 +11,7 @@ $LAB
 			AlwaysPreserveOrder : true
 		})
 		.script(baseUrl + "js/jquery.js")
-		.script(baseUrl + "js/bootstrap.min.js")
+		.script(baseUrl + "js/bootstrap.min.js").wait()
 		.script(baseUrl + "js/jquery.sceditor.bbcode.min.js")
 		.script(baseUrl + "js/jquery.sceditor.xhtml.min.js")
 		.script(baseUrl + "js/select2.min.js")
@@ -19,8 +19,130 @@ $LAB
 		.script(baseUrl + "js/promise.min.js")
 		.script(baseUrl + "js/iframeResizer.min.js")
 		.script(baseUrl + "js/wizard-engine.js")
+		.script(baseUrl + "js/editor.load.css.js")
 		.script("../../../../../lib/seamless/build/seamless.child.js")
 		.wait(function() {
+
+			initMyPage(baseUrl);
+
+			console.log(EditorConfig);
+
+			JSONEditor.defaults.theme = 'bootstrap3';
+			JSONEditor.defaults.iconlib = 'fontawesome4';
+			JSONEditor.plugins.sceditor = {
+				toolbar : "bold,italic,underline,strike,subscript,superscript|left,center,right,justify|font,size,color,removeformat|table|source",
+				width : "560px",
+			};
+			JSONEditor.plugins.select2.width = "300px";
+
+
+			Wizard.init(EditorConfig);
+
+			iFrameResize({
+				log : false,
+				enablePublicMethods : true,
+				resizedCallback : function(messageData) {
+					console.log(messageData);
+				},
+				messageCallback : function(messageData) {
+					var data = JSON.parse(messageData.message);
+					if (data.action == 'edit-block') {
+						window.location = "#state=edit-block-"
+								+ data.block + "-type-" + data.type;
+						$('#wizard-wrapper').modal("show");
+						$('#modal').toggle();
+					}
+					if (data.action == 'insertbefore-block') {
+						window.location = "#state=insertbefore-block-"
+								+ data.block + "-type-" + data.type;
+						$('#wizard-wrapper').modal("show");
+						$('#modal').toggle();
+					}
+					if (data.action == 'insertafter-block') {
+						window.location = "#state=insertafter-block-"
+								+ data.block + "-type-" + data.type;
+						$('#wizard-wrapper').modal("show");
+						$('#modal').toggle();
+					}
+					if (data.action == 'delete-block') {
+						window.location = "#state=delete-block-"
+								+ data.block + "-type-" + data.type;
+						$('#delete-form').toggle();
+						$('#modal').toggle();
+					}
+				},
+				closedCallback : function(id) {
+					console.log(id);
+				}
+			});
+
+			$('#delete-form').click(
+					function() {
+
+						var hash = location.hash.split('=');
+						var data = hash[1].split('-');
+						var tpl = "";
+						try {
+							tpl = Wizard.widgetJson[data[4]].template;
+						} catch (e) {
+
+						}
+						var meta = {
+							"absolute-url" : document.getElementById(
+									'iframe').getAttribute('src'),
+							"state" : data[0],
+							"block" : data[2],
+							"type" : data[4],
+							"template" : tpl
+						}
+						console.log(meta);
+
+						var fullData = {
+							"meta" : meta
+						}
+
+						var jsonString = JSON.stringify(fullData);
+
+						var data = {
+							"id" : 112,
+							"data" : jsonString
+						};
+						promise.post('/api/block', data)
+								.then(
+										function(error, text, xhr) {
+											if (error) {
+												return;
+											}
+											console.log(text);
+											location = location.href
+													.split('#')[0];
+										});
+
+					});
+
+			if (typeof String.prototype.startsWith != 'function') {
+				String.prototype.startsWith = function(str) {
+					return this.indexOf(str) == 0;
+				};
+			}
+
+			if (location.hash.startsWith("#state=edit-block-")) {
+				$('#wizard-wrapper').modal("show");
+				$('#modal').toggle();
+			}
+
+			$('.close-modal').click(function() {
+				location = location.href.split('#')[0];
+			});
+
+			$('#variants').click(function() {
+				$('#page-selector').toggle();
+			});
+
+
+
+			// connect stuff
+
 			parent = $.seamless.connect({
 				url : 'index.html',
 				container : 'div.content',
@@ -34,14 +156,7 @@ $LAB
 				console.log(data);
 				if (data.action == 'init') {
 					console.log('activating filemanager');
-					console.log($('.iframe-btn'));
-					$('.iframe-btn').trigger("click");
-					$('#ifr').show();
-					if ($('#ifr').size() == 0) {
-						console.log('trying a second time..');
-						$('.iframe-btn').trigger("click");
-						$('#ifr').show();
-					}
+
 				}
 			});
 
