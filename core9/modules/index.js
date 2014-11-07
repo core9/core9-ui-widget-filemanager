@@ -27,5 +27,21 @@ $LAB
 
 	});
 
+	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
+
+		$('.edit-block').on('click', function(){
+			var token;
+			var mySubscriber = function( msg, data ){
+				console.log("got url now destroy filemanager");
+			    console.log( msg, data );
+			    widget.editor.destroy();
+			    PubSub.unsubscribe( token );
+			};
+			token = PubSub.subscribe( 'geturl', mySubscriber );
+			widget.editor.init({'size':'full'});
+		});
+
+	});
+
 
 });
