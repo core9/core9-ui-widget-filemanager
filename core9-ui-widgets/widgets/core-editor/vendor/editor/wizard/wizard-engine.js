@@ -2,6 +2,7 @@ var Wizard = {
 	widgetJson : {},
 	state : {},
 	action : "",
+	activatedWidget : "",
 	config : {},
 	getStep : function(step, label) {
 		var li = document.createElement("li");
@@ -95,6 +96,7 @@ var Wizard = {
 
 	activateWidget : function(widget, widgets) {
 		console.log('activating : ' + widget);
+		Wizard.activatedWidget = widget;
 		// var currentWidget =
 		// location.href.split('-')[location.href.split('-').length -1];
 		// console.log('current widget : ' + currentWidget);
@@ -245,8 +247,8 @@ var Wizard = {
 			"absolute-url" : Wizard.config.pageUrl,
 			"state" : Wizard.action,
 			"block" : Wizard.state.block,
-			"type" : Wizard.state.type,
-			"template" : Wizard.widgetJson[Wizard.state.type].template
+			"type" : Wizard.activatedWidget,
+			"template" : Wizard.widgetJson[Wizard.activatedWidget].template
 		}
 		console.log(meta);
 
@@ -288,7 +290,7 @@ var Wizard = {
 		// page=/scraper/nl&state=edit-block-0-type-video
 		dataRequest += parser.pathname + '&state=';
 		dataRequest += Wizard.state.action + "-" + Wizard.state.block
-				+ "-type-" + Wizard.state.type;
+				+ "-type-" + Wizard.activatedWidget;
 
 		promise.get(dataRequest).then(function(error, text, xhr) {
 			if (error) {
