@@ -45,7 +45,8 @@ $LAB
 					console.log('activating editor..');
 					jQuery('#wizard-wrapper').modal("show");
 					jQuery('#modal').toggle();
-
+					EditorConfig['state'] = Core9.editor.state;
+					Wizard.init(EditorConfig);
 				}
 			});
 			console.log('Editor config : ');
@@ -58,7 +59,7 @@ $LAB
 				width : "560px",
 			};
 			JSONEditor.plugins.select2.width = "300px";
-			Wizard.init(EditorConfig);
+
 
 /*			iFrameResize({
 				log : false,

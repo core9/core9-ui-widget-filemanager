@@ -1,11 +1,13 @@
 var Wizard = {
 	widgetJson : {},
+	state : {},
+	action : "",
 	config : {},
 	getStep : function(step, label) {
 		var li = document.createElement("li");
 		li.setAttribute("class", "step");
 		var a = document.createElement("a");
-		a.setAttribute("href", "javascript:Wizard.restoreUrl();");
+		a.setAttribute("href", "javascript:void(0);");
 		a.appendChild(document.createTextNode(label));
 		li.appendChild(a);
 		var div = document.createElement("div");
@@ -21,7 +23,7 @@ var Wizard = {
 		return li;
 	},
 
-	restoreUrl : function(){
+	restoreUrl : function() {
 		location = location.href;
 	},
 
@@ -32,12 +34,12 @@ var Wizard = {
 		});
 	},
 
-	goToNextStep : function(event){
-  	  var selectedLi = Wizard.getParentElementWithClass(event.target, 'step');
-  	  if(selectedLi.nextSibling != null){
-  		  Wizard.hideAllDivs();
-  		  selectedLi.nextSibling.querySelector('.main-container').style.display = "block";
-  	  }
+	goToNextStep : function(event) {
+		var selectedLi = Wizard.getParentElementWithClass(event.target, 'step');
+		if (selectedLi.nextSibling != null) {
+			Wizard.hideAllDivs();
+			selectedLi.nextSibling.querySelector('.main-container').style.display = "block";
+		}
 	},
 
 	createWizard : function(steps) {
@@ -65,22 +67,23 @@ var Wizard = {
 		}
 	},
 
-	getParentElementWithClass : function(element, className){
-		function collectionHas(a, b) { //helper function (see below)
-		    for(var i = 0, len = a.length; i < len; i ++) {
-		        if(a[i] == b) return true;
-		    }
-		    return false;
+	getParentElementWithClass : function(element, className) {
+		function collectionHas(a, b) { // helper function (see below)
+			for (var i = 0, len = a.length; i < len; i++) {
+				if (a[i] == b)
+					return true;
+			}
+			return false;
 		}
 		function findParentBySelector(elm, selector) {
-		    var all = document.querySelectorAll(selector);
-		    var cur = elm.parentNode;
-		    while(cur && !collectionHas(all, cur)) { //keep going up until you find a match
-		        cur = cur.parentNode; //go up
-		    }
-		    return cur; //will return null if not found
+			var all = document.querySelectorAll(selector);
+			var cur = elm.parentNode;
+			while (cur && !collectionHas(all, cur)) { // keep going up until
+				// you find a match
+				cur = cur.parentNode; // go up
+			}
+			return cur; // will return null if not found
 		}
-
 
 		var parent = findParentBySelector(element, "." + className);
 		return parent;
@@ -92,10 +95,12 @@ var Wizard = {
 
 	activateWidget : function(widget, widgets) {
 		console.log('activating : ' + widget);
-		var currentWidget = location.href.split('-')[location.href.split('-').length -1];
-		console.log('current widget : ' + currentWidget);
-	
-		location.href = location.href.replace('type-' + currentWidget,'type-' + widget);
+		// var currentWidget =
+		// location.href.split('-')[location.href.split('-').length -1];
+		// console.log('current widget : ' + currentWidget);
+
+		// location.href = location.href.replace('type-' + currentWidget,'type-'
+		// + widget);
 
 		var stepFile = widgets[widget].steps;
 		stepFile = Wizard.config.baseUrl + stepFile;
@@ -148,14 +153,15 @@ var Wizard = {
 		document.getElementById('widgets').innerHTML = options;
 	},
 
-	getMetaData : function(){
+	getMetaData : function() {
 		var hash = location.hash.split('=');
 		var data = hash[1].split('-');
 		var meta = {
-				"absolute-url" : document.getElementById('iframe').getAttribute('src'),
-				"state" : data[0],
-				"block" : data[2],
-				"type" : data[4]
+			"absolute-url" : document.getElementById('iframe').getAttribute(
+					'src'),
+			"state" : data[0],
+			"block" : data[2],
+			"type" : data[4]
 		}
 	},
 
@@ -167,134 +173,151 @@ var Wizard = {
 			var json = JSON.parse(text);
 			Wizard.widgetJson = json;
 			Wizard.config = config;
+			Wizard.action = config.state.action;
+			Wizard.state = JSON.parse(config.state.contextmenu.message);
 			Wizard.setUpChooseOptions(json);
 			Wizard.activateChooseButtons(json);
 		});
 	},
-	run : function(step, config){
-	var parser = document.createElement('a');
-	parser.href = Wizard.config.pageUrl;
-	console.log(parser);
+	run : function(step, config) {
+		var parser = document.createElement('a');
+		parser.href = Wizard.config.pageUrl;
+		console.log(parser);
 
-	var dataRequest = Wizard.config.baseUrl + 'site/data.json?page='
-			+ parser.pathname + '&' + location.hash.substring(1);
+		var dataRequest = Wizard.config.baseUrl;
+		dataRequest += 'site/data.json?page=';
+		// page=/scraper/nl&state=edit-block-0-type-video
+		dataRequest += parser.pathname + '&state=';
+		dataRequest += Wizard.state.action + "-" + Wizard.state.block
+				+ "-type-" + Wizard.state.type;
 
-	promise.get(dataRequest).then(function(error, text, xhr) {
-		if (error) {
-//			/alert('Error ' + xhr.status);
-			//return;
-			dataRequest = "";
-		}else{
-			console.log("result block data json : " + text);
-			var json = JSON.parse(text);
-		}
-		getData(dataRequest);
-	});
+		promise.get(dataRequest).then(function(error, text, xhr) {
+			if (error) {
+				// /alert('Error ' + xhr.status);
+				// return;
+				dataRequest = "";
+			} else {
+				console.log("result block data json : " + text);
+				var json = JSON.parse(text);
+			}
+			getData(dataRequest);
+		});
 
-	console.log(Wizard.config.pageUrl + location.hash);
-	function getData(dataRequest) {
+		function getData(dataRequest) {
 
-		var req = dataRequest;
-		if(req == ""){
-			req = Wizard.config.baseUrl + config.data;
-		}
-		promise
-				.get(req)
-				.then(
-						function(error, text, xhr) {
-							if (error) {
-								alert('Error ' + xhr.status);
-								return;
-							}
-							var starting_value = "";
-							try{
-								starting_value = JSON.parse(text).data;
-							}catch(e){}
+			var req = dataRequest;
+			if (req == "") {
+				req = Wizard.config.baseUrl + config.data;
+			}
+			promise
+					.get(req)
+					.then(
+							function(error, text, xhr) {
+								// what a fucking mess
+								if (error) {
+									alert('Error ' + xhr.status);
+									return;
+								}
+								var starting_value = "";
+								try {
+									starting_value = JSON.parse(text).data;
+								} catch (e) {
+								}
 
+								if (typeof (starting_value) == "undefined"
+										|| starting_value == "") {
+									starting_value = JSON.parse(text);
+								}
+								var editor = new JSONEditor(
+										document
+												.getElementById('editor_holder-'
+														+ step), {
+											ajax : true,
+											schema : config.schema,
+											// Seed the form with a starting
+											// value
+											startval : starting_value,
+											// Disable additional properties
+											no_additional_properties : true,
+											disable_edit_json : true,
+											disable_properties : true,
+											disable_collapse : true,
+											// Require all properties by default
+											required_by_default : true
+										});
+								// Hook up the submit button to log to the
+								// console
 
-							if(typeof(starting_value) == "undefined" || starting_value == ""){
-								starting_value = JSON.parse(text);
-							}
-							var editor = new JSONEditor(document
-									.getElementById('editor_holder-' + step), {
-								ajax : true,
-								schema : config.schema,
-								// Seed the form with a starting value
-								startval : starting_value,
-								// Disable additional properties
-								no_additional_properties : true,
-								disable_edit_json : true,
-								disable_properties : true,
-								disable_collapse : true,
-								// Require all properties by default
-								required_by_default : true
+								document
+										.getElementById('submit-' + step)
+										.addEventListener(
+												'click',
+												function(event) {
+													event.stopPropagation();
+													console.log(editor
+															.validate());
+													Wizard.goToNextStep(event);
+													console
+															.log('sending to swagger api');
+													console.log(editor
+															.getValue());
+
+													var hash = location.hash
+															.split('=');
+													var data = hash[1]
+															.split('-');
+													var meta = {
+														"absolute-url" : document
+																.getElementById(
+																		'iframe')
+																.getAttribute(
+																		'src'),
+														"state" : data[0],
+														"block" : data[2],
+														"type" : data[4],
+														"template" : Wizard.widgetJson[data[4]].template
+													}
+													console.log(meta);
+
+													var fullData = {
+														"meta" : meta,
+														"editor" : editor
+																.getValue(),
+													}
+
+													var jsonString = JSON
+															.stringify(fullData);
+
+													var data = {
+														"id" : 112,
+														"data" : jsonString
+													};
+
+													promise
+															.post(
+																	location.origin
+																			+ '/api/block',
+																	data)
+															.then(
+																	function(
+																			error,
+																			text,
+																			xhr) {
+																		if (error) {
+																			alert('Error '
+																					+ xhr.status);
+																			return;
+																		}
+																		console
+																				.log(text);
+																		document
+																				.getElementById('iframe').contentWindow.location = location.href;
+																	});
+
+												});
+
 							});
-							// Hook up the submit button to log to the console
-							document
-									.getElementById('submit-' + step)
-									.addEventListener(
-											'click',
-											function(event) {
-												event.stopPropagation();
-												console.log(editor.validate());
-												Wizard.goToNextStep(event);
-												console
-														.log('sending to swagger api');
-												console.log(editor.getValue());
-
-												var hash = location.hash
-														.split('=');
-												var data = hash[1].split('-');
-												var meta = {
-													"absolute-url" : document
-															.getElementById(
-																	'iframe')
-															.getAttribute('src'),
-													"state" : data[0],
-													"block" : data[2],
-													"type" : data[4],
-													"template" : Wizard.widgetJson[data[4]].template
-												}
-												console.log(meta);
-
-												var fullData = {
-													"meta" : meta,
-													"editor" : editor
-															.getValue(),
-												}
-
-												var jsonString = JSON
-														.stringify(fullData);
-
-												var data = {
-													"id" : 112,
-													"data" : jsonString
-												};
-
-												promise
-														.post(
-																location.origin +'/api/block',
-																data)
-														.then(
-																function(error,
-																		text,
-																		xhr) {
-																	if (error) {
-																		alert('Error '
-																				+ xhr.status);
-																		return;
-																	}
-																	console
-																			.log(text);
-																	document
-																			.getElementById('iframe').contentWindow.location = location.href;
-																});
-
-											});
-
-						});
+		}
 	}
-}
-
 
 }
