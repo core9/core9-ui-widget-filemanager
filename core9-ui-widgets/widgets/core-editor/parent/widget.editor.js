@@ -23,11 +23,13 @@
 						loading : ''
 					});
 					$.editor.child.receive(function(data, event) {
-						console.log('recieving data.. : ');
+						console.log('editor recieving url data.. : ');
 						console.log(data);
 
 						if (data.destroy) {
-							PubSub.publish('destroy', data.url);
+							console.log('editor sending destroy message.. :');
+							//PubSub.publish('destroyUrlService', data.url);
+							$.editor.destroy();
 						}
 					});
 				}
@@ -67,6 +69,13 @@
 				$('#ifr-editor').hide();
 	},
 	$.editor.init = function(data) {
+
+		var getUrlServiceResult = function( msg, data ){
+			console.log("getUrlServiceResult recieving data : ");
+		    console.log( msg, data );
+		};
+		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
+
 		if (data.size == 'full') {
 			$.editor._show();
 		}

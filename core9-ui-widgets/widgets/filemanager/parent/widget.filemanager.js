@@ -67,11 +67,11 @@
 
 					$.filemanager.child.receive(function(data, event) {
 
-						console.log('recieving data.. : ');
+						console.log('file manager recieving data.. : ');
 						console.log(data);
 
 						if (data.url) {
-							PubSub.publish('geturl', data.url);
+							PubSub.publish('destroyUrlService', data.url);
 						}
 
 					});

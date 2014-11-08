@@ -6,6 +6,7 @@ $LAB
 .script("lib/jquery/zepto.min.js")
 .script("lib/seamless/build/seamless.parent.min.js")
 .script("lib/pubsubjs/src/pubsub.js")
+.script("lib/storejs/store.min.js")
 .script("lib/jsclass/src/loader-browser.js")
 .script("widgets/filemanager/parent/packages.filemanager.js")
 .script("widgets/core-editor/parent/packages.editor.js")
@@ -13,19 +14,37 @@ $LAB
 	window.widget = jQuery;
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
-		$('.choose-file').on('click', function(){
-			var token;
-			var mySubscriber = function( msg, data ){
-				console.log("got url now destroy filemanager");
-			    console.log( msg, data );
-			    widget.filemanager.destroy();
-			    PubSub.unsubscribe( token );
-			};
-			token = PubSub.subscribe( 'geturl', mySubscriber );
-			widget.filemanager.init({'size':'full'});
-		});
+		var destroyUrlService = function( msg, data ){
+			console.log("destroy url service");
+		    console.log( msg, data );
+		    widget.editor.init({'size':'full'});
+		    PubSub.publish('getUrlServiceResult', data);
+		    widget.filemanager.destroy();
+		};
+		var tokenDestroyUrlService = PubSub.subscribe( 'destroyUrlService', destroyUrlService );
+
+		var getUrlService = function( msg, data ){
+			console.log("requesting geturl service");
+		    console.log( msg, data );
+		    widget.filemanager.init({'size':'full'});
+		};
+		var tokenGetUrlService = PubSub.subscribe( 'geturl', getUrlService );
 
 	});
+
+
+
+
+	$('.choose-file').on('click', function(){
+		PubSub.publish( 'geturl', 'file' );
+	});
+
+
+
+
+
+
+
 
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
 
