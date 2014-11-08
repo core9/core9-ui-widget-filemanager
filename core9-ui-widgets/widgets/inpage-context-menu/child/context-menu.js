@@ -163,10 +163,7 @@ Core9.menu = {
 
 		setContextMenu :	function () {
 			Core9.menu.addEvent(document.body, 'click', Core9.menu.removeContextMenu);
-			var contextMenuElements = document.getElementsByClassName(Core9.menu.blockClassName()); // class
-																										// for
-																										// context
-																										// menu
+			var contextMenuElements = document.getElementsByClassName(Core9.menu.blockClassName());
 			for (var i = 0; i < contextMenuElements.length; i++) {
 				Core9.menu.addEvent(contextMenuElements[i], 'contextmenu', Core9.menu.clicked);
 			}
@@ -181,7 +178,6 @@ Core9.menu = {
 
 		showMenu :	function (x, y) {
 			Core9.menu.removeContextMenu();
-
 			var menuObj = Core9.menu.t(Core9.menu.menu(), {
 				insertBefore : "insert before",
 				insertAfter : "insert after",
@@ -191,28 +187,22 @@ Core9.menu = {
 				x : x,
 				y : y
 			});
-			document.body.innerHTML += menuObj;
+			var div = document.createElement('div');
+			div.innerHTML = menuObj;
+			document.body.appendChild(div.firstChild);
 			Core9.menu.setContextMenu();
 		},
 
 		clicked :	function (event) {
-
-
+			event.preventDefault();
 			console.log('Block clicked ');
 			console.log(event);
-
-
 			var blocks = document.getElementsByClassName(Core9.menu.blockClassName());
-
 			console.log(event);
-
 			Core9.menu.selectedBlock = Core9.menu.getParentElementWithClass(event.target,Core9.menu.blockClassName());
-
 			if(Core9.menu.selectedBlock == null){
 				Core9.menu.selectedBlock = event.target;
 			}
-
-
 			console.log(Core9.menu.selectedBlock);
 			var current;
 			for(var i = 0; i < blocks.length;i++)
@@ -223,11 +213,8 @@ Core9.menu = {
 				   Core9.menu.selectedBlockPosition = i;
 			   }
 			}
-
 			console.log("Total nr : " + blocks.length);
 			console.log("current : " + current);
-
-			event.preventDefault();
 			Core9.menu.showMenu(event.clientX, event.clientY);
 		}
 }
