@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.content {
+	position: relative;
+	height: 100px;
+	width: 100px;
+}
+</style>
+<script>
+var EditorConfig = {
+            baseUrl : 'http://easydrain.localhost:8080/',
+            pageUrl : 'http://easydrain.localhost:8080/scraper/nl',
+            widgets : 'http://easydrain.localhost:8080/site/assets/json/widgets.json'
+};
+</script>
+</head>
+<body>
+	<div class="content">
+
+  <div id="modal"></div>
+
+  <div id="delete-form"
+    style="display: none; position: fixed; top: 100px; background-color: #fff; z-index: 9999; width: 768px; left: 50%; margin-left: -384px; padding: 20px;"
+  >
+    <p>Weet u zeker dat u dit block wilt verwijderen?</p>
+    <button class="delete-block" style="">bevestig</button>
+  </div>
+
+  <div class="modal fade" id="wizard-wrapper">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+          Blok bewerken
+        </div>
+        <div class="modal-body">
+          <div id="tab-container">
+            <ul id="tab-ul">
+              <li class="step"><a href="javascript:Wizard.restoreUrl();">Maak keuze</a>
+                <div id="choose-div" class="main-container form-container">
+                  <input type="text" id="data-list" list="widgets">
+                  <datalist id="widgets">
+                  </datalist>
+                  <button class="btn btn-success" id="choose-button">Selecteer</button>
+                  <button class="btn btn-danger" onclick="location.reload();">Reset</button>
+                  <button class="btn btn-success close-modal" style="float: right;" onclick="location = location.href.replace(location.hash , '');">Sluiten</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div> <!-- END MODAL -->
+
+	</div>
+
+
+	<script src="widget.init.js"></script>
+  <script src="../vendor/editor/library.load.js"></script>
+</body>
+</html>
