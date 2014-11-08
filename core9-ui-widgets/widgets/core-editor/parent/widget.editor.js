@@ -12,6 +12,7 @@
 	$.editor = function(obj) {
 	};
 
+	$.editor.state = {},
 
 	$.editor.ifr = '<iframe id="ifr-editor" src="widgets/core-editor/child/editor.html"></iframe>',
 	$.editor.child = {},
@@ -39,7 +40,8 @@
 				$.editor._appendIframe();
 				setTimeout(function() {
 					$.editor.child.send({
-						action : 'init'
+						action : 'init',
+						state : $.editor.state
 					});
 				}, 900);
 
@@ -79,6 +81,8 @@
 
 	    //store.set('editor-state', editorState);
 
+	    $.editor.state = editorState;
+
 		console.log('initializing editor with state data : ');
 		console.log(editorState);
 		var getUrlServiceResult = function( msg, data ){
@@ -92,7 +96,5 @@
 		}
 	};
 
-	$(function() {
-	});
 
 })(window.widget);

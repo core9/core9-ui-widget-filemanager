@@ -80,6 +80,7 @@ $LAB
 			console.log("requesting editor service");
 		    console.log( msg, data );
 		    var editorState = store.get('editor-state');
+		    data.iframe = "";
 		    editorState['contextmenu'] = data;
 		    widget.editor.init(editorState);
 		};
