@@ -13,14 +13,16 @@
 	};
 
 
-	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="widgets/inpage-context-menu/child/contextmenu.html"></iframe>',
+	//$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="widgets/inpage-context-menu/child/contextmenu.html"></iframe>',
+	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="http://easydrain.localhost:8080/scraper/nl"></iframe>',
 	$.contextmenu.child = {},
 	$.contextmenu._appendIframe = function(){
 				if($('#ifr-contextmenu').size() == 0){
 					$('body')
 					.append($.contextmenu.ifr);
 					$.contextmenu.child = $('#ifr-contextmenu').seamless({
-						loading : ''
+						loading : '',
+						showLoadingIndicator : false
 					});
 					$.contextmenu.child.receive(function(data, event) {
 						console.log('contextmenu recieving url data.. : ');
@@ -42,7 +44,6 @@
 						action : 'init'
 					});
 				}, 900);
-
 				setTimeout(function() {
 					function getDocHeight() {
 				          var doc = document;
@@ -60,6 +61,44 @@
 					$('#ifr-contextmenu').css('width', $('body').width() - 15 + 'px');
 					$('#ifr-contextmenu').show();
 				}, 1500);
+
+				iFrameResize({
+					log : false,
+					enablePublicMethods : true,
+					resizedCallback : function(messageData) {
+						console.log('context menu resize call back');
+						console.log(messageData);
+					},
+					messageCallback : function(messageData) {
+						console.log('context menu message call back');
+						console.log(messageData);
+						var data = JSON.parse(messageData.message);
+						if (data.action == 'edit-block') {
+/*							window.location = "#state=edit-block-"
+									+ data.block + "-type-" + data.type;
+*/
+						}
+						if (data.action == 'insertbefore-block') {
+/*							window.location = "#state=insertbefore-block-"
+									+ data.block + "-type-" + data.type;*/
+						}
+						if (data.action == 'insertafter-block') {
+/*							window.location = "#state=insertafter-block-"
+									+ data.block + "-type-" + data.type;*/
+						}
+						if (data.action == 'delete-block') {
+							/*
+							 * window.location = "#state=delete-block-" +
+							 * data.block + "-type-" + data.type;
+							 */
+						}
+					},
+					closedCallback : function(id) {
+						console.log(id);
+					}
+				});
+
+
 
 			},
 

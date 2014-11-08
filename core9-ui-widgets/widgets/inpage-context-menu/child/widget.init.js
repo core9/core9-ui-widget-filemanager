@@ -6,32 +6,31 @@ var Core9 = {
 
 var baseUrl = "http://easydrain.localhost:8080/plugins/editor/static/";
 
-$LAB.script(baseUrl + "js/jquery.js").wait();
+$LAB
+.script(baseUrl + "js/jquery.js").wait();
 
-$LAB.setOptions({
-	AlwaysPreserveOrder : true
-}).script(baseUrl + "js/jquery.js").wait().script(
-		baseUrl + "js/iframeResizer.min.js").wait().script(
-		"../../../lib/seamless/build/seamless.child.js").wait().wait(
-		function() {
+$LAB
+		.setOptions({
+			AlwaysPreserveOrder : true
+		})
+		.script(baseUrl + "js/jquery.js").wait()
+		.script(baseUrl + "js/bootstrap.min.js").wait()
+		.script(baseUrl + "js/jquery.sceditor.bbcode.min.js").wait()
+		.script(baseUrl + "js/jquery.sceditor.xhtml.min.js").wait()
+		.script(baseUrl + "js/select2.min.js").wait()
+		.script(baseUrl + "js/jsoneditor.min.js").wait()
+		.script(baseUrl + "js/promise.min.js").wait()
+		.script(baseUrl + "js/iframeResizer.min.js").wait()
+		.script(baseUrl + "js/wizard-engine.js").wait()
+		.script(baseUrl + "js/editor.load.css.js").wait()
+		.script("../../../lib/seamless/build/seamless.child.js").wait()
+		.wait(function() {
 			// connect stuff
 
-			var parent = $.seamless.connect({
-				url : 'index.html',
-				container : 'div.content',
-				allowStyleInjection : true
-			});
 
-			Core9.parent = parent;
 
-			parent.receive(function(data, event) {
-				console.log("child recieved :");
-				console.log(data);
-				if (data.action == 'init') {
-					console.log('activating context menu..');
 
-				}
-			});
+
 
 			iFrameResize({
 				log : false,
@@ -40,27 +39,151 @@ $LAB.setOptions({
 					console.log(messageData);
 				},
 				messageCallback : function(messageData) {
-					var data = JSON.parse(messageData.message);
-					parent = $.seamless.connect({
-						url : 'index.html',
+
+					console.log('context menu recieving message : ');
+					console.log(messageData);
+
+					var parent = $.seamless.connect({
+						url : 'contextmenu.html',
 						container : 'div.content',
 						allowStyleInjection : true
 					});
-
 					Core9.parent = parent;
-
-					parent.receive(function(data, event) {
-						console.log("child recieved :");
-						console.log(data);
-						if (data.action == 'init') {
-							console.log('activating filemanager');
-
-						}
+					parent.send({
+						from : 'context menu in page',
+						message : JSON.stringify(JSON.parse(messageData.message)).toString()
 					});
 
+
+					var data = JSON.parse(messageData.message);
+					if (data.action == 'edit-block') {
+						window.location = "#state=edit-block-"
+								+ data.block + "-type-" + data.type;
+						// connect stuff
+
+/*						parent = $.seamless.connect({
+							url : 'index.html',
+							container : 'div.content',
+							allowStyleInjection : true
+						});
+
+						Core9.parent = parent;
+
+						parent.receive(function(data, event) {
+							console.log("child recieved :");
+							console.log(data);
+							if (data.action == 'init') {
+								console.log('activating filemanager');
+
+							}
+						});
+
+						$(function($) {
+
+							$('#send').on('click', function(e) {
+								parent.send({
+									size : 'full',
+									myparam : 'This is anything you want it to be...'
+								});
+							});
+
+						});*/
+					}
+					if (data.action == 'insertbefore-block') {
+						window.location = "#state=insertbefore-block-"
+								+ data.block + "-type-" + data.type;
+						$('#wizard-wrapper').modal("show");
+						$('#modal').toggle();
+					}
+					if (data.action == 'insertafter-block') {
+						window.location = "#state=insertafter-block-"
+								+ data.block + "-type-" + data.type;
+						$('#wizard-wrapper').modal("show");
+						$('#modal').toggle();
+					}
+					if (data.action == 'delete-block') {
+						window.location = "#state=delete-block-"
+								+ data.block + "-type-" + data.type;
+						$('#delete-form').toggle();
+						$('#modal').toggle();
+					}
 				},
 				closedCallback : function(id) {
 					console.log(id);
 				}
 			});
+
+			$('#delete-form').click(
+					function() {
+
+						var hash = location.hash.split('=');
+						var data = hash[1].split('-');
+						var tpl = "";
+						try {
+							tpl = Wizard.widgetJson[data[4]].template;
+						} catch (e) {
+
+						}
+						var meta = {
+							"absolute-url" : document.getElementById(
+									'iframe').getAttribute('src'),
+							"state" : data[0],
+							"block" : data[2],
+							"type" : data[4],
+							"template" : tpl
+						}
+						console.log(meta);
+
+						var fullData = {
+							"meta" : meta
+						}
+
+						var jsonString = JSON.stringify(fullData);
+
+						var data = {
+							"id" : 112,
+							"data" : jsonString
+						};
+						promise.post('/api/block', data)
+								.then(
+										function(error, text, xhr) {
+											if (error) {
+												return;
+											}
+											console.log(text);
+											location = location.href
+													.split('#')[0];
+										});
+
+					});
+
+			if (typeof String.prototype.startsWith != 'function') {
+				String.prototype.startsWith = function(str) {
+					return this.indexOf(str) == 0;
+				};
+			}
+
+			if (location.hash.startsWith("#state=edit-block-")) {
+				$('#wizard-wrapper').modal("show");
+				$('#modal').toggle();
+			}
+
+			$('.close-modal').click(function() {
+				location = location.href.split('#')[0];
+
+/*				parent.send({
+					destroy : true//,
+					//url : location.href.split('#')[0]
+				});*/
+
+
+			});
+
+			$('#variants').click(function() {
+				$('#page-selector').toggle();
+			});
+
+
+
+
 		});

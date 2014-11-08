@@ -7,6 +7,7 @@ $LAB
 .script("lib/seamless/build/seamless.parent.min.js")
 .script("lib/pubsubjs/src/pubsub.js")
 .script("lib/storejs/store.min.js")
+.script("lib/iframeresizer/iframeResizer.min.js")
 .script("lib/jsclass/src/loader-browser.js")
 .script("widgets/filemanager/parent/packages.filemanager.js")
 .script("widgets/core-editor/parent/packages.editor.js")
