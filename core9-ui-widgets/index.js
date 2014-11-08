@@ -12,12 +12,17 @@ $LAB
 .script("widgets/core-editor/parent/packages.editor.js")
 .wait(function(){
 	window.widget = jQuery;
+
+	store.set('editor-state', { page: '/scraper/nl', action: 'edit', 'size':'full' });
+
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
 		var destroyUrlService = function( msg, data ){
 			console.log("destroy url service");
 		    console.log( msg, data );
-		    widget.editor.init({'size':'full'});
+		    var editorState = store.get('editor-state');
+		    editorState['url'] = data;
+		    widget.editor.init(editorState);
 		    PubSub.publish('getUrlServiceResult', data);
 		    widget.filemanager.destroy();
 		};

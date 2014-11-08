@@ -70,6 +70,17 @@
 	},
 	$.editor.init = function(data) {
 
+	    var editorState = data;
+	    if(isNaN(editorState['inc'])){
+	    	editorState['inc'] = 1;
+	    }else{
+	    	editorState['inc'] = editorState['inc'] + 1;
+	    }
+
+	    store.set('editor-state', editorState);
+
+		console.log('initializing editor with state data : ');
+		console.log(editorState);
 		var getUrlServiceResult = function( msg, data ){
 			console.log("getUrlServiceResult recieving data : ");
 		    console.log( msg, data );
