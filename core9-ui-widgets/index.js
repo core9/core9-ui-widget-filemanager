@@ -10,9 +10,24 @@ $LAB
 .script("lib/jsclass/src/loader-browser.js")
 .script("widgets/filemanager/parent/packages.filemanager.js")
 .script("widgets/core-editor/parent/packages.editor.js")
+.script("widgets/inpage-context-menu/parent/packages.contextmenu.js")
 .wait(function(){
 	window.widget = jQuery;
 
+	// start context
+
+	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
+
+		$('.open-context').on('click', function(){
+			widget.contextmenu.init({'size':'full'});
+		});
+
+	});
+
+	// end context
+
+
+	// start file service
 	store.set('editor-state', { page: '/scraper/nl', action: 'edit', 'size':'full' });
 
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
@@ -44,12 +59,9 @@ $LAB
 		PubSub.publish( 'geturl', 'file' );
 	});
 
+	// end file service
 
-
-
-
-
-
+	// start editor service
 
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
 
@@ -67,5 +79,6 @@ $LAB
 
 	});
 
+	// end editor service
 
 });
