@@ -72,6 +72,9 @@
 					messageCallback : function(messageData) {
 						console.log('context menu message call back');
 						console.log(messageData);
+
+						PubSub.publish('geteditor', messageData);
+
 						var data = JSON.parse(messageData.message);
 						if (data.action == 'edit-block') {
 /*							window.location = "#state=edit-block-"

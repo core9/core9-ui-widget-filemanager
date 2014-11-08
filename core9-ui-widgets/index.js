@@ -66,17 +66,24 @@ $LAB
 
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
 
-		$('.edit-block').on('click', function(){
-			var token;
-			var mySubscriber2 = function( msg, data ){
-				console.log("destroy editor..");
-			    console.log( msg, data );
-			    widget.editor.destroy();
-			    PubSub.unsubscribe( token );
-			};
-			token = PubSub.subscribe( 'destroy', mySubscriber2 );
-			widget.editor.init({'size':'full'});
-		});
+		var destroyEditorService = function( msg, data ){
+			console.log("destroy url service");
+		    console.log( msg, data );
+		    var editorState = store.get('editor-state');
+		    editorState['url'] = data;
+		    //PubSub.publish('getUrlServiceResult', data);
+		    widget.editor.destroy();
+		};
+		var tokenDestroyEditorService = PubSub.subscribe( 'destroyEditorService', destroyEditorService );
+
+		var getEditorService = function( msg, data ){
+			console.log("requesting editor service");
+		    console.log( msg, data );
+		    var editorState = store.get('editor-state');
+		    editorState['contextmenu'] = data;
+		    widget.editor.init(editorState);
+		};
+		var tokenGetEditorService = PubSub.subscribe( 'geteditor', getEditorService );
 
 	});
 

@@ -122,19 +122,19 @@ Core9.menu = {
 				return;
 			}
 
-			// if ( event.origin !== location.origin )
-			// return
+			/*
+			 * code to inject javascript into edited page
+			 *
 			document.getElementById("test").innerHTML = "received: " + event.data + "<script>var url = " + event.data + "</script>";
 			var url = event.data;
 			promise.get(event.data).then(function(error, text, xhr) {
 			    if (error) {
-			        // alert('Error ' + xhr.status);
 			        return;
 			    }
 			    eval(text);
 
 			});
-
+			*/
 
 		},
 

@@ -77,7 +77,7 @@
 	    	editorState['inc'] = editorState['inc'] + 1;
 	    }
 
-	    store.set('editor-state', editorState);
+	    //store.set('editor-state', editorState);
 
 		console.log('initializing editor with state data : ');
 		console.log(editorState);
