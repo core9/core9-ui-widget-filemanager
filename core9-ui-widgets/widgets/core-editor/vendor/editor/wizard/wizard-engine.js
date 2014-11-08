@@ -179,6 +179,105 @@ var Wizard = {
 			Wizard.activateChooseButtons(json);
 		});
 	},
+
+	getData : function(step, dataRequest) {
+
+		var req = dataRequest;
+		if (req == "") {
+			req = Wizard.config.baseUrl + config.data;
+		}
+		promise.get(req).then(
+				function(error, text, xhr) {
+					// what a fucking mess
+					if (error) {
+						alert('Error ' + xhr.status);
+						return;
+					}
+					var starting_value = "";
+					try {
+						starting_value = JSON.parse(text).data;
+					} catch (e) {
+					}
+
+					if (typeof (starting_value) == "undefined"
+							|| starting_value == "") {
+						starting_value = JSON.parse(text);
+					}
+					var placeHolder = document.getElementById('editor_holder-'
+							+ step);
+					var editor = new JSONEditor(placeHolder, {
+						ajax : true,
+						schema : config.schema,
+						// Seed the form with a starting
+						// value
+						startval : starting_value,
+						// Disable additional properties
+						no_additional_properties : true,
+						disable_edit_json : true,
+						disable_properties : true,
+						disable_collapse : true,
+						// Require all properties by default
+						required_by_default : true
+					});
+					// Hook up the submit button to log to the
+					// console
+
+					document.getElementById('submit-' + step).addEventListener(
+							'click', function(event) {
+								event.stopPropagation();
+								console.log(editor.validate());
+								Wizard.goToNextStep(event);
+								console.log('sending to swagger api');
+								console.log(editor.getValue());
+
+								var data = Wizard.getPostToApiData(editor);
+
+								Wizard.postToApi(data)
+
+							});
+
+				});
+	},
+
+	getPostToApiData : function(editor) {
+
+		var meta = {
+			"absolute-url" : Wizard.config.pageUrl,
+			"state" : Wizard.action,
+			"block" : Wizard.state.block,
+			"type" : Wizard.state.type,
+			"template" : Wizard.widgetJson[Wizard.state.type].template
+		}
+		console.log(meta);
+
+		var fullData = {
+			"meta" : meta,
+			"editor" : editor.getValue(),
+		}
+
+		var jsonString = JSON.stringify(fullData);
+
+		var data = {
+			"id" : 112,
+			"data" : jsonString
+		};
+		return data;
+	},
+
+	postToApi : function(data) {
+		promise
+				.post('/api/block', data)
+				.then(
+						function(error, text, xhr) {
+							if (error) {
+								alert('Error ' + xhr.status);
+								return;
+							}
+							console.log(text);
+							//document.getElementById('iframe').contentWindow.location = location.href;
+						});
+	},
+
 	run : function(step, config) {
 		var parser = document.createElement('a');
 		parser.href = Wizard.config.pageUrl;
@@ -200,124 +299,9 @@ var Wizard = {
 				console.log("result block data json : " + text);
 				var json = JSON.parse(text);
 			}
-			getData(dataRequest);
+			Wizard.getData(step, dataRequest);
 		});
 
-		function getData(dataRequest) {
-
-			var req = dataRequest;
-			if (req == "") {
-				req = Wizard.config.baseUrl + config.data;
-			}
-			promise
-					.get(req)
-					.then(
-							function(error, text, xhr) {
-								// what a fucking mess
-								if (error) {
-									alert('Error ' + xhr.status);
-									return;
-								}
-								var starting_value = "";
-								try {
-									starting_value = JSON.parse(text).data;
-								} catch (e) {
-								}
-
-								if (typeof (starting_value) == "undefined"
-										|| starting_value == "") {
-									starting_value = JSON.parse(text);
-								}
-								var editor = new JSONEditor(
-										document
-												.getElementById('editor_holder-'
-														+ step), {
-											ajax : true,
-											schema : config.schema,
-											// Seed the form with a starting
-											// value
-											startval : starting_value,
-											// Disable additional properties
-											no_additional_properties : true,
-											disable_edit_json : true,
-											disable_properties : true,
-											disable_collapse : true,
-											// Require all properties by default
-											required_by_default : true
-										});
-								// Hook up the submit button to log to the
-								// console
-
-								document
-										.getElementById('submit-' + step)
-										.addEventListener(
-												'click',
-												function(event) {
-													event.stopPropagation();
-													console.log(editor
-															.validate());
-													Wizard.goToNextStep(event);
-													console
-															.log('sending to swagger api');
-													console.log(editor
-															.getValue());
-
-													var hash = location.hash
-															.split('=');
-													var data = hash[1]
-															.split('-');
-													var meta = {
-														"absolute-url" : document
-																.getElementById(
-																		'iframe')
-																.getAttribute(
-																		'src'),
-														"state" : data[0],
-														"block" : data[2],
-														"type" : data[4],
-														"template" : Wizard.widgetJson[data[4]].template
-													}
-													console.log(meta);
-
-													var fullData = {
-														"meta" : meta,
-														"editor" : editor
-																.getValue(),
-													}
-
-													var jsonString = JSON
-															.stringify(fullData);
-
-													var data = {
-														"id" : 112,
-														"data" : jsonString
-													};
-
-													promise
-															.post(
-																	location.origin
-																			+ '/api/block',
-																	data)
-															.then(
-																	function(
-																			error,
-																			text,
-																			xhr) {
-																		if (error) {
-																			alert('Error '
-																					+ xhr.status);
-																			return;
-																		}
-																		console
-																				.log(text);
-																		document
-																				.getElementById('iframe').contentWindow.location = location.href;
-																	});
-
-												});
-
-							});
-		}
 	}
 
 }
