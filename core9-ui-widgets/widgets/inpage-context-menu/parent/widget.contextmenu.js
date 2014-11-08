@@ -57,7 +57,7 @@
 					$('#ifr-contextmenu').css('position', 'absolute');
 					$('#ifr-contextmenu').css('top', '0px');
 					$('#ifr-contextmenu').css('height', height + 'px');
-					$('#ifr-contextmenu').css('width', $('body').width() + 'px');
+					$('#ifr-contextmenu').css('width', $('body').width() - 15 + 'px');
 					$('#ifr-contextmenu').show();
 				}, 1500);
 
