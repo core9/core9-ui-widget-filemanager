@@ -27,6 +27,8 @@ $LAB
 		.wait(function() {
 			// connect stuff
 
+			var state = {};
+
 			var parent = $.seamless.connect({
 				url : 'index.html',
 				container : 'div.content',
@@ -34,22 +36,19 @@ $LAB
 			});
 
 			Core9.parent = parent;
-
+			Core9.editor = {};
 			parent.receive(function(data, event) {
-				console.log("child recieved :");
+				console.log("Core editor child recieved data :");
 				console.log(data);
 				if (data.action == 'init') {
+					Core9.editor.state = data.state;
 					console.log('activating editor..');
 					jQuery('#wizard-wrapper').modal("show");
 					jQuery('#modal').toggle();
 
 				}
 			});
-
-
-
-
-
+			console.log('Editor config : ');
 			console.log(EditorConfig);
 
 			JSONEditor.defaults.theme = 'bootstrap3';
@@ -59,11 +58,9 @@ $LAB
 				width : "560px",
 			};
 			JSONEditor.plugins.select2.width = "300px";
-
-
 			Wizard.init(EditorConfig);
 
-			iFrameResize({
+/*			iFrameResize({
 				log : false,
 				enablePublicMethods : true,
 				resizedCallback : function(messageData) {
@@ -126,9 +123,9 @@ $LAB
 				closedCallback : function(id) {
 					console.log(id);
 				}
-			});
+			});*/
 
-			$('#delete-form').click(
+/*			$('#delete-form').click(
 					function() {
 
 						var hash = location.hash.split('=');
@@ -170,9 +167,9 @@ $LAB
 													.split('#')[0];
 										});
 
-					});
+					});*/
 
-			if (typeof String.prototype.startsWith != 'function') {
+/*			if (typeof String.prototype.startsWith != 'function') {
 				String.prototype.startsWith = function(str) {
 					return this.indexOf(str) == 0;
 				};
@@ -181,11 +178,10 @@ $LAB
 			if (location.hash.startsWith("#state=edit-block-")) {
 				$('#wizard-wrapper').modal("show");
 				$('#modal').toggle();
-			}
+			}*/
 
 			$('.close-modal').click(function() {
-				location = location.href.split('#')[0];
-
+				//location = location.href.split('#')[0];
 				parent.send({
 					destroy : true//,
 					//url : location.href.split('#')[0]
@@ -193,12 +189,5 @@ $LAB
 
 
 			});
-
-			$('#variants').click(function() {
-				$('#page-selector').toggle();
-			});
-
-
-
 
 		});
