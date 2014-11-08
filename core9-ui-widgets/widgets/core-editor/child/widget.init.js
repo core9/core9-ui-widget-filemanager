@@ -21,7 +21,7 @@ $LAB
 		.script(baseUrl + "js/jsoneditor.min.js").wait()
 		.script(baseUrl + "js/promise.min.js").wait()
 		.script(baseUrl + "js/iframeResizer.min.js").wait()
-		.script("/ui-widgets/lib/wizard/wizard-engine.js").wait()
+		.script("/ui-widgets/widgets/core-editor/vendor/editor/wizard/wizard-engine.js").wait()
 		.script(baseUrl + "js/editor.load.css.js").wait()
 		.script("../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
