@@ -25,10 +25,7 @@ $LAB
 		.script(baseUrl + "js/editor.load.css.js").wait()
 		.script("../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
-			// connect stuff
-
 			var state = {};
-
 			var parent = $.seamless.connect({
 				url : 'index.html',
 				container : 'div.content',
@@ -51,31 +48,22 @@ $LAB
 								console.log('closing delete box..');
 								$('#delete-form').toggle();
 								$('#modal').toggle();
-								// need to close iframe
 								location.reload();
 							});
 					$('.confirm-block-delete').click(
 							function() {
 
-								var meta = {
-									"absolute-url" : EditorConfig.pageUrl,
-									"state" : reqData.action.split('-')[0],
-									"block" : reqData.block,
-									"type" : reqData.type,
-									"template" : ""
-								}
-
-								console.log(meta);
-
-								var fullData = {
-									"meta" : meta
-								}
-
-								var jsonString = JSON.stringify(fullData);
-
 								var data = {
 									"id" : 112,
-									"data" : jsonString
+									"data" : JSON.stringify({
+										"meta" : {
+											"absolute-url" : EditorConfig.pageUrl,
+											"state" : reqData.action.split('-')[0],
+											"block" : reqData.block,
+											"type" : reqData.type,
+											"template" : ""
+										}
+									})
 								};
 								promise.post('/api/block', data)
 										.then(
@@ -86,7 +74,6 @@ $LAB
 													console.log(text);
 													location.reload();
 												});
-
 							});
 
 				}else if (data.action == 'init') {
@@ -112,7 +99,7 @@ $LAB
 
 			$('.close-modal').click(function() {
 				parent.send({
-					destroy : true//,
+					destroy : true// ,
 				});
 
 
