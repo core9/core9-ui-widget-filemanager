@@ -170,7 +170,7 @@ var Wizard = {
 		});
 	},
 
-	getData : function(step, dataRequest) {
+	getData : function(step, dataRequest, callback) {
 
 		var req = dataRequest;
 		if (req == "") {
@@ -211,6 +211,13 @@ var Wizard = {
 					});
 					// Hook up the submit button to log to the
 					// console
+
+					editor.on('ready',function() {
+
+						 	if (typeof callback == 'function') {
+						 		callback();
+						 		}
+						});
 
 					document.getElementById('submit-' + step).addEventListener(
 							'click', function(event) {
@@ -265,11 +272,10 @@ var Wizard = {
 							}
 							console.log(text);
 							location.reload();
-							//document.getElementById('iframe').contentWindow.location = location.href;
 						});
 	},
 
-	run : function(step, config) {
+	run : function(step, config, callback) {
 		var parser = document.createElement('a');
 		parser.href = Wizard.config.pageUrl;
 		console.log(parser);
@@ -290,7 +296,7 @@ var Wizard = {
 				console.log("result block data json : " + text);
 				var json = JSON.parse(text);
 			}
-			Wizard.getData(step, dataRequest);
+			Wizard.getData(step, dataRequest, callback);
 		});
 
 	}
