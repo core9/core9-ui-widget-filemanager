@@ -38,6 +38,10 @@ $LAB
 				console.log("Core editor child recieved data :");
 				console.log(data);
 
+				if(typeof data.state.contextmenu === 'undefined'){
+					return;
+				}
+
 				var reqData = JSON.parse(data.state.contextmenu.message);
 
 				if (reqData.action == 'delete-block') {

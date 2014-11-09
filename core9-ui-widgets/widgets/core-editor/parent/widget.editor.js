@@ -27,6 +27,10 @@
 						console.log('editor recieving url data.. : ');
 						console.log(data);
 
+						if(data.geturlservice){
+							PubSub.publish('geturl', 'for editor');
+						}
+
 						if (data.destroy) {
 							console.log('editor sending destroy message.. :');
 							//PubSub.publish('destroyUrlService', data.url);
@@ -86,7 +90,7 @@
 		console.log('initializing editor with state data : ');
 		console.log(editorState);
 		var getUrlServiceResult = function( msg, data ){
-			console.log("getUrlServiceResult recieving data : ");
+			console.log("editor getUrlServiceResult recieving data : ");
 		    console.log( msg, data );
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
