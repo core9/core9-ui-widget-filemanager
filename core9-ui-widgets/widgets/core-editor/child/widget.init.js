@@ -84,6 +84,7 @@ $LAB
 														return;
 													}
 													console.log(text);
+													location.reload();
 												});
 
 							});
