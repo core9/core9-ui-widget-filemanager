@@ -40,7 +40,55 @@ $LAB
 			parent.receive(function(data, event) {
 				console.log("Core editor child recieved data :");
 				console.log(data);
-				if (data.action == 'init') {
+
+				var reqData = JSON.parse(data.state.contextmenu.message);
+
+				if (reqData.action == 'delete-block') {
+					$('#delete-form').toggle();
+					$('#modal').toggle();
+					$('.cancel-block-delete').click(
+							function() {
+								console.log('closing delete box..');
+								$('#delete-form').toggle();
+								$('#modal').toggle();
+								// need to close iframe
+								location.reload();
+							});
+					$('.confirm-block-delete').click(
+							function() {
+
+								var meta = {
+									"absolute-url" : EditorConfig.pageUrl,
+									"state" : reqData.action.split('-')[0],
+									"block" : reqData.block,
+									"type" : reqData.type,
+									"template" : ""
+								}
+
+								console.log(meta);
+
+								var fullData = {
+									"meta" : meta
+								}
+
+								var jsonString = JSON.stringify(fullData);
+
+								var data = {
+									"id" : 112,
+									"data" : jsonString
+								};
+								promise.post('/api/block', data)
+										.then(
+												function(error, text, xhr) {
+													if (error) {
+														return;
+													}
+													console.log(text);
+												});
+
+							});
+
+				}else if (data.action == 'init') {
 					Core9.editor.state = data.state;
 					console.log('activating editor..');
 					jQuery('#wizard-wrapper').modal("show");

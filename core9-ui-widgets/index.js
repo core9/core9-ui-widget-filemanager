@@ -23,6 +23,8 @@ $LAB
 			widget.contextmenu.init({'size':'full'});
 		});
 
+		// init page
+		widget.contextmenu.init({'size':'full'});
 	});
 
 	// end context
@@ -89,5 +91,6 @@ $LAB
 	});
 
 	// end editor service
+
 
 });

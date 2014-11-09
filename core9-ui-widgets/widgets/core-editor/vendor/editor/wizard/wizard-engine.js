@@ -155,7 +155,7 @@ var Wizard = {
 		document.getElementById('widgets').innerHTML = options;
 	},
 
-	getMetaData : function() {
+/*	getMetaData : function() {
 		var hash = location.hash.split('=');
 		var data = hash[1].split('-');
 		var meta = {
@@ -165,7 +165,7 @@ var Wizard = {
 			"block" : data[2],
 			"type" : data[4]
 		}
-	},
+	},*/
 
 	init : function(config) {
 		promise.get(config.widgets).then(function(error, text, xhr) {
