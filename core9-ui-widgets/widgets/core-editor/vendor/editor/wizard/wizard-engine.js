@@ -245,7 +245,7 @@ var Wizard = {
 
 		var meta = {
 			"absolute-url" : Wizard.config.pageUrl,
-			"state" : Wizard.action,
+			"state" : Wizard.state.action.split('-')[0],
 			"block" : Wizard.state.block,
 			"type" : Wizard.activatedWidget,
 			"template" : Wizard.widgetJson[Wizard.activatedWidget].template
