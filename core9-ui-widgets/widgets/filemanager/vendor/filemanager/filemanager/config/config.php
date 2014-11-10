@@ -26,18 +26,18 @@ $base_url =
 	'://'.
 	// Get domain portion
 	$_SERVER['HTTP_HOST']; // DON'T TOUCH (base url (only domain) of site (without final /)).
-$upload_dir = '/core9-ui-widget-filemanager/core9-ui-widgets/widgets/filemanager/vendor/filemanager/source/'; // path from base_url to base of upload folder (with start and final /)
+$upload_dir = '/source/'; // path from base_url to base of upload folder (with start and final /)
 $current_path = '../source/'; // relative path from filemanager folder to upload folder (with final /)
 //thumbs folder can't put inside upload folder
 $thumbs_base_path = '../thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
 
 // OPTIONAL SECURITY
-// if set to true only those will access RF whose url contains the access key(akey) like:
+// if set to true only those will access RF whose url contains the access key(akey) like: 
 // <input type="button" href="../filemanager/dialog.php?field_id=imgField&lang=en_EN&akey=myPrivateKey" value="Files">
 // in tinymce a new parameter added: filemanager_access_key:"myPrivateKey"
 // example tinymce config:
 // tiny init ...
-//
+// 
 // external_filemanager_path:"../filemanager/",
 // filemanager_title:"Filemanager" ,
 // filemanager_access_key:"myPrivateKey" ,
@@ -103,9 +103,9 @@ $image_resizing 			= FALSE;
 $image_resizing_width 		= 0;
 $image_resizing_height 		= 0;
 $image_resizing_mode 		= 'auto'; // same as $image_max_mode
-$image_resizing_override 	= FALSE;
-// If set to TRUE then you can specify bigger images than $image_max_width & height otherwise if image_resizing is
-// bigger than $image_max_width or height then it will be converted to those values
+$image_resizing_override 	= FALSE; 
+// If set to TRUE then you can specify bigger images than $image_max_width & height otherwise if image_resizing is 
+// bigger than $image_max_width or height then it will be converted to those values  
 
 //******************
 // Default layout setting
@@ -118,7 +118,7 @@ $image_resizing_override 	= FALSE;
 //******************
 $default_view = 0;
 
-//set if the filename is truncated when overflow first row
+//set if the filename is truncated when overflow first row 
 $ellipsis_title_after_first_row = TRUE;
 
 //*************************
@@ -145,7 +145,7 @@ $previewable_text_file_exts_no_prettify = array('txt', 'log');
 
 // you can edit these type of files if $edit_text_files is true (only text based files)
 // you can create these type of files if $create_text_files is true (only text based files)
-// if you want you can add html,css etc.
+// if you want you can add html,css etc. 
 // but for security reasons it's NOT RECOMMENDED!
 $editable_text_file_exts = array('txt', 'log', 'xml','html','css','htm','js');
 
@@ -170,7 +170,7 @@ $copy_cut_max_count = 200;
 //**********************
 $ext_img 	= array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg'); //Images
 $ext_file 	= array('doc', 'docx','rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv','html','xhtml','psd','sql','log','fla','xml','ade','adp','mdb','accdb','ppt','pptx','odt','ots','ott','odb','odg','otp','otg','odf','ods','odp','css','ai'); //Files
-$ext_video 	= array('mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg','wma',"flv","webm"); //Video
+$ext_video 	= array('mov', 'mpeg', 'm4v', 'mp4', 'avi', 'mpg','wma',"flv","webm"); //Video 
 $ext_music 	= array('mp3', 'm4a', 'ac3', 'aiff', 'mid','ogg','wav'); //Audio
 $ext_misc 	= array('zip', 'rar','gz','tar','iso','dmg'); //Archives
 
@@ -212,12 +212,12 @@ $JAVAMaxSizeUpload = 200; //Gb
 
 
 // New image resized creation with fixed path from filemanager folder after uploading (thumbnails in fixed mode)
-// If you want create images resized out of upload folder for use with external script you can choose this method,
+// If you want create images resized out of upload folder for use with external script you can choose this method, 
 // You can create also more than one image at a time just simply add a value in the array
 // Remember than the image creation respect the folder hierarchy so if you are inside source/test/test1/ the new image will create at
 // path_from_filemanager/test/test1/
 // PS if there isn't write permission in your destination folder you must set it
-//
+// 
 $fixed_image_creation                   = FALSE; //activate or not the creation of one or more image resized with fixed path from filemanager folder
 $fixed_path_from_filemanager            = array('../test/','../test1/'); //fixed path of the image folder from the current position on upload folder
 $fixed_image_creation_name_to_prepend   = array('','test_'); //name to prepend on filename
@@ -238,7 +238,7 @@ $fixed_image_creation_option            = array('crop','auto'); //set the type o
 // With Responsive filemanager you can create automatically resized image inside the upload folder, also more than one at a time
 // just simply add a value in the array
 // The image creation path is always relative so if i'm inside source/test/test1 and I upload an image, the path start from here
-//
+// 
 $relative_image_creation                = FALSE; //activate or not the creation of one or more image resized with relative path from upload folder
 $relative_path_from_current_pos         = array('thumb/','thumb/'); //relative path of the image folder from the current position on upload folder
 $relative_image_creation_name_to_prepend= array('','test_'); //name to prepend on filename

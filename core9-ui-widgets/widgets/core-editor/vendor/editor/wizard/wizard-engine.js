@@ -172,6 +172,7 @@ var Wizard = {
 
 	getData : function(step, dataRequest, callback) {
 
+		var editor;
 		var req = dataRequest;
 		if (req == "") {
 			req = Wizard.config.baseUrl + config.data;
@@ -195,7 +196,7 @@ var Wizard = {
 					}
 					var placeHolder = document.getElementById('editor_holder-'
 							+ step);
-					var editor = new JSONEditor(placeHolder, {
+					editor = new JSONEditor(placeHolder, {
 						ajax : true,
 						schema : config.schema,
 						// Seed the form with a starting
@@ -212,10 +213,20 @@ var Wizard = {
 					// Hook up the submit button to log to the
 					// console
 
+					editor.on('change',function() {
+						console.log(' editor changed ..');
+
+
+
+						console.log(editor.getValue());
+					});
+
+
+
 					editor.on('ready',function() {
 
 						 	if (typeof callback == 'function') {
-						 		callback();
+						 		callback(editor);
 						 		}
 						});
 
@@ -224,11 +235,11 @@ var Wizard = {
 								event.stopPropagation();
 								console.log(editor.validate());
 								Wizard.goToNextStep(event);
+
 								console.log('sending to swagger api');
 								console.log(editor.getValue());
 
 								var data = Wizard.getPostToApiData(editor);
-
 								Wizard.postToApi(data)
 
 							});
