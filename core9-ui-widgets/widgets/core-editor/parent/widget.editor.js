@@ -28,6 +28,7 @@
 						console.log(data);
 
 						if(data.geturlservice){
+							console.log('editor requesting url data.. : ');
 							PubSub.publish('geturl', 'for editor');
 						}
 
@@ -90,7 +91,7 @@
 		console.log('initializing editor with state data : ');
 		console.log(editorState);
 		var getUrlServiceResult = function( msg, data ){
-			console.log("editor getUrlServiceResult recieving data : ");
+			console.log("editor parent getUrlServiceResult recieving data : ");
 		    console.log( msg, data );
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );

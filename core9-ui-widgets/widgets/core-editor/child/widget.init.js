@@ -101,12 +101,10 @@ $LAB
 			JSONEditor.plugins.select2.width = "300px";
 
 
-			$('.close-modal').click(function() {
+/*			$('.close-modal').click(function() {
 				parent.send({
 					destroy : true// ,
 				});
-
-
-			});
+			});*/
 
 		});
