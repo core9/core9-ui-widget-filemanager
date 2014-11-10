@@ -4,7 +4,7 @@ var Core9 = {
 	"test" : "test"
 };
 
-var baseUrl = "http://easydrain.localhost:8080/plugins/editor/static/";
+var baseUrl = "/plugins/editor/static/";
 
 $LAB
 .script(baseUrl + "js/jquery.js").wait();

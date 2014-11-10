@@ -12,9 +12,20 @@
 	$.contextmenu = function(obj) {
 	};
 
+	$.contextmenu.parseQuery = function(variable){
 
-	//$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="widgets/inpage-context-menu/child/contextmenu.html"></iframe>',
-	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="http://easydrain.localhost:8080/scraper/nl"></iframe>',
+	    var query = window.location.search.substring(1);
+	    var vars = query.split('&');
+	    for (var i = 0; i < vars.length; i++) {
+	        var pair = vars[i].split('=');
+	        if (decodeURIComponent(pair[0]) == variable) {
+	            return decodeURIComponent(pair[1]);
+	        }
+	    }
+	    console.log('Query variable %s not found', variable);
+	},
+
+	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="' +$.contextmenu.parseQuery('page')+ '"></iframe>',
 	$.contextmenu.child = {},
 	$.contextmenu._appendIframe = function(){
 				if($('#ifr-contextmenu').size() == 0){
@@ -75,26 +86,6 @@
 
 						PubSub.publish('geteditor', messageData);
 
-						var data = JSON.parse(messageData.message);
-						if (data.action == 'edit-block') {
-/*							window.location = "#state=edit-block-"
-									+ data.block + "-type-" + data.type;
-*/
-						}
-						if (data.action == 'insertbefore-block') {
-/*							window.location = "#state=insertbefore-block-"
-									+ data.block + "-type-" + data.type;*/
-						}
-						if (data.action == 'insertafter-block') {
-/*							window.location = "#state=insertafter-block-"
-									+ data.block + "-type-" + data.type;*/
-						}
-						if (data.action == 'delete-block') {
-							/*
-							 * window.location = "#state=delete-block-" +
-							 * data.block + "-type-" + data.type;
-							 */
-						}
 					},
 					closedCallback : function(id) {
 						console.log(id);
