@@ -47,36 +47,7 @@ function OnMessage(e) {
 }
 
 function  initMyPage(baseUrl){
-
 	loadCssUrls(baseUrl);
-
-jQuery(document).ready(function($) {
-
-
-			$('.iframe-btn').fancybox({
-				'width' : 880,
-				'height' : 570,
-				'type' : 'iframe',
-				'autoScale' : false
-			});
-
-
-			$('#fancybox-close').on('click', function(){
-				Core9.parent.send({
-					url : 'no url chosen',
-					myparam : 'Trying again...'
-				});
-			});
-
-			// Handler for a message from ResponsiveFilemanager
-			$('.iframe-btn').on('click', function(e) {
-				e.preventDefault();
-				$(window).on('message', OnMessage);
-
-			});
-
-		});
-
 }
 
 initMyPage(baseUrl);

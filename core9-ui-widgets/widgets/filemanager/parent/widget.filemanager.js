@@ -31,7 +31,7 @@
 					$.filemanager.child.send({
 						action : 'init'
 					});
-		}, 30);
+		}, 1000);
 		setTimeout(function() {
 
 					function getDocHeight() {
