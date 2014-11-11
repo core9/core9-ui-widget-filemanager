@@ -395,11 +395,10 @@ $LAB.setOptions({
 
 
 		var a = document.createElement('a');
-		var linkText = document.createTextNode("my title text");
+		var linkText = document.createTextNode("");
 		a.appendChild(linkText);
-		a.title = "my title text";
 		a.href = "http://internet.maintenance.testing.trimm.nl/rcooke/filemanager/filemanager/dialog.php?type=1&amp;field_id=fieldID&crossdomain=1";
-		a.className = "btn iframe-btn";
+		a.className = "iframe-btn";
 		document.body.appendChild(a);
 
 		$('.iframe-btn').fancybox({
@@ -408,6 +407,11 @@ $LAB.setOptions({
 			'type' : 'iframe',
 			'autoScale' : false
 		});
+
+		setTimeout(function(){
+			$('.iframe-btn').trigger('click');
+		}, 3000);
+
 
 		$('#fancybox-close').on('click', function() {
 			Core9.parent.send({
