@@ -48,7 +48,7 @@
 						action : 'init',
 						state : $.editor.state
 					});
-				}, 900);
+				}, 1100);
 
 				setTimeout(function() {
 					function getDocHeight() {
@@ -66,7 +66,7 @@
 					$('#ifr-editor').css('height', height + 'px');
 					$('#ifr-editor').css('width', $('body').width() + 'px');
 					$('#ifr-editor').show();
-				}, 1500);
+				}, 2500);
 
 			},
 
