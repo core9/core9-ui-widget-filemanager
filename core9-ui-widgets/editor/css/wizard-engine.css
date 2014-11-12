@@ -64,7 +64,7 @@
   left: 26px;
   max-height: 600px;
   overflow-y: auto;
-  
+
 }
 .main-container {
 	border: 1px solid #2A2A2A;
@@ -140,10 +140,22 @@ width:99%;
 
 
 .sceditor-container {
-	top:30px;
+	_top:30px;
 }
 
 .main-container > div > div > div {
 	padding-bottom:30px !important;
+}
+
+.row {
+margin-right: 0px;
+margin-left: 0px;
+}
+.form-control {
+	height: auto;
+}
+
+.form-control > input {
+	width: 100%;
 }
 
