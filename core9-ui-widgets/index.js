@@ -31,7 +31,7 @@ $LAB
 
 
 	// start file service
-	store.set('editor-state', { page: '/scraper/nl', action: 'edit', 'size':'full' });
+	store.set('editor-state', { page: '/p/scraper/nl', action: 'edit', 'size':'full' });
 
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
