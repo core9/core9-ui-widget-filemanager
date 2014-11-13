@@ -15,6 +15,18 @@ $LAB
 .wait(function(){
 	window.widget = jQuery;
 
+	function getQueryVariable(variable) {
+	    var query = window.location.search.substring(1);
+	    var vars = query.split('&');
+	    for (var i = 0; i < vars.length; i++) {
+	        var pair = vars[i].split('=');
+	        if (decodeURIComponent(pair[0]) == variable) {
+	            return decodeURIComponent(pair[1]);
+	        }
+	    }
+	    console.log('Query variable %s not found', variable);
+	}
+
 	// start context
 
 	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
@@ -31,7 +43,7 @@ $LAB
 
 
 	// start file service
-	store.set('editor-state', { page: '/p/scraper/nl', action: 'edit', 'size':'full' });
+	store.set('editor-state', { page: getQueryVariable('page'), action: 'edit', 'size':'full' });
 
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 
