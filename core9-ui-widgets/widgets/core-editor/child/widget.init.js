@@ -38,6 +38,33 @@ $LAB
 				console.log("Core editor child recieved data :");
 				console.log(data);
 
+
+				 $("body").click(function(e) {
+				        if (e.target.id == "wizard-wrapper" || $(e.target).parents("#wizard-wrapper").size()) {
+				        } else {
+							parent.send({
+								destroy : true// ,
+							});
+				        }
+				    });
+
+				 $("#reset-button").click(function() {
+					 var lis = $('li');
+					 for (var i = 0; i < lis.length; i++) {
+						    if(i != 0){
+						    	lis[i].remove();
+						    }
+						}
+					});
+
+				$("#close-button").click(function() {
+					console.log(this);
+					parent.send({
+						destroy : true// ,
+					});
+				});
+
+
 				if(typeof data.state.contextmenu === 'undefined'){
 					return;
 				}
@@ -110,10 +137,6 @@ $LAB
 			JSONEditor.plugins.select2.width = "300px";
 
 
-/*			$('.close-modal').click(function() {
-				parent.send({
-					destroy : true// ,
-				});
-			});*/
+
 
 		});

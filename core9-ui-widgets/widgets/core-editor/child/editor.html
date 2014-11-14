@@ -32,14 +32,14 @@ body {background-color: transparent !important;}
         <div class="modal-body">
           <div id="tab-container">
             <ul id="tab-ul">
-              <li class="step"><a href="javascript:Wizard.restoreUrl();">Maak keuze</a>
+              <li class="step"><a href="javascript:void(0);">Maak keuze</a>
                 <div id="choose-div" class="main-container form-container">
                   <input type="text" id="data-list" list="widgets">
                   <datalist id="widgets">
                   </datalist>
                   <button class="btn btn-success" id="choose-button">Selecteer</button>
-                  <button class="btn btn-danger" onclick="javascript:void(0);">Reset</button>
-                  <button class="btn btn-success close-modal" style="float: right;" onclick="location = location.href.replace(location.hash , '');">Sluiten</button>
+                  <button class="btn btn-danger" id="reset-button">Reset</button>
+                  <button class="btn btn-success close-modal" id="close-button" style="float: right;">Sluiten</button>
                 </div>
               </li>
             </ul>
