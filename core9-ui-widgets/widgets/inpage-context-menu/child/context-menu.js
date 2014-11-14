@@ -6,7 +6,7 @@
 var Core9 = {}
 Core9.menu = {
 
-		blockClassName : function(){return "block";},
+		blockClassName : function(){return "core9-block";},
 		selectedBlockPosition : "",
 		selectedBlock : {},
 

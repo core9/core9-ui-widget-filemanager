@@ -24,10 +24,6 @@ var Wizard = {
 		return li;
 	},
 
-	restoreUrl : function() {
-		location = location.href;
-	},
-
 	getScript : function(script, step) {
 		script = Wizard.config.baseUrl + script;
 		$LAB.script(script).wait(function() {
@@ -80,7 +76,6 @@ var Wizard = {
 			var all = document.querySelectorAll(selector);
 			var cur = elm.parentNode;
 			while (cur && !collectionHas(all, cur)) { // keep going up until
-				// you find a match
 				cur = cur.parentNode; // go up
 			}
 			return cur; // will return null if not found
@@ -97,13 +92,6 @@ var Wizard = {
 	activateWidget : function(widget, widgets) {
 		console.log('activating : ' + widget);
 		Wizard.activatedWidget = widget;
-		// var currentWidget =
-		// location.href.split('-')[location.href.split('-').length -1];
-		// console.log('current widget : ' + currentWidget);
-
-		// location.href = location.href.replace('type-' + currentWidget,'type-'
-		// + widget);
-
 		var stepFile = widgets[widget].steps;
 		stepFile = Wizard.config.baseUrl + stepFile;
 		if (!Wizard.endsWith(stepFile, ".json")) {
@@ -299,7 +287,7 @@ var Wizard = {
 								return;
 							}
 							console.log(text);
-							location.reload();
+							//location.reload();
 						});
 	},
 
