@@ -168,7 +168,7 @@ var Wizard = {
 			console.log(lis);
 			lis[1].click()
 
-		}, 0);
+		}, 500);
 	},
 
 	init : function(config) {
