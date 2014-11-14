@@ -55,6 +55,7 @@ $LAB
 						    	lis[i].remove();
 						    }
 						}
+					 document.getElementById("data-list").value = "";
 					});
 
 				$("#close-button").click(function() {

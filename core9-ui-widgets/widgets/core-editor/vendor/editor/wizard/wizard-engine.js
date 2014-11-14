@@ -155,6 +155,22 @@ var Wizard = {
 		document.getElementById('widgets').innerHTML = options;
 	},
 
+	selectChoosenBlock : function(state){
+		console.log("init state : ");
+		console.log(state);
+		document.getElementById("block-action").innerHTML=JSON.stringify(state);
+
+		document.getElementById("data-list").value = state.type;
+		document.getElementById("choose-button").click();
+		setTimeout(function(){
+			console.log('clicking li');
+			var lis = document.querySelectorAll('li > a');
+			console.log(lis);
+			lis[1].click()
+
+		}, 0);
+	},
+
 	init : function(config) {
 		promise.get(config.widgets).then(function(error, text, xhr) {
 			if (error) {
@@ -167,6 +183,7 @@ var Wizard = {
 			Wizard.state = JSON.parse(config.state.contextmenu.message);
 			Wizard.setUpChooseOptions(json);
 			Wizard.activateChooseButtons(json);
+			Wizard.selectChoosenBlock(Wizard.state);
 		});
 	},
 
