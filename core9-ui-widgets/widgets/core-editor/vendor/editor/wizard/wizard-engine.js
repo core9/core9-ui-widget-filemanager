@@ -303,6 +303,12 @@ var Wizard = {
 		dataRequest += Wizard.state.action + "-" + Wizard.state.block
 				+ "-type-" + Wizard.activatedWidget;
 
+		if(Wizard.state.contentid.length > 2){
+			console.log("requesting : " + Wizard.state.contentid);
+			dataRequest = "/dynamic-blocks/"+Wizard.activatedWidget+"/data/"+Wizard.activatedWidget+".json?id=" + Wizard.state.contentid;
+			console.log("request url : " + dataRequest);
+		}
+
 		promise.get(dataRequest).then(function(error, text, xhr) {
 			if (error) {
 				// /alert('Error ' + xhr.status);
