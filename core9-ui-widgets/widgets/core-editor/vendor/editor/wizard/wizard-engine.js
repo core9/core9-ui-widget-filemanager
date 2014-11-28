@@ -259,7 +259,8 @@ var Wizard = {
 			"state" : Wizard.state.action.split('-')[0],
 			"block" : Wizard.state.block,
 			"type" : Wizard.activatedWidget,
-			"template" : Wizard.widgetJson[Wizard.activatedWidget].template
+			"template" : Wizard.widgetJson[Wizard.activatedWidget].template,
+			"contentid" : Wizard.state.contentid
 		}
 		console.log(meta);
 
@@ -278,8 +279,15 @@ var Wizard = {
 	},
 
 	postToApi : function(data) {
+
+		var postUrl = '/api/block';
+		console.log(Wizard.state.contentid.length);
+		if(Wizard.state.contentid.length > 2){
+			postUrl = "/dynamic-blocks/update/" + Wizard.state.contentid;
+		}
+
 		promise
-				.post('/api/block', data)
+				.post(postUrl, data)
 				.then(
 						function(error, text, xhr) {
 							if (error) {
