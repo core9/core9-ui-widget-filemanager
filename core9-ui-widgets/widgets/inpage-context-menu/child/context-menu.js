@@ -54,11 +54,13 @@ Core9.menu = {
 			console.log('selected block : ');
 			console.log(Core9.menu.selectedBlock);
 			console.log('data attribute type :  ' + Core9.menu.selectedBlock.dataset.type);
+			console.log('data attribute contentid :  ' + Core9.menu.selectedBlock.dataset.contentid);
 
 			var jsonData = {
 					"action": "edit-block",
 					"block": Core9.menu.selectedBlockPosition,
-					"type" : Core9.menu.selectedBlock.dataset.type
+					"type" : Core9.menu.selectedBlock.dataset.type,
+					"contentid" : Core9.menu.selectedBlock.dataset.contentid
 			}
 
 			console.log(event);
