@@ -35,10 +35,6 @@ $LAB
 			Core9.parent = parent;
 			Core9.editor = {};
 			parent.receive(function(data, event) {
-				console.log("Core editor child recieved data :");
-				console.log(data);
-
-
 				 $("body").click(function(e) {
 				        if (e.target.id == "wizard-wrapper" || $(e.target).parents("#wizard-wrapper").size()) {
 				        } else {
@@ -59,12 +55,10 @@ $LAB
 					});
 
 				$("#close-button").click(function() {
-					console.log(this);
 					parent.send({
 						destroy : true// ,
 					});
 				});
-
 
 				if(typeof data.state.contextmenu === 'undefined'){
 					return;
@@ -72,12 +66,23 @@ $LAB
 
 				var reqData = JSON.parse(data.state.contextmenu.message);
 
+				Core9.editor.state = data.state;
+				var EditorConfig = {};
+				var url = "http://" + location.hostname;
+				if(location.port != ""){
+				  url = url + ":" + location.port
+				}
+				EditorConfig.pageUrl = url + data.state.page;
+				EditorConfig.widgets = '/site/assets/json/widgets.json';
+
+				EditorConfig.baseUrl = url + '/';
+				EditorConfig['state'] = Core9.editor.state;
+
 				if (reqData.action == 'delete-block') {
 					$('#delete-form').toggle();
 					$('#modal').toggle();
 					$('.cancel-block-delete').click(
 							function() {
-								console.log('closing delete box..');
 								$('#delete-form').toggle();
 								$('#modal').toggle();
 								location.reload();
@@ -103,31 +108,16 @@ $LAB
 													if (error) {
 														return;
 													}
-													console.log(text);
 													location.reload();
 												});
 							});
 
 				}else if (data.action == 'init') {
-					Core9.editor.state = data.state;
-					console.log('activating editor..');
 					jQuery('#wizard-wrapper').modal("show");
 					jQuery('#modal').toggle();
-					var EditorConfig = {};
-					var url = "http://" + location.hostname;
-					if(location.port != ""){
-					  url = url + ":" + location.port
-					}
-					EditorConfig.pageUrl = url + data.state.page;
-					EditorConfig.widgets = '/site/assets/json/widgets.json';
-
-					EditorConfig.baseUrl = url + '/';
-					EditorConfig['state'] = Core9.editor.state;
 					Wizard.init(EditorConfig);
 				}
 			});
-			console.log('Editor config : ');
-			console.log(EditorConfig);
 
 			JSONEditor.defaults.theme = 'bootstrap3';
 			JSONEditor.defaults.iconlib = 'fontawesome4';
