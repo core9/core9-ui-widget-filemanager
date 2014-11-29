@@ -4,25 +4,25 @@ var Core9 = {
 	"test" : "test"
 };
 
-var baseUrl = "/ui-widgets/editor/";
+var baseUrl = "/ui-widgets/widgets/core-editor/";
 
 $LAB
-.script(baseUrl + "js/jquery.js").wait();
+.script(baseUrl + "vendor/editor/assets/js/jquery.js").wait();
 
 $LAB
 		.setOptions({
 			AlwaysPreserveOrder : true
 		})
-		.script(baseUrl + "js/jquery.js").wait()
-		.script(baseUrl + "js/bootstrap.min.js").wait()
-		.script(baseUrl + "js/jquery.sceditor.bbcode.min.js").wait()
-		.script(baseUrl + "js/jquery.sceditor.xhtml.min.js").wait()
-		.script(baseUrl + "js/select2.min.js").wait()
-		.script(baseUrl + "js/jsoneditor.min.js").wait()
-		.script(baseUrl + "js/promise.min.js").wait()
-		.script(baseUrl + "js/iframeResizer.min.js").wait()
-		.script("/ui-widgets/widgets/core-editor/vendor/editor/wizard/wizard-engine.js").wait()
-		.script(baseUrl + "js/editor.load.css.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/jquery.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/bootstrap.min.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/jquery.sceditor.bbcode.min.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/jquery.sceditor.xhtml.min.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/select2.min.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/jsoneditor.min.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/promise.min.js").wait()
+		.script(baseUrl + "vendor/editor/assets/js/iframeResizer.min.js").wait()
+		.script(baseUrl + "vendor/editor/wizard/wizard-engine.js").wait()
+		.script(baseUrl + "vendor/editor/wizard/editor.load.css.js").wait()
 		.script("../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
 			var state = {};

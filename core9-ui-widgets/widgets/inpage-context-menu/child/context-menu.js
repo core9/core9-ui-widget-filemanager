@@ -49,77 +49,43 @@ Core9.menu = {
 		},
 
 		editBlock : function(event){
-			console.log('sending edit message');
-			console.log('selected block position : ' + Core9.menu.selectedBlockPosition);
-			console.log('selected block : ');
-			console.log(Core9.menu.selectedBlock);
-			console.log('data attribute type :  ' + Core9.menu.selectedBlock.dataset.type);
-			console.log('data attribute contentid :  ' + Core9.menu.selectedBlock.dataset.contentid);
-
 			var jsonData = {
 					"action": "edit-block",
 					"block": Core9.menu.selectedBlockPosition,
 					"type" : Core9.menu.selectedBlock.dataset.type,
 					"contentid" : Core9.menu.selectedBlock.dataset.contentid
 			}
-
-			console.log(event);
 			if ('parentIFrame' in window) window.parentIFrame.sendMessage(JSON.stringify(jsonData));return false;
 		},
 
 		insertBeforeBlock : function (){
-			console.log('sending edit message');
-			console.log('selected block position : ' + Core9.menu.selectedBlockPosition);
-			console.log('selected block : ');
-			console.log(Core9.menu.selectedBlock);
-			console.log('data attribute type :  ' + Core9.menu.selectedBlock.dataset.type);
-
 			var jsonData = {
 					"action": "insertbefore-block",
 					"block": Core9.menu.selectedBlockPosition,
 					"type" : Core9.menu.selectedBlock.dataset.type
 			}
-
-			console.log(event);
 			if ('parentIFrame' in window) window.parentIFrame.sendMessage(JSON.stringify(jsonData));return false;
 		},
 
 		insertAfterBlock : function (){
-			console.log('sending edit message');
-			console.log('selected block position : ' + Core9.menu.selectedBlockPosition);
-			console.log('selected block : ');
-			console.log(Core9.menu.selectedBlock);
-			console.log('data attribute type :  ' + Core9.menu.selectedBlock.dataset.type);
-
 			var jsonData = {
 					"action": "insertafter-block",
 					"block": Core9.menu.selectedBlockPosition,
 					"type" : Core9.menu.selectedBlock.dataset.type
 			}
-
-			console.log(event);
 			if ('parentIFrame' in window) window.parentIFrame.sendMessage(JSON.stringify(jsonData));return false;
 		},
 
 		deleteBlock : function (event){
-			console.log('sending edit message');
-			console.log('selected block position : ' + Core9.menu.selectedBlockPosition);
-			console.log('selected block : ');
-			console.log(Core9.menu.selectedBlock);
-			console.log('data attribute type :  ' + Core9.menu.selectedBlock.dataset.type);
-
 			var jsonData = {
 					"action": "delete-block",
 					"block": Core9.menu.selectedBlockPosition,
 					"type" : Core9.menu.selectedBlock.dataset.type
 			}
-
-			console.log(event);
 			if ('parentIFrame' in window) window.parentIFrame.sendMessage(JSON.stringify(jsonData));return false;
 		},
 
 		listener :	function (event) {
-
 			if(Core9.menu.endsWith(event.data, "null:offset:null:null:0")){
 				return;
 			}
@@ -197,15 +163,11 @@ Core9.menu = {
 
 		clicked :	function (event) {
 			event.preventDefault();
-			console.log('Block clicked ');
-			console.log(event);
 			var blocks = document.getElementsByClassName(Core9.menu.blockClassName());
-			console.log(event);
 			Core9.menu.selectedBlock = Core9.menu.getParentElementWithClass(event.target,Core9.menu.blockClassName());
 			if(Core9.menu.selectedBlock == null){
 				Core9.menu.selectedBlock = event.target;
 			}
-			console.log(Core9.menu.selectedBlock);
 			var current;
 			for(var i = 0; i < blocks.length;i++)
 			{
@@ -215,8 +177,6 @@ Core9.menu = {
 				   Core9.menu.selectedBlockPosition = i;
 			   }
 			}
-			console.log("Total nr : " + blocks.length);
-			console.log("current : " + current);
 			Core9.menu.showMenu(event.clientX, event.clientY);
 		}
 }

@@ -4,7 +4,7 @@ JSCLASS_PATH = 'lib/jsclass/min';
 $LAB
 .setOptions({AlwaysPreserveOrder:true})
 .script("lib/jquery/zepto.min.js")
-.script("lib/seamless/build/seamless.parent.min.js")
+.script("lib/seamless/build/seamless.parent.js")
 .script("lib/pubsubjs/src/pubsub.js")
 .script("lib/storejs/store.min.js")
 .script("lib/iframeresizer/iframeResizer.min.js")

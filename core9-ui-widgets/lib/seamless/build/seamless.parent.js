@@ -21,6 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  **/
+window.jQuery = Zepto;
 var NO_JQUERY = {};
 (function(window, $, undefined) {
 
@@ -105,7 +106,7 @@ var NO_JQUERY = {};
          bind: function(type, fn, origin, hash, async_reply) {
            pm._replyBind ( type, fn, origin, hash, async_reply );
          },
-       
+
          _replyBind: function(type, fn, origin, hash, isCallback) {
            if (("postMessage" in window) && !hash) {
                pm._bind();
@@ -208,7 +209,7 @@ var NO_JQUERY = {};
                  var msg = JSON.parse(e.data);
              }
              catch (ex) {
-                 console.warn("postmessage data invalid json: ", ex);
+                 //console.warn("postmessage data invalid json: ", ex);
                  return;
              }
              if (!msg.type) {
@@ -243,7 +244,7 @@ var NO_JQUERY = {};
                            pm.send({target:e.source, data:data, type:msg.callback});
                        }
                      }
-                     
+
                      try {
                          if ( o.callback ) {
                            o.fn(msg.data, sendReply, e);
@@ -390,7 +391,7 @@ var NO_JQUERY = {};
                          pm.send({target:source_window, data:data, type:msg.callback, hash:true, url:hash.source.url});
                        }
                      }
-                     
+
                      try {
                          if ( o.callback ) {
                            o.fn(msg.data, sendReply);

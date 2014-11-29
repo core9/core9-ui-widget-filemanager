@@ -311,7 +311,9 @@ var Wizard = {
 		dataRequest += Wizard.state.action + "-" + Wizard.state.block
 				+ "-type-" + Wizard.activatedWidget;
 
-		if(Wizard.state.contentid.length > 2){
+
+
+		if(typeof Wizard.state.contentid !== 'undefined' && Wizard.state.contentid.length > 2){
 			console.log("requesting : " + Wizard.state.contentid);
 			dataRequest = "/dynamic-blocks/"+Wizard.activatedWidget+"/data/"+Wizard.activatedWidget+".json?id=" + Wizard.state.contentid;
 			console.log("request url : " + dataRequest);

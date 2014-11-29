@@ -12,14 +12,14 @@ function loadCss(url){
 	document.getElementsByTagName("head")[0].appendChild(link);
 }
 function loadCssUrls(baseUrl){
-loadCss(baseUrl + "assets/bootstrap.min.css");
-loadCss(baseUrl + "assets/bootstrap-responsive.min.css");
-loadCss(baseUrl + "assets/animate.min.css");
-loadCss(baseUrl + "assets/style.css");
-loadCss(baseUrl + "assets/style.css");
-loadCss(baseUrl + "assets/jquery.fancybox-1.3.4.css");
-loadCss(baseUrl + "assets/font-awesome.min.css");
-loadCss(baseUrl + "assets/prettyPhoto.css");
+loadCss(baseUrl + "vendor/editor/assets/css/bootstrap.min.css");
+loadCss(baseUrl + "vendor/editor/assets/css/bootstrap-responsive.min.css");
+loadCss(baseUrl + "vendor/editor/assets/css/animate.min.css");
+loadCss(baseUrl + "vendor/editor/assets/css/style.css");
+loadCss(baseUrl + "vendor/editor/assets/css/style.css");
+loadCss(baseUrl + "vendor/editor/assets/css/jquery.fancybox-1.3.4.css");
+loadCss(baseUrl + "vendor/editor/assets/css/font-awesome.min.css");
+loadCss(baseUrl + "vendor/editor/assets/css/prettyPhoto.css");
 }
 // Handles message from ResponsiveFilemanager
 //
