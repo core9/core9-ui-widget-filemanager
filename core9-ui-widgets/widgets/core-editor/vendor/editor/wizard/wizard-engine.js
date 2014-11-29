@@ -281,8 +281,7 @@ var Wizard = {
 	postToApi : function(data) {
 
 		var postUrl = '/api/block';
-		console.log(Wizard.state.contentid.length);
-		if(Wizard.state.contentid.length > 2){
+		if(typeof Wizard.state.contentid !== 'undefined' && Wizard.state.contentid.length > 2){
 			postUrl = "/dynamic-blocks/update/" + Wizard.state.contentid;
 		}
 
