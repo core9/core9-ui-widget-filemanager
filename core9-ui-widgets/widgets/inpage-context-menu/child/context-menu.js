@@ -185,7 +185,7 @@ Core9.menu = {
 				insertAfter : "insert after",
 				switchblock : "verwissel",
 				removeblock : "verwijder",
-				testdata : "test",
+				testdata : "A/B test",
 				x : x,
 				y : y
 			});
