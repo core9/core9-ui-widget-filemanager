@@ -12,6 +12,7 @@ $LAB
 .script("widgets/filemanager/parent/packages.filemanager.js")
 .script("widgets/core-editor/parent/packages.editor.js")
 .script("widgets/inpage-context-menu/parent/packages.contextmenu.js")
+.script("widgets/test-editor/parent/packages.conversion.js")
 .wait(function(){
 	window.widget = jQuery;
 
@@ -24,32 +25,46 @@ $LAB
 	            return decodeURIComponent(pair[1]);
 	        }
 	    }
-	    console.log('Query variable %s not found', variable);
 	}
 
 	// start context
-
 	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
 
 		$('.open-context').on('click', function(){
 			widget.contextmenu.init({'size':'full'});
 		});
-
 		// init page
 		widget.contextmenu.init({'size':'full'});
 	});
-
 	// end context
+
+	// start test-editor
+	window.widget.conversion = JS.require('widget.conversion', function(Hash, Observable) {
+		$('#open-conversion').on('click', function(){
+			var ifrContextMenu = $('#ifr-contextmenu');
+			var ifrConversion = $('#ifr-conversion');
+			if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'block'){
+				ifrConversion.hide();
+				ifrContextMenu.css('top', '0px');
+			}else if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'none'){
+				ifrConversion.show();
+				ifrContextMenu.css('top', '200px');
+			}else{
+				widget.conversion.init({'size':'full'});
+				ifrContextMenu.css('top', '200px');
+			}
+
+		});
+		// init page
+		//widget.conversion.init({'size':'full'});
+	});
+	// end test-editor
 
 
 	// start file service
 	store.set('editor-state', { page: getQueryVariable('page'), action: 'edit', 'size':'full' });
-
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
-
 		var destroyUrlService = function( msg, data ){
-			console.log("destroy url service");
-		    console.log( msg, data );
 		    var editorState = store.get('editor-state');
 		    editorState['url'] = data;
 		    widget.editor.init(editorState);
@@ -59,49 +74,31 @@ $LAB
 		var tokenDestroyUrlService = PubSub.subscribe( 'destroyUrlService', destroyUrlService );
 
 		var getUrlService = function( msg, data ){
-			console.log("requesting geturl service");
-		    console.log( msg, data );
 		    widget.filemanager.init({'size':'full'});
 		};
 		var tokenGetUrlService = PubSub.subscribe( 'geturl', getUrlService );
-
 	});
-
-
-
 
 	$('.choose-file').on('click', function(){
 		PubSub.publish( 'geturl', 'file' );
 	});
-
 	// end file service
-
 	// start editor service
-
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
-
 		var destroyEditorService = function( msg, data ){
-			console.log("destroy url service");
-		    console.log( msg, data );
 		    var editorState = store.get('editor-state');
 		    editorState['url'] = data;
-		    //PubSub.publish('getUrlServiceResult', data);
 		    widget.editor.destroy();
 		};
 		var tokenDestroyEditorService = PubSub.subscribe( 'destroyEditorService', destroyEditorService );
-
 		var getEditorService = function( msg, data ){
-			console.log("requesting editor service");
-		    console.log( msg, data );
 		    var editorState = store.get('editor-state');
 		    data.iframe = "";
 		    editorState['contextmenu'] = data;
 		    widget.editor.init(editorState);
 		};
 		var tokenGetEditorService = PubSub.subscribe( 'geteditor', getEditorService );
-
 	});
-
 	// end editor service
 
 
