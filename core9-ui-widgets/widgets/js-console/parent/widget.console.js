@@ -59,13 +59,12 @@
 				              Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
 				          );
 				      }
-				   var height = getDocHeight();
-				   height = 200;
+				   var docHeight = getDocHeight();
+				   var height = 200;
 				   var width = $('body').width();
 				   //width = width - 50;
-					console.log("height : " + height);
 					$('#ifr-console').css('position', 'fixed');
-					$('#ifr-console').css('top', '0px');
+					$('#ifr-console').css('top', ($(window).height() - height)+'px');
 					$('#ifr-console').css('height', height + 'px');
 					$('#ifr-console').css('width', width + 'px');
 					$('#ifr-console').show();

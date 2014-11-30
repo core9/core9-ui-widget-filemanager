@@ -65,7 +65,7 @@
 				   //width = width - 50;
 					console.log("height : " + height);
 					$('#ifr-conversion').css('position', 'fixed');
-					$('#ifr-conversion').css('top', '0px');
+					$('#ifr-conversion').css('top', '20px');
 					$('#ifr-conversion').css('height', height + 'px');
 					$('#ifr-conversion').css('width', width + 'px');
 					$('#ifr-conversion').show();

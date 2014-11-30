@@ -46,13 +46,13 @@ $LAB
 			var ifrConversion = $('#ifr-conversion');
 			if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'block'){
 				ifrConversion.hide();
-				ifrContextMenu.css('top', '0px');
+				ifrContextMenu.css('top', '20px');
 			}else if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'none'){
 				ifrConversion.show();
-				ifrContextMenu.css('top', '200px');
+				ifrContextMenu.css('top', '220px');
 			}else{
 				widget.conversion.init({'size':'full'});
-				ifrContextMenu.css('top', '200px');
+				ifrContextMenu.css('top', '220px');
 			}
 
 		});
