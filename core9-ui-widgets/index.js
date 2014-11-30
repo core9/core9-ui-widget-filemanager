@@ -13,6 +13,7 @@ $LAB
 .script("widgets/core-editor/parent/packages.editor.js")
 .script("widgets/inpage-context-menu/parent/packages.contextmenu.js")
 .script("widgets/test-editor/parent/packages.conversion.js")
+.script("widgets/js-console/parent/packages.console.js")
 .wait(function(){
 	window.widget = jQuery;
 
@@ -55,10 +56,29 @@ $LAB
 			}
 
 		});
-		// init page
-		//widget.conversion.init({'size':'full'});
 	});
 	// end test-editor
+
+	// start js-console
+	window.widget.console = JS.require('widget.console', function(Hash, Observable) {
+		var consoleButton = $('#open-console');
+		consoleButton.on('click', function(){
+			var ifrContextMenu = $('#ifr-contextmenu');
+			var ifrConsole = $('#ifr-console');
+			if(ifrConsole.size() == 1 && ifrConsole.css('display') == 'block'){
+				ifrConsole.hide();
+				//ifrContextMenu.css('top', '0px');
+			}else if(ifrConsole.size() == 1 && ifrConsole.css('display') == 'none'){
+				ifrConsole.show();
+				//ifrContextMenu.css('top', '200px');
+			}else{
+				widget.console.init({'size':'full'});
+				//ifrContextMenu.css('top', '200px');
+			}
+
+		});
+	});
+	// end js-console
 
 
 	// start file service
