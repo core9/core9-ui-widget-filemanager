@@ -109,6 +109,7 @@ $LAB
 														return;
 													}
 													location.reload();
+													
 												});
 							});
 

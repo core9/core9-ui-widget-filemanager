@@ -14,6 +14,7 @@ $LAB
 .script("widgets/inpage-context-menu/parent/packages.contextmenu.js")
 .script("widgets/test-editor/parent/packages.conversion.js")
 .script("widgets/js-console/parent/packages.console.js")
+.script("widgets/tree-menu/parent/packages.treemenu.js")
 .wait(function(){
 	window.widget = jQuery;
 
@@ -36,8 +37,35 @@ $LAB
 		});
 		// init page
 		widget.contextmenu.init({'size':'full'});
+
+		//
+
+		var reloadContextMenu = function( msg, data ){
+			document.getElementById('ifr-contextmenu').contentWindow.location.reload();
+		};
+		var tokenReloadContextMenu = PubSub.subscribe( 'reloadContextMenu', reloadContextMenu );
+
 	});
 	// end context
+
+	// start context
+	window.widget.treemenu = JS.require('widget.treemenu', function(Hash, Observable) {
+
+
+		$('#open-treemenu').on('click', function(){
+			var ifrTreeMenu = $('#ifr-treemenu');
+			if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'block'){
+				ifrTreeMenu.hide();
+			}else if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'none'){
+				ifrTreeMenu.show();
+			}else{
+				widget.treemenu.init({'size':'full'});
+			}
+		});
+
+	});
+	// end context
+
 
 	// start test-editor
 	window.widget.conversion = JS.require('widget.conversion', function(Hash, Observable) {

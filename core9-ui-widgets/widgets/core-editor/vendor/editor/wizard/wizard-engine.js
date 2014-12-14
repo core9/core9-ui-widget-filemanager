@@ -40,14 +40,20 @@ var Wizard = {
 	},
 
 	createWizard : function(steps) {
+
 		var ul = document.getElementById('tab-ul');
+		var lis = document.querySelectorAll('li > a');
 		for ( var step in steps) {
 			var script = steps[step].file;
-			ul.appendChild(Wizard.getStep(step, steps[step].label));
-			Wizard.getScript(script, step);
+			if(lis.length == 1){
+				ul.appendChild(Wizard.getStep(step, steps[step].label));
+				Wizard.getScript(script, step);
+			}
 		}
 		Wizard.hideAllDivs();
 		Wizard.showChooseDiv();
+
+		
 	},
 
 	showChooseDiv : function() {
@@ -101,7 +107,7 @@ var Wizard = {
 
 		promise.get(stepFile).then(function(error, text, xhr) {
 			if (error) {
-				alert('Error ' + xhr.status);
+				//alert('Error ' + xhr.status);
 				return;
 			}
 			Wizard.createWizard(JSON.parse(text))
@@ -125,6 +131,11 @@ var Wizard = {
 	},
 
 	activateChooseButtons : function(json) {
+	
+		var old_element = document.getElementById("choose-button");
+		var new_element = old_element.cloneNode(true);
+		old_element.parentNode.replaceChild(new_element, old_element);
+
 		var button = document.getElementById("choose-button");
 		button.addEventListener("click", function(event) {
 			Wizard.activateWidget(document.getElementById("data-list").value,
@@ -144,17 +155,23 @@ var Wizard = {
 	},
 
 	selectChoosenBlock : function(state){
+	//"#reset-button"
+	    document.getElementById("reset-button").click();
 		console.log("init state : ");
 		console.log(state);
 		document.getElementById("block-action").innerHTML=JSON.stringify(state);
 
 		document.getElementById("data-list").value = state.type;
+
 		document.getElementById("choose-button").click();
 		setTimeout(function(){
 			console.log('clicking li');
 			var lis = document.querySelectorAll('li > a');
 			console.log(lis);
-			lis[1].click()
+			if(typeof lis[1] !== 'undefined'){
+				lis[1].click();
+			}
+			
 
 		}, 500);
 	},
@@ -186,7 +203,7 @@ var Wizard = {
 				function(error, text, xhr) {
 					// what a fucking mess
 					if (error) {
-						alert('Error ' + xhr.status);
+						//alert('Error ' + xhr.status);
 						return;
 					}
 					var starting_value = "";
@@ -290,11 +307,16 @@ var Wizard = {
 				.then(
 						function(error, text, xhr) {
 							if (error) {
-								alert('Error ' + xhr.status);
+								//alert('Error ' + xhr.status);
 								return;
 							}
 							console.log(text);
 							//location.reload();
+							
+							Core9.parent.send({
+						destroy : true// ,
+					});
+
 						});
 	},
 
