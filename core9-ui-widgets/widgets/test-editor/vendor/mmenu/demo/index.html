@@ -7,23 +7,28 @@
 
 		<title>jQuery.mmenu demo</title>
 
-		<link type="text/css" rel="stylesheet" href="../vendor/mmenu/demo/css/demo.css" />
-		<link type="text/css" rel="stylesheet" href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
+		<link type="text/css" rel="stylesheet" href="css/demo.css" />
+		<link type="text/css" rel="stylesheet" href="../src/css/jquery.mmenu.all.css" />
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="../vendor/mmenu/src/js/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript" src="../src/js/jquery.mmenu.min.all.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('nav#menu').mmenu();
 			});
 		</script>
 	</head>
-	<body style="background-color:#ccc;">
+	<body>
 		<div id="page">
 			<div class="header">
 				<a href="#menu"></a>
+				Demo
 			</div>
-
+			<div class="content">
+				<p><strong>This is a demo.</strong><br />
+					Click the menu icon to open the menu.</p>
+				<p>For more demos, a tutorial, documentation and support, please visit <a href="http://mmenu.frebsite.nl" target="_blank">mmenu.frebsite.nl</a></p>			
+			</div>
 			<nav id="menu">
 				<ul>
 					<li><a href="#">Home</a></li>
