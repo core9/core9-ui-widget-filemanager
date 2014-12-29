@@ -12,53 +12,12 @@
 	href="../vendor/mmenu/demo/css/demo.css" /> -->
 
 <script type="text/javascript" src="../vendor/taffydb/taffy-min.js"></script>
-
+<script type="text/javascript" src="test.js"></script>
 
 </head>
 <body style="background-color: #ccc;">
 
 
-	<script>
-		//Create DB and fill it with records
-		var request = TAFFY([ {
-			"ua" : "firefox",
-			"language" : "M",
-			"device" : "ipad",
-			"queryparams" : "",
-			"refferal" : ""
-		} ]);
-
-		var variations = [ {
-			"variation" : "a",
-			"percentage" : 60,
-			"percentage-had" : 50,
-			"query" : {
-				ua : "firefox",
-				device : "iphone"
-			}
-		}, {
-			"variation" : "b",
-			"percentage" : 40,
-			"percentage-had" : 30,
-			"query" : {
-				ua : "firefox",
-				device : "ipad"
-			}
-		} ];
-
-		var dict = {};
-
-		for (var i = 0; i < variations.length; i++) {
-			var test = variations[i];
-			dict[test.variation] = request(test.query).count();
-		}
-
-		var result = request();
-
-		console.log("dict : ");
-		console.log(dict);
-		console.log("result : " + result.count());
-	</script>
 
 </body>
 </html>
