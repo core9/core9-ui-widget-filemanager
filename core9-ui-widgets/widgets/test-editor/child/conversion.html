@@ -14,7 +14,7 @@
 	href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
 
 <script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript"
 	src="../vendor/mmenu/src/js/jquery.mmenu.min.all.js"></script>
 <script type="text/javascript">
@@ -33,13 +33,15 @@ main {
 	width: 100%;
 	margin-left: 80px;
 	background-color: #fff;
+	top: -7px;
+	
 }
 
 /*tabs*/
 
     .tabs {
       position: relative;   
-      min-height: 175px; /* This part sucks */
+      min-height: 200px; /* This part sucks */
       clear: both;
       margin: 25px 0;
     }
@@ -124,11 +126,11 @@ main {
 							</ul></li>
 						<li><a href="#about/address">Our address</a></li>
 					</ul></li>
-				<li><a href="#contact">Contact</a></li>
+				<li><a href="tabs/variations.html">Variations</a></li>
 			</ul>
 		</nav>
 
-
+	<div id="main">
 		<main>
 
 		<div class="tabs">
@@ -149,7 +151,7 @@ main {
 				<div class="content">
 					<p>Stuff for Tab Two</p>
 
-					<img src="http://placekitten.com/200/100">
+					<img src="http://globalapk.com/uploads/posts/2014-04/1398059009_unnamed.png">
 				</div>
 			</div>
 
@@ -164,8 +166,36 @@ main {
 
 
 		</main>
+	</div>
 
 
 	</div>
+	
+	<script>
+	
+	$( document ).ready(function() {
+	    console.log( "ready!" );
+	    
+	    $('#menu').on('click', function(e){
+	    	e.preventDefault();
+	    	console.log(e.target);
+	    	var elem = e.target;
+	    	
+	    	$('#main').empty();
+	    	
+	    	console.log(elem.href);
+	    	
+	    	$("#main").load(elem.href + " main");
+	    	
+	    	
+	    	console.log(this);
+	    });
+	    
+	    
+	});
+	
+	</script>
+	
+	
 </body>
 </html>
