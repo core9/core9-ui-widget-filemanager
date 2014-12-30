@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="www.frebsite.nl" />
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+
+		<title>jQuery.mmenu demo</title>
+
+		<link type="text/css" rel="stylesheet" href="../vendor/mmenu/demo/css/demo.css" />
+		<link type="text/css" rel="stylesheet" href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../vendor/mmenu/src/js/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu();
+			});
+		</script>
+		<style>
+		#ab-variations {
+			float:left;
+			height:300px;
+			width:600px;
+			_background-color: aqua;
+			margin-left: 60px;
+		}
+		</style>
+	</head>
+	<body style="background-color:#ccc;">
+		<div id="page">
+			<div class="header">
+				<a href="#menu"></a>
+			</div>
+
+			<nav id="menu">
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#about">About us</a>
+						<ul>
+							<li><a href="#about/history">History</a></li>
+							<li><a href="#about/team">The team</a>
+								<ul>
+									<li><a href="#about/team/management">Management</a></li>
+									<li><a href="#about/team/sales">Sales</a></li>
+									<li><a href="#about/team/development">Development</a></li>
+								</ul>
+							</li>
+							<li><a href="#about/address">Our address</a></li>
+						</ul>
+					</li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+			
+			<div id="ab-variations">
+			<form>
+			
+			<div id="request" style="float: left; ">
+
+				<input type="text" id="menu-geo" style="margin-right: -1px;"
+					list="menu-geo-json-datalist" placeholder="e.g. Geo">
+				<datalist id="menu-geo-json-datalist"></datalist>
+
+				<input type="text" id="menu-hostname"
+					style="width: 290px; margin-right: 1px;"
+					list="menu-hostname-json-datalist" placeholder="e.g. Hostname">
+				<datalist id="menu-hostname-json-datalist"></datalist>
+
+				<input type="text" id="menu-page" list="menu-page-json-datalist"
+					style="width: 465px; margin-right: 1px;" placeholder="e.g. Page">
+				<datalist id="menu-page-json-datalist"></datalist>
+
+				<input type="text" id="menu-request"
+					list="menu-request-json-datalist"
+					style="width: 465px; margin-right: -3px;"
+					placeholder="e.g. Request">
+				<datalist id="menu-request-json-datalist"></datalist>
+
+				<br style="clear: both;"> <input type="text"
+					id="menu-useragent" style="margin-right: -1px;"
+					list="menu-useragent-json-datalist" placeholder="e.g. Useragent">
+				<datalist id="menu-useragent-json-datalist"></datalist>
+
+				<input type="text" id="menu-period" style="margin-right: -1px;"
+					list="menu-period-json-datalist" placeholder="e.g. Period">
+				<datalist id="menu-period-json-datalist"></datalist>
+
+				<input type="text" id="menu-percentage" style="margin-right: 1px;width:115px;"
+					list="menu-percentage-json-datalist" placeholder="e.g. Percentage">
+				<datalist id="menu-percentage-json-datalist"></datalist>
+				
+				<br><br>
+				Add new page
+				<br>
+
+				<input type="text" id="menu-page" list="menu-page-json-datalist"
+					style="width: 465px; margin-right: 1px;" placeholder="e.g. Host">
+				<datalist id="menu-page-json-datalist"></datalist>
+
+				<input type="text" id="menu-request"
+					list="menu-request-json-datalist"
+					style="width: 465px; margin-right: -3px;"
+					placeholder="e.g. Page">
+				<datalist id="menu-request-json-datalist"></datalist>
+
+			</div>
+			
+			</form>
+			</div>
+			
+		</div>
+	</body>
+</html>

@@ -1,114 +1,171 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="author" content="www.frebsite.nl" />
-		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="www.frebsite.nl" />
+<meta name="viewport"
+	content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
 
-		<title>jQuery.mmenu demo</title>
+<title>jQuery.mmenu demo</title>
 
-		<link type="text/css" rel="stylesheet" href="../vendor/mmenu/demo/css/demo.css" />
-		<link type="text/css" rel="stylesheet" href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet"
+	href="../vendor/mmenu/demo/css/demo.css" />
+<link type="text/css" rel="stylesheet"
+	href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
 
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="../vendor/mmenu/src/js/jquery.mmenu.min.all.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('nav#menu').mmenu();
-			});
-		</script>
-		<style>
-		#ab-variations {
-			float:left;
-			height:300px;
-			width:600px;
-			_background-color: aqua;
-			margin-left: 60px;
-		}
-		</style>
-	</head>
-	<body style="background-color:#ccc;">
-		<div id="page">
-			<div class="header">
-				<a href="#menu"></a>
-			</div>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="../vendor/mmenu/src/js/jquery.mmenu.min.all.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('nav#menu').mmenu();
+	});
+</script>
+<style>
+body {
+	overflow: hidden;
+}
 
-			<nav id="menu">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#about">About us</a>
-						<ul>
-							<li><a href="#about/history">History</a></li>
-							<li><a href="#about/team">The team</a>
-								<ul>
-									<li><a href="#about/team/management">Management</a></li>
-									<li><a href="#about/team/sales">Sales</a></li>
-									<li><a href="#about/team/development">Development</a></li>
-								</ul>
-							</li>
-							<li><a href="#about/address">Our address</a></li>
-						</ul>
-					</li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-			</nav>
-			
-			<div id="ab-variations">
-			<form>
-			
-			<div id="request" style="float: left; ">
+main {
+	position: relative;
+	min-height: 100vh;
+	width: 100%;
+	margin-left: 80px;
+	background-color: #fff;
+}
 
-				<input type="text" id="menu-geo" style="margin-right: -1px;"
-					list="menu-geo-json-datalist" placeholder="e.g. Geo">
-				<datalist id="menu-geo-json-datalist"></datalist>
+/*tabs*/
 
-				<input type="text" id="menu-hostname"
-					style="width: 290px; margin-right: 1px;"
-					list="menu-hostname-json-datalist" placeholder="e.g. Hostname">
-				<datalist id="menu-hostname-json-datalist"></datalist>
+    .tabs {
+      position: relative;   
+      min-height: 175px; /* This part sucks */
+      clear: both;
+      margin: 25px 0;
+    }
+    .tab {
+      float: left;
+    }
+    .tab label {
+      background: #eee; 
+      padding: 10px; 
+      border: 1px solid #ccc; 
+      margin-left: -1px; 
+      position: relative;
+      left: 1px; 
+    }
+    .tab [type=radio] {
+      display: none;   
+    }
+    .content {
+      position: absolute;
+      top: 28px;
+      left: 0;
+      background: white;
+      right: 0;
+      bottom: 0;
+      padding: 20px;
+      border: 1px solid #ccc; 
+      
+      overflow: hidden;
+    }
+    .content > * {
+      opacity: 0;
+      
+      -webkit-transform: translate3d(0, 0, 0);
+    
+      -webkit-transform: translateX(-100%);
+      -moz-transform:    translateX(-100%);
+      -ms-transform:     translateX(-100%);
+      -o-transform:      translateX(-100%);
+      
+      -webkit-transition: all 0.6s ease;
+      -moz-transition:    all 0.6s ease;
+      -ms-transition:     all 0.6s ease;
+      -o-transition:      all 0.6s ease;
+    }
+    [type=radio]:checked ~ label {
+      background: white;
+      border-bottom: 1px solid white;
+      z-index: 2;
+    }
+    [type=radio]:checked ~ label ~ .content {
+      z-index: 1;
+    }
+    [type=radio]:checked ~ label ~ .content > * {
+      opacity: 1;
+      
+      -webkit-transform: translateX(0);
+      -moz-transform:    translateX(0);
+      -ms-transform:     translateX(0);
+      -o-transform:      translateX(0);
+    }
 
-				<input type="text" id="menu-page" list="menu-page-json-datalist"
-					style="width: 465px; margin-right: 1px;" placeholder="e.g. Page">
-				<datalist id="menu-page-json-datalist"></datalist>
-
-				<input type="text" id="menu-request"
-					list="menu-request-json-datalist"
-					style="width: 465px; margin-right: -3px;"
-					placeholder="e.g. Request">
-				<datalist id="menu-request-json-datalist"></datalist>
-
-				<br style="clear: both;"> <input type="text"
-					id="menu-useragent" style="margin-right: -1px;"
-					list="menu-useragent-json-datalist" placeholder="e.g. Useragent">
-				<datalist id="menu-useragent-json-datalist"></datalist>
-
-				<input type="text" id="menu-period" style="margin-right: -1px;"
-					list="menu-period-json-datalist" placeholder="e.g. Period">
-				<datalist id="menu-period-json-datalist"></datalist>
-
-				<input type="text" id="menu-percentage" style="margin-right: 1px;width:115px;"
-					list="menu-percentage-json-datalist" placeholder="e.g. Percentage">
-				<datalist id="menu-percentage-json-datalist"></datalist>
-				
-				<br><br>
-				Add new page
-				<br>
-
-				<input type="text" id="menu-page" list="menu-page-json-datalist"
-					style="width: 465px; margin-right: 1px;" placeholder="e.g. Host">
-				<datalist id="menu-page-json-datalist"></datalist>
-
-				<input type="text" id="menu-request"
-					list="menu-request-json-datalist"
-					style="width: 465px; margin-right: -3px;"
-					placeholder="e.g. Page">
-				<datalist id="menu-request-json-datalist"></datalist>
-
-			</div>
-			
-			</form>
-			</div>
-			
+/*tabs*/
+</style>
+</head>
+<body style="background-color: #ccc;">
+	<div id="page">
+		<div class="header">
+			<a href="#menu"></a>
 		</div>
-	</body>
+
+		<nav id="menu">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#about">About us</a>
+					<ul>
+						<li><a href="#about/history">History</a></li>
+						<li><a href="#about/team">The team</a>
+							<ul>
+								<li><a href="#about/team/management">Management</a></li>
+								<li><a href="#about/team/sales">Sales</a></li>
+								<li><a href="#about/team/development">Development</a></li>
+							</ul></li>
+						<li><a href="#about/address">Our address</a></li>
+					</ul></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</nav>
+
+
+		<main>
+
+		<div class="tabs">
+
+			<div class="tab">
+				<input type="radio" id="tab-4" name="tab-group-2" checked="">
+				<label for="tab-4">Tab One</label>
+
+				<div class="content">
+					<p>Stuff for Tab One</p>
+				</div>
+			</div>
+
+			<div class="tab">
+				<input type="radio" id="tab-5" name="tab-group-2"> <label
+					for="tab-5">Tab Two</label>
+
+				<div class="content">
+					<p>Stuff for Tab Two</p>
+
+					<img src="http://placekitten.com/200/100">
+				</div>
+			</div>
+
+			<div class="tab">
+				<input type="radio" id="tab-6" name="tab-group-2"> <label
+					for="tab-6">Tab Three</label>
+
+				<div class="content">You made it this far?!</div>
+			</div>
+
+		</div>
+
+
+		</main>
+
+
+	</div>
+</body>
 </html>
