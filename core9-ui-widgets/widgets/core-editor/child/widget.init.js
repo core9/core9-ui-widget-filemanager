@@ -123,7 +123,7 @@ $LAB
 			JSONEditor.defaults.theme = 'bootstrap3';
 			JSONEditor.defaults.iconlib = 'fontawesome4';
 			JSONEditor.plugins.sceditor = {
-				toolbar : "bold,italic,underline,strike,subscript,superscript|left,center,right,justify|font,size,color,removeformat|table|source",
+				toolbar : "bold,italic,underline,strike,subscript,superscript|left,center,right,justify|font,size,color,removeformat|table|source|image,email,link,unlink,youtube",
 				width : "560px",
 			};
 			JSONEditor.plugins.select2.width = "300px";
