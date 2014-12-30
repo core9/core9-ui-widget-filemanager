@@ -131,41 +131,7 @@ main {
 		</nav>
 
 	<div id="main">
-		<main>
-
-		<div class="tabs">
-
-			<div class="tab">
-				<input type="radio" id="tab-4" name="tab-group-2" checked="">
-				<label for="tab-4">Tab One</label>
-
-				<div class="content">
-					<p>Stuff for Tab One</p>
-				</div>
-			</div>
-
-			<div class="tab">
-				<input type="radio" id="tab-5" name="tab-group-2"> <label
-					for="tab-5">Tab Two</label>
-
-				<div class="content">
-					<p>Stuff for Tab Two</p>
-
-					<img src="http://globalapk.com/uploads/posts/2014-04/1398059009_unnamed.png">
-				</div>
-			</div>
-
-			<div class="tab">
-				<input type="radio" id="tab-6" name="tab-group-2"> <label
-					for="tab-6">Tab Three</label>
-
-				<div class="content">You made it this far?!</div>
-			</div>
-
-		</div>
-
-
-		</main>
+	
 	</div>
 
 
@@ -175,6 +141,12 @@ main {
 	
 	$( document ).ready(function() {
 	    console.log( "ready!" );
+	    
+	    $('#main').empty();
+    
+    	
+    	$("#main").load("tabs/overview.html" + " main");
+	    
 	    
 	    $('#menu').on('click', function(e){
 	    	e.preventDefault();
