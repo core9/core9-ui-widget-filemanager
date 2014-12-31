@@ -6,25 +6,47 @@
 <meta name="viewport"
 	content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
 
-<title>jQuery.mmenu demo</title>
+<title></title>
 
 <link type="text/css" rel="stylesheet"
 	href="../vendor/mmenu/demo/css/demo.css" />
 <link type="text/css" rel="stylesheet"
 	href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
-	
+
 <link type="text/css" rel="stylesheet"
 	href="css/entireframework.min.css" />
-	
+
+
+
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript"
 	src="../vendor/mmenu/src/js/jquery.mmenu.min.all.js"></script>
+	
+<script type="text/javascript"
+	src="../vendor/store.min.js"></script>
+
+<script>
+    function init() {
+        if (!store.enabled) {
+            alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
+            return
+        }
+    }
+    init()
+    
+    store.set('user', 'marcus')
+    var user = store.get('user')
+</script>
+
 <script type="text/javascript">
-	$(function() {
-		$('nav#menu').mmenu();
+	jQuery.noConflict();
+	jQuery(function() {
+		jQuery('nav#menu').mmenu();
 	});
 </script>
+
+
 <style>
 body {
 	overflow: hidden;
@@ -143,19 +165,21 @@ main {
 	</div>
 
 	<script>
-		$(document).ready(function() {
+		jQuery(document).ready(function() {
 
-			$('#main').empty();
-			$("#main").load("tabs/overview.html" + " main");
-			$('#menu').on('click', function(e) {
+			//var store = Rhaboo.persistent('test-editor');
+			
+			jQuery('#main').empty();
+			jQuery("#main").load("tabs/overview.html" + " main");
+			jQuery('#menu').on('click', function(e) {
 				e.preventDefault();
 				var elem = e.target;
-				$('#main').empty();
-				$("#main").load(elem.href + " main", function() {
+				jQuery('#main').empty();
+				jQuery("#main").load(elem.href + " main", function() {
 					console.log("Load was performed.");
 					var script = elem.href.replace(".html", ".js");
 					console.log(script);
-					$.getScript(script).done(function(script, textStatus) {
+					jQuery.getScript(script).done(function(script, textStatus) {
 						console.log(textStatus);
 					}).fail(function(jqxhr, settings, exception) {
 						console.log("Triggered ajaxError handler.");
