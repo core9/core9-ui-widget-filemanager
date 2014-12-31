@@ -40,9 +40,8 @@
 </script>
 
 <script type="text/javascript">
-	jQuery.noConflict();
-	jQuery(function() {
-		jQuery('nav#menu').mmenu();
+	$(function() {
+		$('nav#menu').mmenu();
 	});
 </script>
 
@@ -165,21 +164,21 @@ main {
 	</div>
 
 	<script>
-		jQuery(document).ready(function() {
+		$(document).ready(function() {
 
 			//var store = Rhaboo.persistent('test-editor');
 			
-			jQuery('#main').empty();
-			jQuery("#main").load("tabs/overview.html" + " main");
-			jQuery('#menu').on('click', function(e) {
+			$('#main').empty();
+			$("#main").load("tabs/overview.html" + " main");
+			$('#menu').on('click', function(e) {
 				e.preventDefault();
 				var elem = e.target;
-				jQuery('#main').empty();
-				jQuery("#main").load(elem.href + " main", function() {
+				$('#main').empty();
+				$("#main").load(elem.href + " main", function() {
 					console.log("Load was performed.");
 					var script = elem.href.replace(".html", ".js");
 					console.log(script);
-					jQuery.getScript(script).done(function(script, textStatus) {
+					$.getScript(script).done(function(script, textStatus) {
 						console.log(textStatus);
 					}).fail(function(jqxhr, settings, exception) {
 						console.log("Triggered ajaxError handler.");
