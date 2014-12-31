@@ -12,7 +12,10 @@
 	href="../vendor/mmenu/demo/css/demo.css" />
 <link type="text/css" rel="stylesheet"
 	href="../vendor/mmenu/src/css/jquery.mmenu.all.css" />
-
+	
+<link type="text/css" rel="stylesheet"
+	href="css/entireframework.min.css" />
+	
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript"
@@ -52,9 +55,12 @@ main {
 	background: #eee;
 	padding: 10px;
 	border: 1px solid #ccc;
-	margin-left: -1px;
+	margin-left: -2px;
 	position: relative;
-	left: 1px;
+	left: 2px;
+	top: 5px;
+	padding-bottom: 5px;
+	font-size: 13px;
 }
 
 .tab [type=radio] {
@@ -63,7 +69,7 @@ main {
 
 .content {
 	position: absolute;
-	top: 28px;
+	top: 27px;
 	left: 0;
 	background: white;
 	right: 0;
@@ -115,8 +121,8 @@ main {
 
 		<nav id="menu">
 			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#about">About us</a>
+				<li><a href="tabs/overview.html">Home</a></li>
+				<li><a href="tabs/system.html">System</a>
 					<ul>
 						<li><a href="#about/history">History</a></li>
 						<li><a href="#about/team">The team</a>
@@ -149,15 +155,12 @@ main {
 					console.log("Load was performed.");
 					var script = elem.href.replace(".html", ".js");
 					console.log(script);
-					
-					$.getScript(script)
-					  .done(function( script, textStatus ) {
-					    console.log( textStatus );
-					  })
-					  .fail(function( jqxhr, settings, exception ) {
-					    console.log( "Triggered ajaxError handler." );
+					$.getScript(script).done(function(script, textStatus) {
+						console.log(textStatus);
+					}).fail(function(jqxhr, settings, exception) {
+						console.log("Triggered ajaxError handler.");
 					});
-					
+
 				});
 
 			});

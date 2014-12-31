@@ -68,6 +68,7 @@
 					$('#ifr-conversion').css('top', '20px');
 					$('#ifr-conversion').css('height', height + 'px');
 					$('#ifr-conversion').css('width', width + 'px');
+					$('#ifr-conversion').css('border-bottom','15px solid #073163');
 					$('#ifr-conversion').show();
 				}, 2500);
 

@@ -77,10 +77,10 @@ $LAB
 				ifrContextMenu.css('top', '20px');
 			}else if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'none'){
 				ifrConversion.show();
-				ifrContextMenu.css('top', '220px');
+				ifrContextMenu.css('top', '235px');
 			}else{
 				widget.conversion.init({'size':'full'});
-				ifrContextMenu.css('top', '220px');
+				ifrContextMenu.css('top', '235px');
 			}
 
 		});
@@ -95,13 +95,10 @@ $LAB
 			var ifrConsole = $('#ifr-console');
 			if(ifrConsole.size() == 1 && ifrConsole.css('display') == 'block'){
 				ifrConsole.hide();
-				//ifrContextMenu.css('top', '0px');
 			}else if(ifrConsole.size() == 1 && ifrConsole.css('display') == 'none'){
 				ifrConsole.show();
-				//ifrContextMenu.css('top', '200px');
 			}else{
 				widget.console.init({'size':'full'});
-				//ifrContextMenu.css('top', '200px');
 			}
 
 		});
