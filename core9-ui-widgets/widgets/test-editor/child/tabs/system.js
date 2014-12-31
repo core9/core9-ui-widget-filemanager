@@ -1,28 +1,21 @@
 console.log("exec loaded system script..");
 
-$('#backup-btn').on(
-		'click',
-		function() {
-			console.log(this);
-			console.log("store");
-			console.log(store);
+$('#backup-btn').on('click', function() {
+	var user = store.get('user')
+	if (typeof user === "undefined") {
 
-			var user = store.get('user')
+		var person = prompt("Please enter your name", "Harry Potter");
+		if (person != null) {
+			store.set('user', person)
+		}
 
-			console.log("user : " + user);
+		var password = prompt("Please enter your password", "Harry Potter");
+		if (password != null) {
+			store.set('password', password)
+		}
 
-			if (typeof user === "undefined") {
+	}else{
+		// dooo backup
+	}
 
-				var person = prompt("Please enter your name", "Harry Potter");
-				if (person != null) {
-					store.set('user', person)
-				}
-				
-				var password = prompt("Please enter your password", "Harry Potter");
-				if (password != null) {
-					store.set('password', password)
-				}
-
-			}
-
-		});
+});
