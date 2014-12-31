@@ -14,8 +14,16 @@ $('#backup-btn').on('click', function() {
 			store.set('password', password)
 		}
 
-	}else{
+	} else {
 		// dooo backup
+		// http://easydrain.localhost:8090/plugins/editor/backup
+
+		$.post("/plugins/editor/backup", {
+			user : store.get('user'),
+			password : store.get('password')
+		}).done(function(data) {
+			alert("Data Loaded: " + data);
+		});
 	}
 
 });
