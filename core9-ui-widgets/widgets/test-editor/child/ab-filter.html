@@ -10,52 +10,80 @@
 
 <!-- <link type="text/css" rel="stylesheet"
 	href="../vendor/mmenu/demo/css/demo.css" /> -->
-<script type="text/javascript" src="../vendor/sortable/Sortable.min.js"></script>
+<script type="text/javascript" src="../vendor/sortable/Sortable.js"></script>
 <script type="text/javascript" src="../vendor/taffydb/taffy-min.js"></script>
 <script type="text/javascript" src="test.js"></script>
 <style>
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
 .container {
 	background-color: aliceblue;
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 100px;
 }
+
 #advanced-1 {
 	list-style: none;
 }
+
 #advanced-2 {
 	list-style: none;
+}
+
+.drop-box {
+	width: 25%;
+	float: left;
+	background-color: #fff;
+}
+
+.select-box {
+	width: 25%;
+	float: right;
+	background-color: #fff;
 }
 </style>
 </head>
 <body style="background-color: #fff;">
 
 
-	<div class="container" style="margin-top: 100px;">
-		<div id="advanced" style="margin-left: 30px;">
+	<div class="container">
 
-			<div
-				style="width: 25%; float: left; margin-top: 15px; margin-left: 10px"
-				class="block__list block__list_words">
-				<ul id="advanced-1">
-					<li>Drop</li>
-				</ul>
-			</div>
-
-
-			<div
-				style="width: 25%; float: left; margin-top: 15px; margin-left: 10px"
-				class="block__list block__list_words">
-				<ul id="advanced-2">
-					<li class="device">Money</li>
-					<li>Force</li>
-					<li>Agility</li>
-				</ul>
-			</div>
-
-			<div style="clear: both"></div>
+		<div class="drop-box">
+			<ul id="advanced-1">
+				<li>Drop</li>
+			</ul>
 		</div>
+
+
+		<div class="select-box">
+			<ul id="advanced-2">
+				<li class="device">Money</li>
+				<li>Force</li>
+				<li>Agility</li>
+			</ul>
+		</div>
+
+		<div style="clear: both"></div>
 	</div>
 
+
 	<script>
-		[ {
+		Core9 = {};
+		Core9.ab = {
+			createSelectBox : function() {
+				var ul2 = document.getElementById('advanced-1');
+				console.log(ul2);
+			}
+		}
+	</script>
+
+
+	<script>
+		[{
 			name : 'advanced',
 			pull : false,
 			put : true
@@ -63,14 +91,21 @@
 			name : 'advanced',
 			pull : 'clone',
 			put : false
-		} ].forEach(function(groupOpts, i) {
+		}].forEach(function(groupOpts, i) {
 			Sortable.create(document.getElementById('advanced-' + (i + 1)), {
 				sort : (i != 1),
 				group : groupOpts,
-				animation : 150
+				animation : 150,
+				onEnd : function(e) {
+					console.log(e);
+
+					Core9.ab.createSelectBox();
+
+				}
 			});
 		});
 	</script>
+
 
 
 
