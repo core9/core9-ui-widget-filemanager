@@ -27,9 +27,15 @@
 						console.log('conversion recieving url data.. : ');
 						console.log(data);
 
-						if(data.geturlservice){
-							console.log('conversion requesting url data.. : ');
-							PubSub.publish('geturl', 'for conversion');
+						if(data.hoopla){
+							console.log('conversion requesting hoopla url data.. : ');
+							console.log(location);
+							
+							location = data.location;
+							
+							$.conversion.child.send({
+								  location: location
+								});
 						}
 
 						if (data.destroy) {
