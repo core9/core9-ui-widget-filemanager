@@ -36,7 +36,7 @@ $LAB
 			widget.contextmenu.init({'size':'full'});
 		});
 		// init page
-		widget.contextmenu.init({'size':'full'});
+		//widget.contextmenu.init({'size':'full'});
 
 		//
 
@@ -140,7 +140,9 @@ $LAB
 		    var editorState = store.get('editor-state');
 		    data.iframe = "";
 		    editorState['contextmenu'] = data;
+		    editorState['page'] = getQueryVariable('page');
 		    widget.editor.init(editorState);
+		    
 		};
 		var tokenGetEditorService = PubSub.subscribe( 'geteditor', getEditorService );
 	});

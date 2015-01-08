@@ -11,9 +11,15 @@
 			};
 	$.contextmenu = function(obj) {
 	};
-
+	$.contextmenu.data = {},
 	$.contextmenu.parseQuery = function(variable){
 
+		if($.contextmenu.data.url){
+			console.log("url exists");
+			console.log($.contextmenu.data);
+			return $.contextmenu.data.url;
+		}
+		
 	    var query = window.location.search.substring(1);
 	    var vars = query.split('&');
 	    for (var i = 0; i < vars.length; i++) {
@@ -25,9 +31,12 @@
 	    console.log('Query variable %s not found', variable);
 	},
 
-	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="' +$.contextmenu.parseQuery('page')+ '"></iframe>',
+	
 	$.contextmenu.child = {},
 	$.contextmenu._appendIframe = function(){
+		
+		$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="' +$.contextmenu.parseQuery('page')+ '"></iframe>';
+
 				if($('#ifr-contextmenu').size() == 0){
 					$('body')
 					.append($.contextmenu.ifr);
@@ -102,6 +111,9 @@
 				$('#ifr-contextmenu').hide();
 	},
 	$.contextmenu.init = function(data) {
+
+		$.contextmenu.data = data;
+
 
 	    var contextmenuState = data;
 	    if(isNaN(contextmenuState['inc'])){
