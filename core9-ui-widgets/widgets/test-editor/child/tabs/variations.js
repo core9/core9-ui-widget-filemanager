@@ -1,12 +1,14 @@
 console.log("exec loaded script..");
 
 
-$('#test-btn').on('click', function() {
+$('.test-btn').on('click', function() {
 	
+	var location = this.getAttribute("data-request");
+
 	console.log(location);
 	Core9.parent.send({
 		hoopla : true,
-		location : "http://easydrain.localhost:8090/ui-widgets/index.html?page=/p/scraper/nl/"
+		location : location
 	});
 	
 	Core9.parent.receive(function(data, event) {

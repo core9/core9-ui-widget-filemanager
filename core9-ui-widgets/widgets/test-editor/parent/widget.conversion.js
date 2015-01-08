@@ -31,7 +31,10 @@
 							console.log('conversion requesting hoopla url data.. : ');
 							console.log(location);
 							
-							location = data.location;
+							//location = data.location;
+							$('#ifr-contextmenu').attr('src', data.location);
+							var newUrl = "/ui-widgets/index.html?page=" + data.location;
+							window.history.pushState('page2', 'Title', newUrl);
 							
 							$.conversion.child.send({
 								  location: location
