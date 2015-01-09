@@ -59,6 +59,7 @@
 					$('#ifr-editor').css('top', '0px');
 					$('#ifr-editor').css('height', height + 'px');
 					$('#ifr-editor').css('width', $('body').width() + 'px');
+					$('#ifr-editor').css('z-index','9999');
 					$('#ifr-editor').show();
 				}, 2500);
 
