@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../../lib/jquery/zepto.min.js"></script>
+<script>
+window.jQuery = Zepto;
+</script>
+<script src="../../lib/seamless/build/seamless.parent.min.js"></script>
+<script>
+	$(function() {
+		$('#ifr').seamless();
+	});
+</script>
+<script>
+JSCLASS_PATH = '../../lib/jsclass/min';
+</script>
+<script src="../../lib/jsclass/min/loader-browser.js"></script>
+</head>
+<body style="background-color:#ccc">
+	<iframe id="ifr" src="widget.html"></iframe>
+</body>
+</html>

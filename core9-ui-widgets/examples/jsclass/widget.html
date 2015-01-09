@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../../lib/jquery/zepto.min.js"></script>
+<script src="../../lib/jquery/zepto-extras.js"></script>
+<script>
+window.jQuery = Zepto;
+</script>
+<script src="../../lib/seamless/build/seamless.child.min.js"></script>
+<script>
+	$.seamless.connect({
+	      url: 'index.html',
+	      container: 'div.content',
+	      allowStyleInjection: true
+	    });
+</script>
+
+<script src="../../lib/inject/inject.min.js"></script>
+<script>
+
+
+
+  Inject.setModuleRoot("./modules");
+  require.run("sub/program");
+  
+
+  
+  
+</script>
+
+</head>
+<body>
+<div class="content">
+Hi..
+</div>
+</body>
+</html>
