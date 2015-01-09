@@ -52,9 +52,15 @@
 				              Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
 				          );
 				      }
+					
+				    var top = 20;  
+				   if($('#ifr-conversion').size() == 1){
+					   top = top + 215;
+				   }
+				      
 				   var height = getDocHeight();
 					$('#ifr-contextmenu').css('position', 'absolute');
-					$('#ifr-contextmenu').css('top', '20px');
+					$('#ifr-contextmenu').css('top', top + 'px');
 					$('#ifr-contextmenu').css('height', height + 'px');
 					$('#ifr-contextmenu').css('width', $('body').width() - 15 + 'px');
 					$('#ifr-contextmenu').show();
