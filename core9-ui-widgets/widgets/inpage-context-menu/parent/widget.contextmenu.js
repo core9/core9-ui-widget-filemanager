@@ -14,9 +14,12 @@
 
 
 
-	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="' +store.get('page')+ '"></iframe>',
+	
 	$.contextmenu.child = {},
 	$.contextmenu._appendIframe = function(){
+		
+		$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="' +store.get('page')+ '"></iframe>';
+		
 				if($('#ifr-contextmenu').size() == 0){
 					$('body')
 					.append($.contextmenu.ifr);
@@ -77,7 +80,7 @@
 
 
 	$.contextmenu.destroy = function(){
-				$('#ifr-contextmenu').hide();
+				$('#ifr-contextmenu').remove();//.hide();
 	},
 	$.contextmenu.init = function(data) {
 

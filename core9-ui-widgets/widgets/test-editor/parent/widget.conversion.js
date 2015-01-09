@@ -25,6 +25,12 @@
 					});
 					$.conversion.child.receive(function(data, event) {
 
+						console.log(data);
+						store.set('page',data.location);
+						store.set('editor-state', { page: store.get('page'), action: 'edit', 'size':'full' });
+						widget.contextmenu.destroy();
+						widget.contextmenu.init({'size':'full','url' : data.location});
+
 						if(data.geturlservice){
 							PubSub.publish('geturl', 'for conversion');
 						}

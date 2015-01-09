@@ -99,7 +99,7 @@ $LAB
 	// start file service
 	
 	//FIXME page needs to be handled
-	store.set('page','/p/scraper/nl');
+	store.set('page','/variations/p/scraper/nl');
 	store.set('editor-state', { page: store.get('page'), action: 'edit', 'size':'full' });
 	
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
