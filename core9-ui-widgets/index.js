@@ -17,7 +17,7 @@ $LAB
 .script("widgets/tree-menu/parent/packages.treemenu.js")
 .wait(function(){
 	window.widget = jQuery;
-
+/*
 	function getQueryVariable(variable) {
 	    var query = window.location.search.substring(1);
 	    var vars = query.split('&');
@@ -28,7 +28,7 @@ $LAB
 	        }
 	    }
 	}
-
+*/
 	// start context
 	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
 
@@ -39,12 +39,12 @@ $LAB
 		//widget.contextmenu.init({'size':'full'});
 
 		//
-
+/*
 		var reloadContextMenu = function( msg, data ){
 			document.getElementById('ifr-contextmenu').contentWindow.location.reload();
 		};
 		var tokenReloadContextMenu = PubSub.subscribe( 'reloadContextMenu', reloadContextMenu );
-
+*/
 	});
 	// end context
 
@@ -107,7 +107,7 @@ $LAB
 
 
 	// start file service
-	store.set('editor-state', { page: getQueryVariable('page'), action: 'edit', 'size':'full' });
+	//store.set('editor-state', { page: getQueryVariable('page'), action: 'edit', 'size':'full' });
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 		var destroyUrlService = function( msg, data ){
 		    var editorState = store.get('editor-state');
@@ -131,16 +131,22 @@ $LAB
 	// start editor service
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
 		var destroyEditorService = function( msg, data ){
-		    var editorState = store.get('editor-state');
-		    editorState['url'] = data;
 		    widget.editor.destroy();
 		};
 		var tokenDestroyEditorService = PubSub.subscribe( 'destroyEditorService', destroyEditorService );
 		var getEditorService = function( msg, data ){
+			
+			/*
 		    var editorState = store.get('editor-state');
 		    data.iframe = "";
-		    editorState['contextmenu'] = data;
+		    
 		    editorState['page'] = getQueryVariable('page');
+		    */
+		    var editorState = {};
+		    editorState['contextmenu'] = data;
+		    
+		    
+		    
 		    widget.editor.init(editorState);
 		    
 		};

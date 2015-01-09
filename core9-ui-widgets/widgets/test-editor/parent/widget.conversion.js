@@ -44,10 +44,12 @@
 									
 									
 									widget.contextmenu.init({'size':'full','url' : data.location});
-
+										
+									/*
 									$.conversion.child.send({
 										location : location
 									});
+									*/
 									
 	
 									

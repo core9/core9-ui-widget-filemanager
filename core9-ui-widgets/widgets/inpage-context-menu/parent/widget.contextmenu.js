@@ -108,7 +108,11 @@
 
 
 	$.contextmenu.destroy = function(){
+		$('#ifr-contextmenu').remove();
+		
 				$('#ifr-contextmenu').hide();
+				
+				
 	},
 	$.contextmenu.init = function(data) {
 
