@@ -34,13 +34,15 @@
 									console.log(location);
 
 									// location = data.location;
-									
+									/*
 									var newUrl = "/ui-widgets/index.html?page="
 											+ data.location;
 									window.history.pushState('', '',
 											newUrl);
-									
+									*/
 									widget.contextmenu.destroy();
+									
+									
 									widget.contextmenu.init({'size':'full','url' : data.location});
 
 									$.conversion.child.send({

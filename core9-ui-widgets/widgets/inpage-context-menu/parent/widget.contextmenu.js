@@ -122,7 +122,7 @@
 	    	contextmenuState['inc'] = contextmenuState['inc'] + 1;
 	    }
 
-	    store.set('contextmenu-state', contextmenuState);
+	    //store.set('contextmenu-state', contextmenuState);
 
 		console.log('initializing contextmenu with state data : ');
 		console.log(contextmenuState);
