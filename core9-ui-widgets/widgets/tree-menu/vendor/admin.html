@@ -302,23 +302,14 @@ Core9.state = {};
     <script>
     $( document ).ready(function() {
     	$('#save-button').click(function(){
-    		console.log( this );
             var editor = ace.edit("editor");
             editor.session.setMode("ace/mode/html");
             editor.setOption("enableEmmet", true);
             var el = document.getElementById("editor");
             var content = el.env.editor.getValue();
-            console.log("edited file : ");
-            console.log(Core9.state.editedfile);
-            //console.log(content);
-            
-            //http://easydrain.localhost:8080/ui-admin/?operation=get_content&id=/site/site.json
-            		
             
             $.post( "/ui-admin/?operation=save_content&id=" + Core9.state.editedfile, { content: content })
             .done(function( data ) {
-              console.log( "Data Loaded: " );
-              console.log(data);
             });
             
     	});

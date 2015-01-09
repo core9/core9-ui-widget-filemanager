@@ -12,18 +12,7 @@
 	$.contextmenu = function(obj) {
 	};
 
-//	$.contextmenu.parseQuery = function(variable){
-//
-//	    var query = window.location.search.substring(1);
-//	    var vars = query.split('&');
-//	    for (var i = 0; i < vars.length; i++) {
-//	        var pair = vars[i].split('=');
-//	        if (decodeURIComponent(pair[0]) == variable) {
-//	            return decodeURIComponent(pair[1]);
-//	        }
-//	    }
-//	    console.log('Query variable %s not found', variable);
-//	},
+
 
 	$.contextmenu.ifr = '<iframe id="ifr-contextmenu" src="' +store.get('page')+ '"></iframe>',
 	$.contextmenu.child = {},
@@ -36,12 +25,8 @@
 						showLoadingIndicator : false
 					});
 					$.contextmenu.child.receive(function(data, event) {
-						console.log('contextmenu recieving url data.. : ');
-						console.log(data);
 
 						if (data.destroy) {
-							console.log('contextmenu sending destroy message.. :');
-							//PubSub.publish('destroyUrlService', data.url);
 							$.contextmenu.destroy();
 						}
 					});
@@ -65,7 +50,6 @@
 				          );
 				      }
 				   var height = getDocHeight();
-					console.log("height : " + height);
 					$('#ifr-contextmenu').css('position', 'absolute');
 					$('#ifr-contextmenu').css('top', '20px');
 					$('#ifr-contextmenu').css('height', height + 'px');
@@ -77,18 +61,12 @@
 					log : false,
 					enablePublicMethods : true,
 					resizedCallback : function(messageData) {
-						console.log('context menu resize call back');
-						console.log(messageData);
 					},
 					messageCallback : function(messageData) {
-						console.log('context menu message call back');
-						console.log(messageData);
-
 						PubSub.publish('geteditor', messageData);
 
 					},
 					closedCallback : function(id) {
-						console.log(id);
 					}
 				});
 
@@ -112,11 +90,7 @@
 
 	    store.set('contextmenu-state', contextmenuState);
 
-		console.log('initializing contextmenu with state data : ');
-		console.log(contextmenuState);
 		var getUrlServiceResult = function( msg, data ){
-			console.log("getUrlServiceResult recieving data : ");
-		    console.log( msg, data );
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
 

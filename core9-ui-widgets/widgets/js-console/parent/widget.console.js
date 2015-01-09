@@ -24,17 +24,12 @@
 						loading : ''
 					});
 					$.console.child.receive(function(data, event) {
-						console.log('console recieving url data.. : ');
-						console.log(data);
 
 						if(data.geturlservice){
-							console.log('console requesting url data.. : ');
 							PubSub.publish('geturl', 'for console');
 						}
 
 						if (data.destroy) {
-							console.log('console sending destroy message.. :');
-							//PubSub.publish('destroyUrlService', data.url);
 							$.console.destroy();
 						}
 					});
@@ -90,11 +85,7 @@
 
 	    $.console.state = consoleState;
 
-		console.log('initializing console with state data : ');
-		console.log(consoleState);
 		var getUrlServiceResult = function( msg, data ){
-			console.log("console parent getUrlServiceResult recieving data : ");
-		    console.log( msg, data );
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
 

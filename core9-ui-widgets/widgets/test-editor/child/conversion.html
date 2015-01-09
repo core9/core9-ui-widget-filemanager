@@ -175,13 +175,9 @@ main {
 				var elem = e.target;
 				$('#main').empty();
 				$("#main").load(elem.href + " main", function() {
-					console.log("Load was performed.");
 					var script = elem.href.replace(".html", ".js");
-					console.log(script);
 					$.getScript(script).done(function(script, textStatus) {
-						console.log(textStatus);
 					}).fail(function(jqxhr, settings, exception) {
-						console.log("Triggered ajaxError handler.");
 					});
 
 				});

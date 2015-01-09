@@ -24,17 +24,12 @@
 						loading : ''
 					});
 					$.treemenu.child.receive(function(data, event) {
-						console.log('treemenu recieving url data.. : ');
-						console.log(data);
 
 						if(data.geturlservice){
-							console.log('treemenu requesting url data.. : ');
 							PubSub.publish('geturl', 'for treemenu');
 						}
 
 						if (data.destroy) {
-							console.log('treemenu sending destroy message.. :');
-							//PubSub.publish('destroyUrlService', data.url);
 							$.treemenu.destroy();
 						}
 					});
@@ -90,11 +85,7 @@
 
 	    $.treemenu.state = treemenuState;
 
-		console.log('initializing treemenu with state data : ');
-		console.log(treemenuState);
 		var getUrlServiceResult = function( msg, data ){
-			console.log("treemenu parent getUrlServiceResult recieving data : ");
-		    console.log( msg, data );
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
 

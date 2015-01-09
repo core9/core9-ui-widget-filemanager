@@ -24,16 +24,12 @@
 						loading : ''
 					});
 					$.conversion.child.receive(function(data, event) {
-						console.log('conversion recieving url data.. : ');
-						console.log(data);
 
 						if(data.geturlservice){
-							console.log('conversion requesting url data.. : ');
 							PubSub.publish('geturl', 'for conversion');
 						}
 
 						if (data.destroy) {
-							console.log('conversion sending destroy message.. :');
 							//PubSub.publish('destroyUrlService', data.url);
 							$.conversion.destroy();
 						}
@@ -63,7 +59,6 @@
 				   height = 200;
 				   var width = $('body').width();
 				   //width = width - 50;
-					console.log("height : " + height);
 					$('#ifr-conversion').css('position', 'fixed');
 					$('#ifr-conversion').css('top', '20px');
 					$('#ifr-conversion').css('height', height + 'px');
@@ -92,11 +87,7 @@
 
 	    $.conversion.state = conversionState;
 
-		console.log('initializing conversion with state data : ');
-		console.log(conversionState);
 		var getUrlServiceResult = function( msg, data ){
-			console.log("conversion parent getUrlServiceResult recieving data : ");
-		    console.log( msg, data );
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
 

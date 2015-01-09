@@ -40,8 +40,6 @@
 
 		var result = request();
 
-		console.log("dict : ");
-		console.log(dict);
 
 
 		for (var i = 0; i < dict.length; i++) {
@@ -49,9 +47,7 @@
 			var tst = dict[i];
 
 			if(tst.result != 0){
-				console.log("Test ok : ");
 
-				console.log(test);
 			}
 			
 		}

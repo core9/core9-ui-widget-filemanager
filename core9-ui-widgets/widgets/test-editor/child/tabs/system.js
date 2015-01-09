@@ -1,4 +1,3 @@
-console.log("exec loaded system script..");
 
 $('#backup-btn').on('click', function() {
 	var user = store.get('user')
