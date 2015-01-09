@@ -19,8 +19,6 @@ $LAB
 		.wait(
 				function() {
 
-					console.log(EditorConfig);
-
 					JSONEditor.defaults.theme = 'bootstrap3';
 					JSONEditor.defaults.iconlib = 'fontawesome4';
 					JSONEditor.plugins.sceditor = {
@@ -36,7 +34,6 @@ $LAB
 						log : false,
 						enablePublicMethods : true,
 						resizedCallback : function(messageData) {
-							console.log(messageData);
 						},
 						messageCallback : function(messageData) {
 							var data = JSON.parse(messageData.message);
@@ -66,7 +63,6 @@ $LAB
 							}
 						},
 						closedCallback : function(id) {
-							console.log(id);
 						}
 					});
 
@@ -89,7 +85,6 @@ $LAB
 									"type" : data[4],
 									"template" : tpl
 								}
-								console.log(meta);
 
 								var fullData = {
 									"meta" : meta
@@ -107,7 +102,6 @@ $LAB
 													if (error) {
 														return;
 													}
-													console.log(text);
 													location = location.href
 															.split('#')[0];
 												});

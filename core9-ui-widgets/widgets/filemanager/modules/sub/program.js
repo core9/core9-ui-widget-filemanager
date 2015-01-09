@@ -7,4 +7,3 @@ module.exports.two = two.text;
 module.exports.three = three.text;
 
 
-console.log(module.exports.three);

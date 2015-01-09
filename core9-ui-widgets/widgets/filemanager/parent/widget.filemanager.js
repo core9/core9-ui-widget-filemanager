@@ -45,7 +45,6 @@
 					}
 
 					var height = getDocHeight();
-					console.log("height : " + height);
 					$('#ifr').css('position', 'absolute');
 					$('#ifr').css('top', '0px');
 					$('#ifr').css('height', height + 'px');
@@ -67,8 +66,6 @@
 
 					$.filemanager.child.receive(function(data, event) {
 
-						console.log('file manager recieving data.. : ');
-						console.log(data);
 
 						if (data.url) {
 							PubSub.publish('destroyUrlService', data.url);

@@ -96,12 +96,10 @@ var Wizard = {
 	},
 
 	activateWidget : function(widget, widgets) {
-		console.log('activating : ' + widget);
 		Wizard.activatedWidget = widget;
 		var stepFile = widgets[widget].steps;
 		stepFile = Wizard.config.baseUrl + stepFile;
 		if (!Wizard.endsWith(stepFile, ".json")) {
-			console.log("Oops wrong file : " + stepFile);
 			return;
 		}
 
@@ -157,17 +155,13 @@ var Wizard = {
 	selectChoosenBlock : function(state){
 	//"#reset-button"
 	    document.getElementById("reset-button").click();
-		console.log("init state : ");
-		console.log(state);
 		document.getElementById("block-action").innerHTML=JSON.stringify(state);
 
 		document.getElementById("data-list").value = state.type;
 
 		document.getElementById("choose-button").click();
 		setTimeout(function(){
-			console.log('clicking li');
 			var lis = document.querySelectorAll('li > a');
-			console.log(lis);
 			if(typeof lis[1] !== 'undefined'){
 				lis[1].click();
 			}
@@ -236,11 +230,6 @@ var Wizard = {
 					// console
 
 					editor.on('change',function() {
-						console.log(' editor changed ..');
-
-
-
-						console.log(editor.getValue());
 					});
 
 
@@ -255,12 +244,7 @@ var Wizard = {
 					document.getElementById('submit-' + step).addEventListener(
 							'click', function(event) {
 								event.stopPropagation();
-								console.log(editor.validate());
 								Wizard.goToNextStep(event);
-
-								console.log('sending to swagger api');
-								console.log(editor.getValue());
-
 								var data = Wizard.getPostToApiData(editor);
 								Wizard.postToApi(data)
 
@@ -279,7 +263,6 @@ var Wizard = {
 			"template" : Wizard.widgetJson[Wizard.activatedWidget].template,
 			"contentid" : Wizard.state.contentid
 		}
-		console.log(meta);
 
 		var fullData = {
 			"meta" : meta,
@@ -310,8 +293,6 @@ var Wizard = {
 								//alert('Error ' + xhr.status);
 								return;
 							}
-							console.log(text);
-							//location.reload();
 							
 							Core9.parent.send({
 						destroy : true// ,
@@ -323,7 +304,6 @@ var Wizard = {
 	run : function(step, config, callback) {
 		var parser = document.createElement('a');
 		parser.href = Wizard.config.pageUrl;
-		console.log(parser);
 
 		var dataRequest = Wizard.config.baseUrl;
 		dataRequest += 'site/data.json?page=';
@@ -335,9 +315,7 @@ var Wizard = {
 
 
 		if(typeof Wizard.state.contentid !== 'undefined' && Wizard.state.contentid.length > 2){
-			console.log("requesting : " + Wizard.state.contentid);
 			dataRequest = "/dynamic-blocks/"+Wizard.activatedWidget+"/data/"+Wizard.activatedWidget+".json?id=" + Wizard.state.contentid;
-			console.log("request url : " + dataRequest);
 		}
 
 		promise.get(dataRequest).then(function(error, text, xhr) {
@@ -346,7 +324,6 @@ var Wizard = {
 				// return;
 				dataRequest = "";
 			} else {
-				console.log("result block data json : " + text);
 				var json = JSON.parse(text);
 			}
 			Wizard.getData(step, dataRequest, callback);

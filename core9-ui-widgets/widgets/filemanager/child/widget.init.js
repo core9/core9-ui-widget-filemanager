@@ -16,15 +16,10 @@ $LAB
 	Core9.parent = parent;
 
 	parent.receive(function(data, event) {
-		console.log("child recieved :");
-		console.log(data);
 		if(data.action == 'init'){
-			console.log('activating filemanager');
-			console.log($('.iframe-btn'));
 			$('.iframe-btn').trigger("click");
 			$('#ifr').show();
 			if($('#ifr').size() == 0){
-				console.log('trying a second time..');
 				$('.iframe-btn').trigger("click");
 				$('#ifr').show();
 			}

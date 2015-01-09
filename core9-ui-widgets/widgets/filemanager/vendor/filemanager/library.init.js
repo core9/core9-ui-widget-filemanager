@@ -32,8 +32,7 @@ function OnMessage(e) {
 			var url = event.data.url;
 
 			$('#' + fieldID).val(url).trigger('change');
-			//$.fancybox.close();
-			console.log(Core9);
+
 
 			Core9.parent.send({
 				url : url,
