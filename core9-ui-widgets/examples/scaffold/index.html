@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../lib/pmrpc/pmrpc.js"></script>
+  </head>
+  <body>
+    <iframe id="ifr" name="ifr" src="widget.html" width="0" height="0" style="display:none;border: 0px solid transparent;"></iframe>
+    <script>
+      // call the exposed procedure
+      pmrpc.call( {
+        destination : window.frames["ifr"],
+        publicProcedureName : "HelloPMRPC",
+        params : ["Hello World!"] } );
+    </script>
+
+
+
+
+    <script>
+
+    var w = new Widget();
+
+    </script>
+
+
+
+  </body>
+</html>

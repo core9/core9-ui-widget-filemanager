@@ -1,0 +1,1 @@
+module.exports.text = 'modules/sub/a.js';

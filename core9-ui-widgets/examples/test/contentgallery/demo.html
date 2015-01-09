@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+.container {
+	width: 800px;
+	height: 400px;
+	padding: 20px;
+	border: 1px solid gray;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background: #ccc;
+}
+
+.slider_wrapper {
+	overflow: hidden;
+	position: relative;
+	height: 280px;
+	top: auto;
+}
+
+.image_slider {
+	position: relative;
+	height: auto;
+	list-style: none;
+	overflow: hidden;
+	float: left;
+	/*Chrom default padding for ul is 40px */
+	padding: 0px;
+	margin: 0px;
+}
+
+.image_slider li {
+	position: relative;
+	float: left;
+}
+
+.nvgt {
+	position: absolute;
+	top: 120px;
+	height: 50px;
+	width: 30px;
+	opacity: 0.6;
+}
+
+.nvgt:hover {
+	opacity: 0.9;
+}
+
+#prev {
+	background: #000
+		url('https://dl.dropboxusercontent.com/u/65639888/image/prev.png')
+		no-repeat center;
+	left: 0px;
+}
+
+#next {
+	background: #000
+		url('https://dl.dropboxusercontent.com/u/65639888/image/next.png')
+		no-repeat center;
+	right: 0px;
+}
+
+img {
+	max-width: 200px;
+	min-height: 300px;
+	padding: 5px;
+}
+
+.container>ul>li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 20px;
+	color: #fff;
+}
+</style>
+
+<script>
+	//1. set ul width
+	//2. image when click prev/next button
+	var ul;
+	var li_items;
+	var imageNumber;
+	var imageWidth;
+	var prev, next;
+	var currentPostion = 0;
+	var currentImage = 0;
+
+	function init() {
+		ul = document.getElementById('image_slider_1');
+		li_items = ul.children;
+		imageNumber = li_items.length;
+		imageWidth = li_items[0].children[0].clientWidth;
+		ul.style.width = parseInt(imageWidth * imageNumber) + 'px';
+		prev = document.getElementById("prev");
+		next = document.getElementById("next");
+		//.onclike = slide(-1) will be fired when onload;
+		/*
+		prev.onclick = function(){slide(-1);};
+		next.onclick = function(){slide(1);};*/
+		prev.onclick = function() {
+			onClickPrev();
+		};
+		next.onclick = function() {
+			onClickNext();
+		};
+	}
+
+	function animate(opts) {
+		var start = new Date;
+		var id = setInterval(function() {
+			var timePassed = new Date - start;
+			var progress = timePassed / opts.duration;
+			if (progress > 1) {
+				progress = 1;
+			}
+			var delta = opts.delta(progress);
+			opts.step(delta);
+			if (progress == 1) {
+				clearInterval(id);
+				opts.callback();
+			}
+		}, opts.delay || 17);
+		//return id;
+	}
+
+	function slideTo(imageToGo) {
+		var direction;
+		var numOfImageToGo = Math.abs(imageToGo - currentImage);
+		// slide toward left
+
+		direction = currentImage > imageToGo ? 1 : -1;
+		currentPostion = -1 * currentImage * imageWidth;
+		var opts = {
+			duration : 700,
+			delta : function(p) {
+				return p;
+			},
+			step : function(delta) {
+				ul.style.left = parseInt(currentPostion + direction * delta
+						* imageWidth * numOfImageToGo)
+						+ 'px';
+			},
+			callback : function() {
+				currentImage = imageToGo;
+			}
+		};
+		animate(opts);
+	}
+
+	function onClickPrev() {
+		if (currentImage == 0) {
+			slideTo(imageNumber - 1);
+		} else {
+			slideTo(currentImage - 1);
+		}
+	}
+
+	function onClickNext() {
+		if (currentImage == imageNumber - 1) {
+			slideTo(0);
+		} else {
+			slideTo(currentImage + 1);
+		}
+	}
+
+	window.onload = init;
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<ul>
+			<li>item</li>
+			<li>item</li>
+			<li>item</li>
+			<li>item</li>
+			<li>item</li>
+		</ul>
+		<div class="slider_wrapper">
+			<ul class="image_slider" id="image_slider_1">
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+			</ul>
+			<ul class="image_slider" id="image_slider_2">
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+			</ul>
+			<ul class="image_slider" id="image_slider_3">
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+				<li><img alt="" src="https://placeimg.com/200/300/any"></li>
+			</ul>
+			<span class="nvgt" id="prev"></span> <span class="nvgt" id="next"></span>
+		</div>
+	</div>
+</body>
