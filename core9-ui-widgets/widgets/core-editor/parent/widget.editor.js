@@ -69,7 +69,7 @@
 
 	$.editor.destroy = function(){
 				PubSub.publish('reloadContextMenu', 'reload context menu');
-				$('#ifr-editor').hide();
+				$('#ifr-editor').remove();//.hide();
 				
 	},
 	$.editor.init = function(data) {
