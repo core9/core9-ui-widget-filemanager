@@ -44,11 +44,13 @@ $LAB
 
 		$('#open-treemenu').on('click', function(){
 			var ifrTreeMenu = $('#ifr-treemenu');
+			var ifrConversion = $('#ifr-conversion');
+			
 			if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'block'){
 				ifrTreeMenu.hide();
 			}else if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'none'){
 				var top = 0;
-				if($('#ifr-conversion').size() == 1){
+				if($('#ifr-conversion').size() == 1 && ifrConversion.css('display') == 'block'){
 					top = 235;
 				}
 			
