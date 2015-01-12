@@ -2,26 +2,21 @@
 <html>
 <head>
 
-
 <script
 	src="../vendor/codemirror-ui/lib/CodeMirror-2.3/lib/codemirror.js"
 	type="text/javascript"></script>
 <script
 	src="../vendor/codemirror-ui/lib/CodeMirror-2.3/lib/util/searchcursor.js"
 	type="text/javascript"></script>
-	
-	
 <link rel="stylesheet"
 	href="../vendor/codemirror-ui/lib/CodeMirror-2.3/lib/codemirror.css">
-	
-	
 <link rel="stylesheet"
 	href="../vendor/codemirror-ui/css/codemirror-ui.css" type="text/css"
 	media="screen" />
 <script
 	src="../vendor/codemirror-ui/lib/CodeMirror-2.3/mode/javascript/javascript.js"></script>
-<!-- <link rel="stylesheet"
-	href="../vendor/codemirror-ui/lib/CodeMirror-2.3/mode/javascript/javascript.css"> -->
+<link rel="stylesheet"
+	href="../vendor/codemirror-ui/lib/CodeMirror-2.3/mode/javascript/javascript.css">
 <script src="../vendor/codemirror-ui/js/codemirror-ui.js"
 	type="text/javascript"></script>
 
@@ -33,33 +28,34 @@
 
 body {
 
-	background-color: #073163;
+	background-color: #ccc;
 	padding: 30px;
 }
 
 #console {
+	background-color: #fff;
 	position: relative;
-	max-height: 170px;
-	overflow: scroll;
+	margin: auto 0;
+	height: 150px;
+
 }
 </style>
 
 <!-- Create a simple CodeMirror instance -->
-<!-- <link rel="stylesheet" href="lib/codemirror.css">
-<script src="lib/codemirror.js"></script> -->
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="lib/codemirror.js"></script>
 <script>
-/* 	var editor = CodeMirror.fromTextArea(myTextarea, {
-		lineNumbers : true
-	}); */
+  var editor = CodeMirror.fromTextArea(myTextarea, {
+    lineNumbers: true
+  });
 </script>
-
-
 
 </head>
 <body>
 
 
 	<div id="console">
+
 
 		<textarea id="code" cols="120" rows="30"></textarea>
 
@@ -84,6 +80,7 @@ body {
 					mode : "javascript"
 				});
 	</script>
+
 
 </body>
 </html>

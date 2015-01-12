@@ -47,7 +47,16 @@ $LAB
 			if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'block'){
 				ifrTreeMenu.hide();
 			}else if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'none'){
+				var top = 0;
+				if($('#ifr-conversion').size() == 1){
+					top = 235;
+				}
+			
+			
 				ifrTreeMenu.show();
+				ifrTreeMenu.css('top',top + 'px');
+				
+				
 			}else{
 				widget.treemenu.init({'size':'full'});
 			}
@@ -61,16 +70,23 @@ $LAB
 	window.widget.conversion = JS.require('widget.conversion', function(Hash, Observable) {
 		$('#open-conversion').on('click', function(){
 			var ifrContextMenu = $('#ifr-contextmenu');
+			var ifrTreeMenu = $('#ifr-treemenu');
+			
 			var ifrConversion = $('#ifr-conversion');
 			if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'block'){
 				ifrConversion.hide();
 				ifrContextMenu.css('top', '20px');
+				ifrTreeMenu.css('top', '20px');
+				
+				
 			}else if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'none'){
 				ifrConversion.show();
 				ifrContextMenu.css('top', '235px');
+				ifrTreeMenu.css('top', '235px');
 			}else{
 				widget.conversion.init({'size':'full'});
 				ifrContextMenu.css('top', '235px');
+				ifrTreeMenu.css('top', '235px');
 			}
 
 		});
