@@ -15,9 +15,9 @@ $LAB
 .script("widgets/test-editor/parent/packages.conversion.js")
 .script("widgets/js-console/parent/packages.console.js")
 .script("widgets/tree-menu/parent/packages.treemenu.js")
+.script("widgets/wysiwyg/parent/packages.wysiwyg.js")
 .wait(function(){
 	window.widget = jQuery;
-
 
 	// start context
 	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
@@ -113,6 +113,17 @@ $LAB
 	});
 	// end js-console
 
+	
+	// start wysiwyg service
+	window.widget.wysiwyg = JS.require('widget.wysiwyg', function(Hash, Observable) {
+
+		var getWysiwygService = function( msg, data ){
+		    widget.wysiwyg.init({'size':'full'});
+		};
+		var tokenGetWysiwygService = PubSub.subscribe( 'getwysiwyg', getWysiwygService );
+	});
+	// end wysiwyg service
+	
 
 	// start file service
 	
@@ -142,6 +153,8 @@ $LAB
 	// end file service
 	// start editor service
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
+	
+		
 		var destroyEditorService = function( msg, data ){
 		    var editorState = store.get('editor-state');
 		    editorState['url'] = data;

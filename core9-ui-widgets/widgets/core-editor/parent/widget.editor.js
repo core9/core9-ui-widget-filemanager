@@ -25,6 +25,10 @@
 					});
 					$.editor.child.receive(function(data, event) {
 
+						if(data.getwysiwyg){
+							PubSub.publish('getwysiwyg', "");
+						}
+						
 						if(data.geturlservice){
 							PubSub.publish('geturl', 'for editor');
 						}
