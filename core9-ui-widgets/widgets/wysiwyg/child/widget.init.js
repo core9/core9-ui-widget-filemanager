@@ -19,6 +19,10 @@ $LAB
 	Core9.parent = parent;
 	
 	Core9.save = function(data){
+		
+		console.log("saving data ");
+	
+	
 		Core9.parent.send({
 			"content" : data
 		});

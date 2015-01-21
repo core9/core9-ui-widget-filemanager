@@ -69,8 +69,8 @@
                 	
                 	// saved data
                 	if(data.content){
-                		
-                		PubSub.publish('wysiwygdataService', data.content);
+                		console.log("sending wysiwig data pubsub style");
+                		PubSub.publish('destroyWysiwygService', data.content);
                 	}
                 	
                 	if(data.getwysiwyg){

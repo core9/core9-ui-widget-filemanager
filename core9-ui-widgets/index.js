@@ -116,6 +116,20 @@ $LAB
 	
 	// start wysiwyg service
 	window.widget.wysiwyg = JS.require('widget.wysiwyg', function(Hash, Observable) {
+		
+	
+		var destroyWysiwygService = function( msg, data ){
+			
+			console.log("init editor with wysywig data");
+		
+		    var editorState = store.get('editor-state');
+		    editorState['content'] = data;
+		    widget.editor.init(editorState);
+		    //PubSub.publish('getUrlServiceResult', data);
+		    widget.wysiwyg.destroy();
+		};
+		var tokenDestroyWysiwygService = PubSub.subscribe( 'destroyWysiwygService', destroyWysiwygService );
+	
 
 		var getWysiwygService = function( msg, data ){
 		    widget.wysiwyg.init({'size':'full'});

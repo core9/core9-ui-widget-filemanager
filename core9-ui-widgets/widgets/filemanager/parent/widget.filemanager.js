@@ -47,6 +47,7 @@
 					var height = getDocHeight();
 					$('#ifr').css('position', 'absolute');
 					$('#ifr').css('top', '0px');
+					$('#ifr').css('z-index', '9999');
 					$('#ifr').css('height', height + 'px');
 					$('#ifr').css('width', $('body').width() + 'px');
 					$('#ifr').show();

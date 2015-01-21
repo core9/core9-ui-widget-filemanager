@@ -88,11 +88,11 @@
 	    //store.set('editor-state', editorState);
 
 	    $.editor.state = editorState;
-
+/*
 		var getUrlServiceResult = function( msg, data ){
 		};
 		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
-
+*/
 		if (data.size == 'full') {
 			$.editor._show();
 		}
