@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://draggabilly.desandro.com/draggabilly.pkgd.min.js"></script>
 <style>
 body {
 	background-color: transparent !important;
@@ -66,6 +67,12 @@ background-color: transparent !important;
   <script src="widget.init.js"></script>
 <!--   <script src="../vendor/editor/library.load.js"></script> -->
 
+<script>
+var elem = document.querySelector('.modal-content');
+var draggie = new Draggabilly( elem, {
+  // options...
+});
+</script>
 
 </body>
 </html>
