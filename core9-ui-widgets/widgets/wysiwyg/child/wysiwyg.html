@@ -28,10 +28,9 @@ tinymce.init({
 	init_instance_callback : function(editor) {
         console.log("Editor: " + editor.id + " is now initialized.");
         console.log(Core9.content);
-        editor.setContent("hiiii");
         
         setTimeout(function(){ 
-        	editor.setContent("hiiii ho");
+
         	
         	editor.setContent(Core9.content.payload);
         	console.log(Core9.content);
@@ -63,7 +62,7 @@ tinymce.init({
 
 </script>
 <div id="wrapper">
-    <textarea id="tiny" name="content" style="width: 100%;"></textarea>
+    <textarea name="content" style="width: 100%;"></textarea>
 </div>
 </body>
 </html>
