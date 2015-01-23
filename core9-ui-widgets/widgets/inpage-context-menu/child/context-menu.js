@@ -145,10 +145,10 @@ Core9.menu = {
 		showMenu :	function (x, y) {
 			Core9.menu.removeContextMenu();
 			var menuObj = Core9.menu.t(Core9.menu.menu(), {
-				insertBefore : "insert before",
-				insertAfter : "insert after",
+				insertBefore : "Insert Before",
+				insertAfter : "Insert After",
 				switchblock : "verwissel",
-				removeblock : "verwijder",
+				removeblock : "Delete",
 				//testdata : "A/B test",
 				x : x,
 				y : y
