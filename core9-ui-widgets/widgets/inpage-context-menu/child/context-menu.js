@@ -16,13 +16,11 @@ Core9.menu = {
 		menu : function(){
 
 			var menu = "";
-			menu += '<ul id="context-menu" style="border:1px solid #000;position:absolute; top:{y}px; left:{x}px;background-color:#fff;width: 70px;color:#fff;z-index: 9999999;list-style: none;padding: 20px;">';
-			menu += '<li><button style="border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.editBlock()">Edit</button></li>';
-			menu += '<li><button style="border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.insertBeforeBlock()">{insertBefore}</button></li>';
-			menu += '<li><button style="border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.insertAfterBlock()">{insertAfter}</button></li>';
-			menu += '<!--<li><button style="border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="if (\'parentIFrame\' in window) window.parentIFrame.sendMessage(\'edit-block\');return false;">{switchblock}</button></li>-->';
-			menu += '<li><button style="border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.deleteBlock()">{removeblock}</button></li>';
-			//menu += '<li><button style="border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.testData()">{testdata}</button></li>';
+			menu += '<ul id="context-menu" style="height: 85px;border:1px solid #000;position:absolute; top:{y}px; left:{x}px;background-color:#fff;width: 70px;color:#fff;z-index: 9999999;list-style: none;padding: 20px;">';
+			menu += '<li><button style="padding: 0px; border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.editBlock()">Edit</button></li>';
+			menu += '<li><button style="padding: 0px; border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.insertBeforeBlock()">{insertBefore}</button></li>';
+			menu += '<li><button style="padding: 0px; border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.insertAfterBlock()">{insertAfter}</button></li>';
+			menu += '<li><button style="padding: 0px; border: 0 rgba(0,0,0,0); background-color: transparent; width: 125px; text-decoration: none; color:#000; text-align:left;"  onclick="Core9.menu.deleteBlock()">{removeblock}</button></li>';
 			menu += '</ul>';
 			return menu;
 		},
