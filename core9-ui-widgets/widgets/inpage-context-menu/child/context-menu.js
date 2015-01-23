@@ -176,6 +176,13 @@ Core9.menu = {
 			   }
 			}
 			Core9.menu.showMenu(event.clientX, event.clientY);
+			console.log("Menu position : x = "+ event.clientX + " y = "+event.clientY);
+			var jsonData = {
+			        "action": "setposition",
+					"x": event.clientX,
+					"y" : event.clientY
+			}
+			if ('parentIFrame' in window) window.parentIFrame.sendMessage(JSON.stringify(jsonData));return false;
 		}
 }
 

@@ -32,6 +32,7 @@ $LAB
 
 		var reloadContextMenu = function( msg, data ){
 			document.getElementById('ifr-contextmenu').contentWindow.location.reload();
+			PubSub.publish( 'initLastPosition' );
 		};
 		var tokenReloadContextMenu = PubSub.subscribe( 'reloadContextMenu', reloadContextMenu );
 
@@ -178,14 +179,41 @@ $LAB
 		};
 		var tokenDestroyEditorService = PubSub.subscribe( 'destroyEditorService', destroyEditorService );
 		var getEditorService = function( msg, data ){
+			
+			if(data.message.indexOf('setposition') != -1){
+				var jsonData = JSON.parse(data.message);
+				store.set('positionX',jsonData.x);
+				store.set('positionY',jsonData.y);
+				return;
+			}
+		
 		    var editorState = store.get('editor-state');
 		    data.iframe = "";
 		    editorState['contextmenu'] = data;
 		    widget.editor.init(editorState);
+  	       var positionY = store.get('positionY');
+	       console.log('positionY : ' + positionY);
+		    
+		    $('html,body').scrollTop(positionY - 300);
+		    
+		    store.set('lastPosition', positionY - 300);
+		    
 		};
 		var tokenGetEditorService = PubSub.subscribe( 'geteditor', getEditorService );
 	});
 	// end editor service
 
 
+	
+		var initLastPosition = function( msg, data ){
+		 setTimeout(function(){ 
+		 	console.log('init last position : ' + store.get('lastPosition'));
+		 	$('html,body').scrollTop(store.get('lastPosition'));
+		 }, 3000);
+		};
+		var tokeninitLastPosition = PubSub.subscribe( 'initLastPosition', initLastPosition );
+
+		    
+
+		    
 });

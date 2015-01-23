@@ -387,7 +387,8 @@ $LAB.setOptions({
 		baseUrl + "js/iframeResizer.min.js").wait().script(
 		baseUrl + "js/wizard-engine.js").wait().script(
 		baseUrl + "js/editor.load.css.js").wait().script(
-		"../../../lib/seamless/build/seamless.child.js").wait().wait(
+		"../../../lib/storejs/store.min.js").wait().script(
+		"../../../lib/seamless/build/seamless.child.js").wait(
 		function() {
 			// connect stuff
 
@@ -411,6 +412,11 @@ $LAB.setOptions({
 					});
 
 					var data = JSON.parse(messageData.message);
+					
+					if (data.action == 'setposition') {
+						return;
+					}					
+
 					if (data.action == 'edit-block') {
 						window.location = "#state=edit-block-" + data.block
 								+ "-type-" + data.type;

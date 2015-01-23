@@ -58,9 +58,14 @@
 				              Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
 				          );
 				      }
+					
+				       var positionY = store.get('positionY');
+				       console.log('positionY : ' + positionY);
+				    
 				   var height = getDocHeight();
+				   console.log("height : " + height);
 					$('#ifr-editor').css('position', 'absolute');
-					$('#ifr-editor').css('top', '0px');
+					$('#ifr-editor').css('top', positionY + 'px');
 					$('#ifr-editor').css('height', height + 'px');
 					$('#ifr-editor').css('width', $('body').width() + 'px');
 					$('#ifr-editor').css('z-index','9999');
