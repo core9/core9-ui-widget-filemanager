@@ -28,11 +28,26 @@ $LAB
 		});
 	}
 	
-/*	Core9.parent.receive(function(data, event) {
+	Core9.hideWysiwyg = function() {
+		//$(".hide").hide();
+		console.log("destroy");
+		Core9.parent.send({
+			"destroy" : true
+		});
+	}
+
+
+	Core9.parent.receive(function(data, event) {
 		
-		console.log("parent is recieving :: ");
+		console.log("!!parent is recieving :: ");
 		console.log(data);
-	});*/
+		console.log("setting tinymc data");
+		
+		Core9.content = data;
+		
+		
+		
+	});
 /*
 	$(function($) {
 

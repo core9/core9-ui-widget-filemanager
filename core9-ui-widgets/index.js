@@ -132,7 +132,7 @@ $LAB
 	
 
 		var getWysiwygService = function( msg, data ){
-		    widget.wysiwyg.init({'size':'full'});
+		    widget.wysiwyg.init({'size':'full','data':data});
 		};
 		var tokenGetWysiwygService = PubSub.subscribe( 'getwysiwyg', getWysiwygService );
 	});
@@ -142,7 +142,9 @@ $LAB
 	// start file service
 	
 	//FIXME page needs to be handled
-	store.set('page','/variations/p/scraper/nl');
+	//store.set('page','/variations/p/scraper/nl');
+	store.set('page','/jaarplan');
+	
 	store.set('editor-state', { page: store.get('page'), action: 'edit', 'size':'full' });
 	
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {

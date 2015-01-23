@@ -11,15 +11,17 @@
     };
 
     $.wysiwyg = function(obj) {};
+    $.wysiwyg.content = {};
 
     $.wysiwyg.child = {},
 
         $.wysiwyg.destroy = function() {
-            $('#ifr-wysiwyg').hide();
+            $('#ifr-wysiwyg').remove();
         },
 
         $.wysiwyg.init = function(data) {
             if (data.size == 'full') {
+                $.wysiwyg.content = data.data;
                 $.wysiwyg._show();
             }
         };
@@ -28,7 +30,8 @@
             $.wysiwyg._appendIframe();
             setTimeout(function() {
                 $.wysiwyg.child.send({
-                    action: 'init'
+                    action: 'init',
+                    payload : $.wysiwyg.content
                 });
             }, 1000);
             setTimeout(function() {
@@ -65,7 +68,12 @@
                 });
 
                 $.wysiwyg.child.receive(function(data, event) {
-
+                	console.log("recieving data : ");
+                	console.log(data);
+                	if(data.destroy){
+                		$('#ifr-wysiwyg').remove();
+                		$.wysiwyg.destroy();
+                	}
                 	
                 	// saved data
                 	if(data.content){
@@ -74,13 +82,13 @@
                 	}
                 	
                 	if(data.getwysiwyg){
-                		PubSub.publish('getwysiwyg', "");
+                		PubSub.publish('getwysiwyg', "test content");
                 	}
                 	
-                    if (data.url) {
+/*                    if (data.url) {
                         PubSub.publish('destroyUrlService', data.url);
                     }
-
+*/
                 });
             }
         },

@@ -81,17 +81,17 @@ a.sceditor-button {
 
 
 .form-group > input {
-	padding:0px !important;
+	padding: 0px !important;
   	height: 27px !important;
-  float: right  !important;
-  	width:450px !important;
-  padding-left:10px !important;
+  	float: right  !important;
+  	width: 440px !important;
+  	padding-left: 10px !important;
 }
 
 .form-group {
-	margin-bottom: 0px;
-  _max-height: 10px;
-  _width: 560px;
+	margin-bottom: 10px;
+  	_max-height: 10px;
+  	_width: 560px;
 
 }
 

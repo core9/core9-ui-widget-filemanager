@@ -26,7 +26,7 @@
 					$.editor.child.receive(function(data, event) {
 
 						if(data.getwysiwyg){
-							PubSub.publish('getwysiwyg', "");
+							PubSub.publish('getwysiwyg', data.payload);
 						}
 						
 						if(data.geturlservice){
