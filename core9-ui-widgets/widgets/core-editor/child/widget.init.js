@@ -32,6 +32,34 @@ $LAB
 				allowStyleInjection : true
 			});
 
+			
+						var elem = document.querySelector('.modal-content');
+					   var draggie = new Draggabilly( elem, {
+						   // options...
+					   });
+					   draggie.disable();
+
+		
+			jQuery('#drag').on('click', function(){
+					console.log('click drag');
+					
+					 
+					
+					if ($('.draggable')[0]){
+						$('.modal-content').removeClass('draggable');
+
+					    draggie.disable();
+					   
+					} else {
+					   $('.modal-content').addClass('draggable');
+					   draggie.enable();
+					}
+										
+					
+					
+
+			});
+			
 			Core9.parent = parent;
 			Core9.editor = {};
 			parent.receive(function(data, event) {

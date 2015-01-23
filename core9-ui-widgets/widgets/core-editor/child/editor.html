@@ -16,7 +16,7 @@ width: 100%;
   
 }
 .modal-backdrop {
-background-color: transparent !important;
+	background-color: transparent !important;
 }
 </style>
 </head>
@@ -37,7 +37,8 @@ background-color: transparent !important;
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
-          Blok bewerken <div id="block-action" style="float:right;">action : </div>
+          Blok bewerken <div id="block-action" style="float:right;visibility:hidden;">action : </div>
+          <button id="drag">drag</button>
         </div>
         <div class="modal-body">
           <div id="tab-container">
@@ -68,10 +69,9 @@ background-color: transparent !important;
 <!--   <script src="../vendor/editor/library.load.js"></script> -->
 
 <script>
-var elem = document.querySelector('.modal-content');
-var draggie = new Draggabilly( elem, {
-  // options...
-});
+
+
+
 </script>
 
 </body>

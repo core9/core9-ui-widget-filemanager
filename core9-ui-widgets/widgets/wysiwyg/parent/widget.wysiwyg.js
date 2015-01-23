@@ -46,9 +46,10 @@
                         doc.documentElement.clientHeight));
                 }
 
+                var top = store.get('lastPosition');
                 var height = getDocHeight();
                 $('#ifr-wysiwyg').css('position', 'absolute');
-                $('#ifr-wysiwyg').css('top', '0px');
+                $('#ifr-wysiwyg').css('top', top + 'px');
                 $('#ifr-wysiwyg').css('height', height + 'px');
                 $('#ifr-wysiwyg').css('width', $('body').width() + 'px');
                 $('#ifr-wysiwyg').css('z-index', '9999');
