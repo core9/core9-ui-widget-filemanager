@@ -28,7 +28,7 @@
 						if(data.getwysiwyg){
 							PubSub.publish('getwysiwyg', data.payload);
 						}
-						
+
 						if(data.geturlservice){
 							PubSub.publish('geturl', 'for editor');
 						}
@@ -58,14 +58,15 @@
 				              Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
 				          );
 				      }
-					
+
 				       var positionY = store.get('positionY');
 				       console.log('positionY : ' + positionY);
-				    
+
 				   var height = getDocHeight();
 				   console.log("height : " + height);
 					$('#ifr-editor').css('position', 'absolute');
-					$('#ifr-editor').css('top', positionY + 'px');
+					//$('#ifr-editor').css('top', positionY + 'px');
+					$('#ifr-editor').css('top', '0px');
 					$('#ifr-editor').css('height', height + 'px');
 					$('#ifr-editor').css('width', $('body').width() + 'px');
 					$('#ifr-editor').css('z-index','9999');
@@ -79,25 +80,15 @@
 	$.editor.destroy = function(){
 				PubSub.publish('reloadContextMenu', 'reload context menu');
 				$('#ifr-editor').remove();//.hide();
-				
+
 	},
 	$.editor.init = function(data) {
+		var positionY = store.get('positionY');
+	       console.log('positionY : ' + positionY);
+		data['positionY'] = positionY;
 
-	    var editorState = data;
-	    if(isNaN(editorState['inc'])){
-	    	editorState['inc'] = 1;
-	    }else{
-	    	editorState['inc'] = editorState['inc'] + 1;
-	    }
+	    $.editor.state = data;
 
-	    //store.set('editor-state', editorState);
-
-	    $.editor.state = editorState;
-/*
-		var getUrlServiceResult = function( msg, data ){
-		};
-		var getUrlServiceResultToken = PubSub.subscribe( 'getUrlServiceResult', getUrlServiceResult );
-*/
 		if (data.size == 'full') {
 			$.editor._show();
 		}

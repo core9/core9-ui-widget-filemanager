@@ -25,6 +25,7 @@ $LAB
 		.script(baseUrl + "vendor/editor/wizard/editor.load.css.js").wait()
 		.script("../../../lib/seamless/build/seamless.child.js").wait()
 		.wait(function() {
+
 			var state = {};
 			var parent = $.seamless.connect({
 				url : 'index.html',
@@ -32,37 +33,27 @@ $LAB
 				allowStyleInjection : true
 			});
 
-			
-						var elem = document.querySelector('.modal-content');
-					   var draggie = new Draggabilly( elem, {
-						   // options...
-					   });
-					   draggie.disable();
 
-		
+			var elem = document.querySelector('.modal-content');
+			var draggie = new Draggabilly( elem, {});
+  		    draggie.disable();
+
 			jQuery('#drag').on('click', function(){
-					console.log('click drag');
-					
-					 
-					
 					if ($('.draggable')[0]){
 						$('.modal-content').removeClass('draggable');
-
 					    draggie.disable();
-					   
+					    $('#drag').html('edit');
 					} else {
 					   $('.modal-content').addClass('draggable');
 					   draggie.enable();
+					    $('#drag').html('drag');
 					}
-										
-					
-					
-
 			});
-			
+
 			Core9.parent = parent;
 			Core9.editor = {};
 			parent.receive(function(data, event) {
+
 				 $("body").click(function(e) {
 				        if (e.target.id == "wizard-wrapper" || $(e.target).parents("#wizard-wrapper").size()) {
 				        } else {
@@ -137,7 +128,7 @@ $LAB
 														return;
 													}
 													location.reload();
-													
+
 												});
 							});
 
@@ -146,6 +137,11 @@ $LAB
 					jQuery('#modal').toggle();
 					Wizard.init(EditorConfig);
 				}
+
+				setTimeout(function(){
+					console.log(Core9.editor.state.positionY);
+					$('.modal-content').css('top',Core9.editor.state.positionY + 'px');
+				}, 1500);
 			});
 
 			JSONEditor.defaults.theme = 'bootstrap3';
