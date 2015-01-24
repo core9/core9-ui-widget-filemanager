@@ -1,14 +1,14 @@
 
-$('#backup-btn').on('click', function() {
+var auth = function(callback){
 	var user = store.get('user')
 	if (typeof user === "undefined") {
 
-		var person = prompt("Please enter your name", "Harry Potter");
+		var person = prompt("Please enter your name", "");
 		if (person != null) {
 			store.set('user', person)
 		}
 
-		var password = prompt("Please enter your password", "Harry Potter");
+		var password = prompt("Please enter your password", "");
 		if (password != null) {
 			store.set('password', password)
 		}
@@ -17,6 +17,23 @@ $('#backup-btn').on('click', function() {
 		// dooo backup
 		// http://easydrain.localhost:8090/plugins/editor/backup
 
+		callback();
+
+	}
+}
+
+$("#flush-btn").on('click', function(){
+	$.post("/plugins/editor/flush", {
+		user : store.get('user'),
+		password : store.get('password')
+	}).done(function(data) {
+		alert("Data Loaded: " + data);
+	});
+});
+
+$('#backup-btn').on('click', function() {
+
+	var callback = function(){
 		$.post("/plugins/editor/backup", {
 			user : store.get('user'),
 			password : store.get('password')
@@ -24,5 +41,7 @@ $('#backup-btn').on('click', function() {
 			alert("Data Loaded: " + data);
 		});
 	}
+	auth(callback);
 
 });
+
