@@ -22,6 +22,15 @@ var auth = function(callback){
 	}
 }
 
+$("#ui-update-btn").on('click', function(){
+	$.post("/plugins/editor/ui-widgets-downloader", {
+		user : store.get('user'),
+		password : store.get('password')
+	}).done(function(data) {
+		alert("Data Loaded: " + data);
+	});
+});
+
 $("#flush-btn").on('click', function(){
 	$.post("/plugins/editor/flush", {
 		user : store.get('user'),
