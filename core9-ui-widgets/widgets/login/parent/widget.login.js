@@ -28,7 +28,7 @@
 						console.log("recieving login data");
 						console.log(data);
 
-						if(data.username == "admin" && data.password == "Trimm1234!"){
+						if(data.username == "admin" && data.password == "Tempsit!"){
 							store.set('session','true');
 							$.login.destroy();
 							PubSub.publish( 'openContextMenu', "" );
