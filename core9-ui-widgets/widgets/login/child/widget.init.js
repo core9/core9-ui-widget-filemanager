@@ -8,19 +8,17 @@ $LAB.script(baseUrl + "vendor/editor/assets/js/jquery.js").wait();
 
 $LAB.setOptions({
 	AlwaysPreserveOrder : true
-}).script(baseUrl + "vendor/editor/assets/js/jquery.js").wait().script(
-		"../../../lib/seamless/build/seamless.child.js").wait(function() {
+}).script("../../../lib/jquery/jquery-2.1.1.min.js").wait()
+.script("../../../lib/storejs/store.min.js").wait()
+.script("../../../lib/seamless/build/seamless.child.js").wait(function() {
 
-	var state = {};
-	var parent = $.seamless.connect({
+	Core9.parent = $.seamless.connect({
 		url : 'index.html',
 		container : 'div.content',
 		allowStyleInjection : true
 	});
 
-	Core9.parent = parent;
-	Core9.editor = {};
-	parent.receive(function(data, event) {
+	Core9.parent.receive(function(data, event) {
 
 	});
 
