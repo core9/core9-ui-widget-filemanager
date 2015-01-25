@@ -20,12 +20,21 @@ $LAB
 .wait(function(){
 	window.widget = jQuery;
 
-	// start login
-	window.widget.login = JS.require('widget.login', function(Hash, Observable) {
+	var session = store.get('session');
+	if(session != "true"){
+		// start login
+		window.widget.login = JS.require('widget.login', function(Hash, Observable) {
 
-			widget.login.init({'size':'full'});
+				widget.login.init({'size':'full'});
+		});
+		// end login
+	}
+	$('#logout').on('click',function(){
+		console.log(this);
+		store.set('session','false');
+		store.clear();
+		window.location.reload();
 	});
-	// end login
 
 	// start context
 	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
@@ -34,7 +43,11 @@ $LAB
 			widget.contextmenu.init({'size':'full'});
 		});
 		// init page
-		//widget.contextmenu.init({'size':'full'});
+
+		if(session == "true"){
+			widget.contextmenu.init({'size':'full'});
+		}
+		//
 		var openContextMenu = function( msg, data ){
 			widget.contextmenu.init({'size':'full'});
 		};
