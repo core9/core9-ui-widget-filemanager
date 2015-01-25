@@ -75,7 +75,7 @@
 
 
 	$.login.destroy = function(){
-				$('#ifr-login').hide();
+				$('#ifr-login').remove();
 	},
 	$.login.init = function(data) {
 
