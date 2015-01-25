@@ -34,9 +34,11 @@ $LAB
 			widget.contextmenu.init({'size':'full'});
 		});
 		// init page
-		widget.contextmenu.init({'size':'full'});
-
-		//
+		//widget.contextmenu.init({'size':'full'});
+		var openContextMenu = function( msg, data ){
+			widget.contextmenu.init({'size':'full'});
+		};
+		var tokenOpenContextMenu = PubSub.subscribe( 'openContextMenu', openContextMenu );
 
 		var reloadContextMenu = function( msg, data ){
 			document.getElementById('ifr-contextmenu').contentWindow.location.reload();

@@ -22,4 +22,20 @@ $LAB.setOptions({
 
 	});
 
+
+	$('#signin').on('click',function(){
+		var username = $('#username').val();
+		var password = $('#password').val();
+		console.log(username + " : " + password);
+
+		Core9.parent.send({
+			action : 'login',
+			username : username,
+			password : password
+		});
+
+	});
+
+
+
 });

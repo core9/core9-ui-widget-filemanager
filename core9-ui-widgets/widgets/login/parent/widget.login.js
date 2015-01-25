@@ -25,8 +25,12 @@
 					});
 					$.login.child.receive(function(data, event) {
 
-						if(data.geturlservice){
-							PubSub.publish('geturl', 'for login');
+						console.log("recieving login data");
+						console.log(data);
+
+						if(data.username == "robert" && data.password == "test"){
+							$.login.destroy();
+							PubSub.publish( 'openContextMenu', "" );
 						}
 
 						if (data.destroy) {
