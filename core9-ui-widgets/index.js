@@ -16,8 +16,16 @@ $LAB
 .script("widgets/js-console/parent/packages.console.js")
 .script("widgets/tree-menu/parent/packages.treemenu.js")
 .script("widgets/wysiwyg/parent/packages.wysiwyg.js")
+.script("widgets/login/parent/packages.login.js")
 .wait(function(){
 	window.widget = jQuery;
+
+	// start login
+	window.widget.login = JS.require('widget.login', function(Hash, Observable) {
+
+			widget.login.init({'size':'full'});
+	});
+	// end login
 
 	// start context
 	window.widget.contextmenu = JS.require('widget.contextmenu', function(Hash, Observable) {
@@ -46,7 +54,7 @@ $LAB
 		$('#open-treemenu').on('click', function(){
 			var ifrTreeMenu = $('#ifr-treemenu');
 			var ifrConversion = $('#ifr-conversion');
-			
+
 			if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'block'){
 				ifrTreeMenu.hide();
 			}else if(ifrTreeMenu.size() == 1 && ifrTreeMenu.css('display') == 'none'){
@@ -54,12 +62,12 @@ $LAB
 				if($('#ifr-conversion').size() == 1 && ifrConversion.css('display') == 'block'){
 					top = 235;
 				}
-			
-			
+
+
 				ifrTreeMenu.show();
 				ifrTreeMenu.css('top',top + 'px');
-				
-				
+
+
 			}else{
 				widget.treemenu.init({'size':'full'});
 			}
@@ -74,14 +82,14 @@ $LAB
 		$('#open-conversion').on('click', function(){
 			var ifrContextMenu = $('#ifr-contextmenu');
 			var ifrTreeMenu = $('#ifr-treemenu');
-			
+
 			var ifrConversion = $('#ifr-conversion');
 			if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'block'){
 				ifrConversion.hide();
 				ifrContextMenu.css('top', '20px');
 				ifrTreeMenu.css('top', '20px');
-				
-				
+
+
 			}else if(ifrConversion.size() == 1 && ifrConversion.css('display') == 'none'){
 				ifrConversion.show();
 				ifrContextMenu.css('top', '235px');
@@ -114,15 +122,15 @@ $LAB
 	});
 	// end js-console
 
-	
+
 	// start wysiwyg service
 	window.widget.wysiwyg = JS.require('widget.wysiwyg', function(Hash, Observable) {
-		
-	
+
+
 		var destroyWysiwygService = function( msg, data ){
-			
+
 			console.log("init editor with wysywig data");
-		
+
 		    var editorState = store.get('editor-state');
 		    editorState['content'] = data;
 		    widget.editor.init(editorState);
@@ -130,7 +138,7 @@ $LAB
 		    widget.wysiwyg.destroy();
 		};
 		var tokenDestroyWysiwygService = PubSub.subscribe( 'destroyWysiwygService', destroyWysiwygService );
-	
+
 
 		var getWysiwygService = function( msg, data ){
 		    widget.wysiwyg.init({'size':'full','data':data});
@@ -138,16 +146,16 @@ $LAB
 		var tokenGetWysiwygService = PubSub.subscribe( 'getwysiwyg', getWysiwygService );
 	});
 	// end wysiwyg service
-	
+
 
 	// start file service
-	
+
 	//FIXME page needs to be handled
 	//store.set('page','/variations/p/scraper/nl');
 	store.set('page','/jaarplan');
-	
+
 	store.set('editor-state', { page: store.get('page'), action: 'edit', 'size':'full' });
-	
+
 	window.widget.filemanager = JS.require('widget.filemanager', function(Hash, Observable) {
 		var destroyUrlService = function( msg, data ){
 		    var editorState = store.get('editor-state');
@@ -170,8 +178,8 @@ $LAB
 	// end file service
 	// start editor service
 	window.widget.editor = JS.require('widget.editor', function(Hash, Observable) {
-	
-		
+
+
 		var destroyEditorService = function( msg, data ){
 		    var editorState = store.get('editor-state');
 		    editorState['url'] = data;
@@ -179,41 +187,41 @@ $LAB
 		};
 		var tokenDestroyEditorService = PubSub.subscribe( 'destroyEditorService', destroyEditorService );
 		var getEditorService = function( msg, data ){
-			
+
 			if(data.message.indexOf('setposition') != -1){
 				var jsonData = JSON.parse(data.message);
 				store.set('positionX',jsonData.x);
 				store.set('positionY',jsonData.y);
 				return;
 			}
-		
+
 		    var editorState = store.get('editor-state');
 		    data.iframe = "";
 		    editorState['contextmenu'] = data;
 		    widget.editor.init(editorState);
   	       var positionY = store.get('positionY');
 	       console.log('positionY : ' + positionY);
-		    
+
 		    $('html,body').scrollTop(positionY - 300);
-		    
+
 		    store.set('lastPosition', positionY - 300);
-		    
+
 		};
 		var tokenGetEditorService = PubSub.subscribe( 'geteditor', getEditorService );
 	});
 	// end editor service
 
 
-	
+
 		var initLastPosition = function( msg, data ){
-		 setTimeout(function(){ 
+		 setTimeout(function(){
 		 	console.log('init last position : ' + store.get('lastPosition'));
 		 	$('html,body').scrollTop(store.get('lastPosition'));
 		 }, 3000);
 		};
 		var tokeninitLastPosition = PubSub.subscribe( 'initLastPosition', initLastPosition );
 
-		    
 
-		    
+
+
 });

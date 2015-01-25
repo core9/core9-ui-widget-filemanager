@@ -59,9 +59,10 @@
 				   var width = $('body').width();
 				   //width = width - 50;
 					$('#ifr-login').css('position', 'fixed');
-					$('#ifr-login').css('top', ($(window).height() - height)+'px');
-					$('#ifr-login').css('height', height + 'px');
+					$('#ifr-login').css('top', '0px');
+					$('#ifr-login').css('height', docHeight + 'px');
 					$('#ifr-login').css('width', width + 'px');
+					$('#ifr-login').css('z-index','9999');
 					$('#ifr-login').show();
 				}, 2500);
 
