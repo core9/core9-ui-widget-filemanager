@@ -217,9 +217,9 @@ $LAB
   	       var positionY = store.get('positionY');
 	       console.log('positionY : ' + positionY);
 
-		    $('html,body').scrollTop(positionY - 300);
+		    $('html,body').scrollTop(positionY -80);
 
-		    store.set('lastPosition', positionY - 300);
+		    store.set('lastPosition', positionY - 80);
 
 		};
 		var tokenGetEditorService = PubSub.subscribe( 'geteditor', getEditorService );

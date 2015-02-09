@@ -47,9 +47,9 @@ $('#backup-btn').on('click', function() {
 			user : store.get('user'),
 			password : store.get('password')
 		}).done(function(data) {
-			alert("Data Loaded: " + data);
+			alert("Backup complete");
 		});
-	}
+	};
 	auth(callback);
 
 });
