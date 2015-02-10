@@ -42,11 +42,13 @@ $LAB
 					if ($('.draggable')[0]){
 						$('.modal-content').removeClass('draggable');
 					    draggie.disable();
-					    $('#drag').html('edit');
+					    // $('#drag').html('edit');
+					    $('.modal-header .unlock').html('Blok ontgrendelen');
 					} else {
 					   $('.modal-content').addClass('draggable');
 					   draggie.enable();
-					    $('#drag').html('drag');
+					   // $('#drag').html('drag');
+					   $('.modal-header .unlock').html('Blok vergrendelen');
 					}
 			});
 
